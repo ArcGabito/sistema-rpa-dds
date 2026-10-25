@@ -7,7 +7,7 @@ import { getSessionToken } from "@/lib/session";
 // /api/panel/empresas/12/contactos -> {API_URL}/api/empresas/12/contactos,
 // with the session's JWT attached. Only the modules listed here go through,
 // plus a couple of single routes (signing in stays on its own route).
-const MODULES = new Set(["empresas", "contactos", "oportunidades", "clients", "boveda", "diagnosticos", "procesos", "propuestas", "proyectos", "bots", "incidencias", "vencimientos", "users", "dashboard"]);
+const MODULES = new Set(["empresas", "contactos", "oportunidades", "clients", "boveda", "diagnosticos", "procesos", "propuestas", "proyectos", "implementaciones", "bots", "incidencias", "vencimientos", "users", "dashboard"]);
 const RUTAS = new Set(["auth/me", "auth/clave"]);
 
 // Nothing from the panel's API (vault values least of all) may be cached.

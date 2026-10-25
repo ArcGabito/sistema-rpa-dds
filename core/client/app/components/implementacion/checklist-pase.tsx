@@ -40,7 +40,7 @@ function Fila({ procesoId, item, pddHref, pista }: { procesoId: number; item: It
 
   return (
     <li className="flex gap-3 px-5 py-4">
-      <span className="mt-0.5 shrink-0">{ICONOS[item.automatico ? item.estado : estado] ?? ICONOS.pendiente}</span>
+      <span className="mt-0.5 shrink-0">{ICONOS[item.estado] ?? ICONOS.pendiente}</span>
       <div className="min-w-0 flex-1">
         <p className="text-sm font-medium text-ink-950">{item.titulo}</p>
         <p className="mt-0.5 text-xs text-ink-500">{item.ayuda}</p>

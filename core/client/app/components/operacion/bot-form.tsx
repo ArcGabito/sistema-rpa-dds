@@ -237,7 +237,7 @@ export function BotForm({
             Cancelar
           </Link>
         )}
-        <button type="submit" disabled={isSubmitting || !!bloqueo} className={BUTTON_PRIMARY}>
+        <button type="submit" disabled={isSubmitting || !!bloqueo} className={`${BUTTON_PRIMARY} shrink-0 whitespace-nowrap`}>
           {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
           {bot ? "Guardar cambios" : borrador ? "Poner en producción" : "Registrar bot"}
         </button>
