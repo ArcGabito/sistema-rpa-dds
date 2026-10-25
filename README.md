@@ -9,7 +9,7 @@ Sistema para implementar y gestionar soluciones de automatización RPA & IA para
 #### Clona el proyecto en local:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ArcGabicho/sistema-rpa-dds/master/scripts/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ArcGabito/sistema-rpa-dds/master/scripts/setup.sh | bash
 ```
 
 ----
