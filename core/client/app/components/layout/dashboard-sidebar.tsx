@@ -106,17 +106,11 @@ export function DashboardSidebar({
               {getInitials(user?.name)}
             </span>
             <div className="min-w-0">
-              <div className="flex items-center gap-1.5">
-                <p className="truncate text-sm font-medium text-white">
-                  {user?.name || "Administrador"}
-                </p>
-                {(me?.roleLabel ?? user?.role) && (
-                  <span className="shrink-0 rounded-full border border-white/15 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.06em] text-white/70 uppercase">
-                    {me?.roleLabel ?? user?.role}
-                  </span>
-                )}
-              </div>
+              <p className="truncate text-sm font-medium text-white">
+                {user?.name || "Administrador"}
+              </p>
               <p className="truncate text-xs text-white/45">{user?.email}</p>
+              {(me?.roleLabel ?? user?.role) && <p className="mt-0.5 truncate text-xs text-white/70">{me?.roleLabel ?? user?.role}</p>}
             </div>
           </div>
           <LogoutButton />
