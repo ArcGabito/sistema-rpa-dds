@@ -1,9 +1,10 @@
 name: sistema-rpa-dds
 
-# Local development stack: a SQL Server for development, the API and the
-# website. The API always uses the local sqlserver container here, never the
-# Azure SQL database — that one (DB_CONNECTION_STRING in .env) is only for
-# production, set on whatever platform deploys the API.
+# Local development stack: a SQL Server for development, the API, the
+# website and Mailpit for the e-mails. The API always uses the local
+# sqlserver container here, never the Azure SQL database — that one
+# (DB_CONNECTION_STRING in .env) is only for production, set on the Azure
+# container app that runs the API.
 
 services:
   sqlserver:
@@ -52,12 +53,13 @@ services:
       Admin__FullName: ${ADMIN_FULL_NAME:-Administrador}
       Cors__AllowedOrigins__0: ${CLIENT_ORIGIN:-http://localhost:3000}
       # Password-reset e-mails: the links point at the panel, over SMTP.
+      # Without SMTP_HOST they go to the local Mailpit below.
       App__SiteUrl: ${CLIENT_ORIGIN:-http://localhost:3000}
-      Correo__Host: ${SMTP_HOST:-}
-      Correo__Puerto: ${SMTP_PORT:-587}
+      Correo__Host: ${SMTP_HOST:-mailpit}
+      Correo__Puerto: ${SMTP_PORT:-1025}
       Correo__Usuario: ${SMTP_USER:-}
       Correo__Clave: ${SMTP_PASSWORD:-}
-      Correo__Remitente: ${SMTP_FROM:-}
+      Correo__Remitente: ${SMTP_FROM:-Data Discovery Solutions <no-reply@dds.local>}
       # Fill the empty local database with demo companies and pipeline.
       Seed__DatosDemo: ${SEED_DATOS_DEMO:-true}
     ports:
@@ -68,6 +70,18 @@ services:
       timeout: 5s
       retries: 10
       start_period: 30s
+    networks:
+      - dds
+
+  # Catches the API's e-mails (password resets) instead of delivering them:
+  # read them at http://localhost:8025 (MAILPIT_PORT). SMTP stays inside the
+  # compose network; the inbox is only published on this machine.
+  mailpit:
+    image: axllent/mailpit:v1.31.4
+    environment:
+      MP_MAX_MESSAGES: 500
+    ports:
+      - "127.0.0.1:${MAILPIT_PORT:-8025}:8025"
     networks:
       - dds
 
