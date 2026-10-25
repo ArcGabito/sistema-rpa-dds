@@ -1,3 +1,4 @@
+import { ClientLogo } from "@/components/ui/client-logo";
 import { Container } from "@/components/ui/container";
 import { CLIENTS } from "@/lib/clients";
 
@@ -8,10 +9,10 @@ export function AboutClients() {
         <p className="text-sm text-ink-700">
           Empresas que ya confían en Data Discovery Solutions
         </p>
-        <ul className="mt-6 flex flex-wrap gap-x-10 gap-y-3">
-          {CLIENTS.map((name) => (
-            <li key={name} className="text-sm font-medium text-ink-500">
-              {name}
+        <ul className="mt-6 grid grid-cols-3 items-center gap-x-6 gap-y-4 sm:grid-cols-6">
+          {CLIENTS.map((client) => (
+            <li key={client.name} className="flex justify-center">
+              <ClientLogo client={client} />
             </li>
           ))}
         </ul>

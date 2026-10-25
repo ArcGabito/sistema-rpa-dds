@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { GlowBackdrop } from "@/components/layout/glow-backdrop";
+import { ClientLogo } from "@/components/ui/client-logo";
 import { FrameMarks } from "@/components/ui/frame-marks";
 import { CLIENTS } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
@@ -52,10 +53,10 @@ export function Hero() {
             Más de 30 empresas
             <br className="hidden sm:block" /> confían en DDS
           </p>
-          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:justify-between">
-            {CLIENTS.slice(0, 7).map((name) => (
-              <li key={name} className="font-display text-base font-medium tracking-[-0.02em] text-white sm:text-lg">
-                {name}
+          <ul className="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
+            {CLIENTS.slice(0, 6).map((client) => (
+              <li key={client.name}>
+                <ClientLogo client={client} tile className="h-11" />
               </li>
             ))}
           </ul>

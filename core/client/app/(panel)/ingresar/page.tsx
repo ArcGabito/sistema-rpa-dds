@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Eye, EyeOff, Loader2, ShieldAlert } from "lucide-react";
 import { GlowBackdrop } from "@/components/layout/glow-backdrop";
+import { ClientLogo } from "@/components/ui/client-logo";
 import { useAuth } from "@/hooks/use-auth";
 import { CLIENTS } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
@@ -191,10 +192,10 @@ export default function IngresarPage() {
 
           <div className="mt-14">
             <p className="text-sm text-ink-950">Trabajan con nosotros</p>
-            <ul className="mt-4 flex flex-wrap items-center gap-x-7 gap-y-2">
-              {CLIENTS.slice(0, 4).map((name) => (
-                <li key={name} className="font-display text-lg font-semibold tracking-tight text-ink-950">
-                  {name}
+            <ul className="mt-4 grid grid-cols-3 items-center gap-x-4 gap-y-3">
+              {CLIENTS.slice(0, 6).map((client) => (
+                <li key={client.name}>
+                  <ClientLogo client={client} />
                 </li>
               ))}
             </ul>

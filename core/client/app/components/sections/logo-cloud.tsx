@@ -1,11 +1,11 @@
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { FrameMarks } from "@/components/ui/frame-marks";
+import { ClientLogo } from "@/components/ui/client-logo";
 import { StatCounter } from "@/components/ui/stat-counter";
 import { CLIENTS } from "@/lib/clients";
 
-// The customer wall as a hairline grid. We have names, not logo files, so
-// each cell carries the company name in monospace.
+// The customer wall as a hairline grid, one logo per cell.
 export function LogoCloud() {
   return (
     <section className="bg-brand-50 py-20">
@@ -42,12 +42,9 @@ export function LogoCloud() {
         <div className="relative mt-12 border-t border-l border-line">
           <FrameMarks />
           <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6">
-            {CLIENTS.map((name) => (
-              <li
-                key={name}
-                className="flex h-16 items-center justify-center border-r border-b border-line px-3 text-center font-mono text-xs font-medium tracking-[0.06em] text-ink-700 uppercase"
-              >
-                {name}
+            {CLIENTS.map((client) => (
+              <li key={client.name} className="flex h-20 items-center justify-center border-r border-b border-line px-3">
+                <ClientLogo client={client} className="h-11" />
               </li>
             ))}
           </ul>
