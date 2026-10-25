@@ -188,7 +188,7 @@ export default async function IncidenciasPage({
             <h2 className="text-base font-semibold text-ink-950">Objetivos de SLA</h2>
             <p className="mt-1 text-xs text-ink-500">Horas corridas desde el reporte. El reloj se detiene mientras se espera al cliente.</p>
             <table className="mt-3 w-full text-sm">
-              <thead className="text-left text-xs text-ink-500">
+              <thead className="text-left font-mono text-[11px] tracking-[0.06em] uppercase text-ink-500">
                 <tr>
                   <th className="py-1.5 font-medium">Severidad</th>
                   <th className="py-1.5 text-right font-medium">Respuesta</th>

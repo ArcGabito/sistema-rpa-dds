@@ -1,17 +1,17 @@
 // The palette tokens from globals.css as hex values: recharts draws SVG and
 // takes colors as props, not Tailwind classes.
 export const CHART = {
-  brand700: "#0857a0",
-  brand600: "#2080d9",
-  brand500: "#359cfd",
-  brand400: "#68a7df",
-  brand300: "#9dcaf1",
-  brand200: "#c8e5fe",
-  glow400: "#70d9ff",
-  ink950: "#17273a",
-  ink500: "#5b7a96",
-  ink400: "#8ea7bd",
-  line: "#d9e0e6",
+  brand700: "#1d4fc0",
+  brand600: "#2563d9",
+  brand500: "#3b74e8",
+  brand400: "#6797f0",
+  brand300: "#9dbcf7",
+  brand200: "#c9dafb",
+  glow400: "#5b8dff",
+  ink950: "#0a0a0b",
+  ink500: "#6b6b74",
+  ink400: "#a1a1aa",
+  line: "#e4e4e7",
 } as const;
 
 export const AXIS_TICK = { fill: CHART.ink500, fontSize: 12 };
@@ -20,7 +20,7 @@ export const AXIS_TICK = { fill: CHART.ink500, fontSize: 12 };
 export const CUADRANTE_COLORES: Record<string, string> = {
   quick_win: CHART.brand700,
   estrategico: CHART.brand500,
-  mejora_menor: "#94e2ff",
+  mejora_menor: "#8fb4ff",
   postergar: CHART.ink400,
 };
 

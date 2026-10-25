@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { GlowBackdrop } from "@/components/layout/glow-backdrop";
 import { Container } from "@/components/ui/container";
 import { SERVICES } from "@/lib/services-data";
 import { SITE } from "@/lib/site-config";
@@ -10,19 +11,22 @@ const COMPANY_LINKS = [
   { label: "Visión, Misión y Valores", href: SITE.visionMisionUrl },
 ];
 
-const LINK = "text-sm text-ink-700 hover:text-ink-950 hover:underline";
+const LINK = "text-sm text-white/60 transition-colors hover:text-white";
+const HEADING = "font-mono text-[11px] font-medium tracking-[0.12em] text-white/40 uppercase";
 
-// Light azure.com-style footer: link columns on a pale tint, legal row below.
+// Dark footer over a faint glow: the newsletter on a glass card, link
+// columns with monospace headings, and the legal row below.
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-brand-50 pt-14 pb-8">
-      <Container>
-        <div className="flex flex-col gap-6 rounded-lg bg-white p-6 shadow-card sm:flex-row sm:items-center sm:justify-between sm:p-8">
+    <footer className="relative overflow-hidden pt-14 pb-8">
+      <GlowBackdrop glow="low" />
+      <Container className="relative">
+        <div className="flex flex-col gap-6 rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:p-8">
           <div>
-            <h2 className="font-display text-xl font-semibold text-ink-950">
+            <h2 className="font-display text-xl font-medium tracking-[-0.01em] text-white">
               Ideas que transforman con IA, RPA y Analítica
             </h2>
-            <p className="mt-2 max-w-md text-sm text-ink-700">
+            <p className="mt-2 max-w-md text-sm text-white/60">
               Nuestro newsletter mensual en LinkedIn te conecta con casos de
               éxito, estrategias y herramientas que están revolucionando
               empresas en Perú.
@@ -32,19 +36,19 @@ export function Footer() {
             href={SITE.linkedinNewsletter}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-brand-700 px-5 text-sm font-semibold text-white transition-colors hover:bg-ink-900"
+            className="inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-white px-5 text-sm font-medium text-ink-950 transition-colors hover:bg-white/85"
           >
             Suscribirte en LinkedIn
           </a>
         </div>
 
-        <div className="grid gap-10 pt-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2.5">
               <Image src="/assets/icon.png" alt="" width={28} height={28} className="h-7 w-7" />
-              <span className="font-display text-[15px] font-semibold text-ink-950">{SITE.name}</span>
+              <span className="font-display text-[15px] font-semibold text-white">{SITE.name}</span>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-700">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               Sabemos que gestionar un negocio puede ser caótico. Ahí es
               donde entramos nosotros: claridad, eficiencia y control con
               soluciones inteligentes.
@@ -63,7 +67,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-ink-950">Soluciones para tu empresa</p>
+            <p className={HEADING}>Soluciones</p>
             <ul className="mt-4 flex flex-col gap-3">
               {SERVICES.map((service) => (
                 <li key={service.slug}>
@@ -81,7 +85,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-ink-950">Empresa</p>
+            <p className={HEADING}>Empresa</p>
             <ul className="mt-4 flex flex-col gap-3">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.label}>
@@ -94,8 +98,8 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold text-ink-950">Datos de contacto</p>
-            <ul className="mt-4 flex flex-col gap-3 text-sm text-ink-700">
+            <p className={HEADING}>Contacto</p>
+            <ul className="mt-4 flex flex-col gap-3 text-sm text-white/60">
               <li>
                 <a href={`mailto:${SITE.email}`} className={LINK}>
                   {SITE.email}
@@ -111,13 +115,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-ink-500">
-            Copyright © {new Date().getFullYear()} {SITE.name}. Todos los
-            derechos reservados.
+        <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-mono text-[11px] tracking-[0.06em] text-white/40 uppercase">
+            © {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.
           </p>
-          <Link href={SITE.privacyUrl} className="text-xs text-ink-500 hover:text-ink-950 hover:underline">
-            Política de Privacidad y Confidencialidad
+          <Link href={SITE.privacyUrl} className="font-mono text-[11px] tracking-[0.06em] text-white/40 uppercase hover:text-white">
+            Política de Privacidad
           </Link>
         </div>
       </Container>

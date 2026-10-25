@@ -17,7 +17,7 @@ type Cambios = Partial<Pick<Tarea, "titulo" | "hitoId" | "estado" | "responsable
 
 // Compact controls for task rows (INPUT_BASE is full-width; these size themselves).
 const SELECT =
-  "h-8 rounded-md border border-line bg-white px-2 text-xs text-ink-950 outline-none transition-colors focus:border-brand-500 disabled:opacity-60";
+  "h-8 rounded-md border border-transparent bg-brand-50 px-2 text-xs text-ink-950 outline-none transition-colors focus:border-ink-400 focus:bg-white disabled:opacity-60";
 
 // Add or edit a milestone (its dates drive the timeline). Mounted only while
 // open, so it starts from the milestone's current values.

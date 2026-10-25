@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Roboto_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import { Toaster } from "sileo";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, getSiteUrl, socialMetadata } from "@/lib/metadata";
 import { SITE } from "@/lib/site-config";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-instrument-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: "variable",
 });
 
-const robotoMono = Roboto_Mono({
-  variable: "--font-roboto-mono",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
   weight: "variable",
 });
@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${instrumentSans.variable} ${robotoMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-sans text-ink-950">
         {children}

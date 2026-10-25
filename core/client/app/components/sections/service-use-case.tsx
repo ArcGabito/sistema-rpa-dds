@@ -27,7 +27,7 @@ export function ServiceUseCase({
   return (
     <section className="bg-white py-20">
       <Container className="max-w-3xl">
-        <h2 className="text-center font-display text-2xl font-semibold leading-snug text-ink-950 sm:text-3xl">
+        <h2 className="text-center font-display text-2xl font-medium tracking-[-0.02em] leading-snug text-ink-950 sm:text-3xl">
           {heading}
         </h2>
         <p className="mt-4 text-center leading-relaxed text-ink-700">{intro}</p>
@@ -41,10 +41,10 @@ export function ServiceUseCase({
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 aria-pressed={isActive}
-                className={`rounded-full px-4 py-2 text-xs font-semibold transition-colors ${
+                className={`rounded-full px-4 py-2 font-mono text-[11px] font-medium tracking-[0.06em] uppercase transition-colors ${
                   isActive
                     ? "bg-ink-950 text-white"
-                    : "bg-brand-100 text-ink-700 hover:bg-brand-200"
+                    : "bg-brand-50 text-ink-700 ring-1 ring-line ring-inset hover:bg-white"
                 }`}
               >
                 {useCase.title}
@@ -63,7 +63,7 @@ export function ServiceUseCase({
             className="mt-8 rounded-lg bg-white p-8 shadow-card sm:p-10"
           >
             <div className="flex items-start gap-4">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-700 text-white">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-ink-950 text-white">
                 {active.icon}
               </span>
               <div>
@@ -79,7 +79,7 @@ export function ServiceUseCase({
             <ul className="mt-6 grid gap-2.5 border-t border-line pt-6 sm:grid-cols-2">
               {active.bullets.map((bullet) => (
                 <li key={bullet} className="flex gap-2.5 text-sm text-ink-700">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-400" />
+                  <span className="mt-2 h-1 w-1 shrink-0 bg-brand-600" />
                   {bullet}
                 </li>
               ))}

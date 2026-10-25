@@ -10,7 +10,7 @@ export function ServicesOverview() {
       <Container>
         <div className="max-w-2xl">
           <Eyebrow>Servicios</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
             Automatiza, analiza y decide mejor con soluciones hechas a tu
             medida
           </h2>
@@ -21,8 +21,7 @@ export function ServicesOverview() {
         </div>
 
         <div className="mt-14 flex flex-col border-t border-line">
-          {SERVICES.map((service) => {
-            const Icon = service.icon;
+          {SERVICES.map((service, index) => {
             return (
               <div
                 key={service.slug}
@@ -30,7 +29,7 @@ export function ServicesOverview() {
                 className="grid scroll-mt-24 gap-4 border-b border-line py-10 sm:grid-cols-[0.9fr_1.5fr] sm:gap-10 lg:grid-cols-[0.7fr_1.3fr]"
               >
                 <div className="flex items-start gap-3">
-                  <Icon className="mt-1 h-5 w-5 shrink-0 text-brand-600" strokeWidth={1.75} />
+                  <span className="mt-1.5 shrink-0 font-mono text-xs text-ink-400">/{String(index + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="font-display text-xl font-semibold text-ink-950">
                       {service.title}
@@ -47,7 +46,7 @@ export function ServicesOverview() {
                 <ul className="grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex gap-2.5 text-sm text-ink-700">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-400" />
+                      <span className="mt-2 h-1 w-1 shrink-0 bg-brand-600" />
                       {feature}
                     </li>
                   ))}

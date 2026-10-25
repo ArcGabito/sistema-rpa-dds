@@ -9,8 +9,8 @@ import { SITE } from "@/lib/site-config";
 import type { Me } from "@/lib/permisos";
 import type { SessionUser } from "@/lib/session";
 
-// Azure portal-style shell: a white sidebar against a pale workspace, where
-// each page lays its content out in white Fluent cards. The workspace
+// A dark sidebar floating as a rounded panel beside a light grey workspace,
+// where each page lays its content out in white hairline cards. The workspace
 // scrolls on its own so the sidebar stays put. When printing (a diagnosis
 // report, say), only the page's content is printed, on white.
 export function DashboardShell({
@@ -26,14 +26,14 @@ export function DashboardShell({
 
   return (
     <div className="flex h-dvh overflow-hidden bg-brand-50 print:block print:h-auto print:overflow-visible print:bg-white">
-      <div className="hidden lg:flex print:hidden">
+      <div className="hidden p-3 pr-0 lg:flex print:hidden">
         <DashboardSidebar user={user} me={me} />
       </div>
 
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-ink-950/40"
+            className="absolute inset-0 bg-ink-950/50 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
@@ -49,17 +49,17 @@ export function DashboardShell({
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 shrink-0 items-center justify-between border-b border-line bg-white px-4 lg:hidden print:hidden">
+        <header className="flex h-14 shrink-0 items-center justify-between bg-ink-950 px-4 lg:hidden print:hidden">
           <Link href="/dashboard" className="flex items-center gap-2.5">
             <Image src="/assets/icon.png" alt="" width={24} height={24} className="h-6 w-6" />
-            <span className="font-display text-sm font-semibold text-ink-950">{SITE.shortName}</span>
+            <span className="font-display text-sm font-semibold text-white">{SITE.shortName}</span>
           </Link>
 
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menú"
-            className="rounded-md p-1.5 text-ink-700 transition-colors hover:bg-brand-50 hover:text-ink-950"
+            className="rounded-md p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
           >
             <Menu className="h-5 w-5" />
           </button>

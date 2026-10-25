@@ -19,7 +19,7 @@ const SECTIONS = [
 // its top reaches this far down the viewport.
 const ACTIVE_OFFSET = 140;
 
-// The home page's own sticky section nav (azure.com style), with the section
+// The home page's own sticky section nav, with the section
 // currently in view underlined.
 export function HomeSubnav() {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -60,10 +60,10 @@ export function HomeSubnav() {
                 <a
                   href={`#${id}`}
                   aria-current={active ? "location" : undefined}
-                  className={`flex items-center px-3 text-sm whitespace-nowrap transition-colors ${
+                  className={`flex items-center px-3 font-mono text-[11px] font-medium tracking-[0.08em] whitespace-nowrap uppercase transition-colors ${
                     active
-                      ? "font-semibold text-ink-950 shadow-[inset_0_-2px_0_var(--color-brand-700)]"
-                      : "text-ink-700 hover:text-ink-950"
+                      ? "text-ink-950 shadow-[inset_0_-2px_0_var(--color-ink-950)]"
+                      : "text-ink-500 hover:text-ink-950"
                   }`}
                 >
                   {label}
@@ -74,7 +74,7 @@ export function HomeSubnav() {
         </ul>
         <Link
           href={SITE.contactUrl}
-          className="hidden h-9 shrink-0 items-center rounded-md bg-brand-700 px-4 text-sm font-semibold text-white transition-colors hover:bg-ink-900 md:inline-flex"
+          className="hidden h-8 shrink-0 items-center rounded-full bg-ink-950 px-4 font-mono text-[11px] font-medium tracking-[0.08em] text-white uppercase transition-colors hover:bg-ink-800 md:inline-flex"
         >
           Solicita tu asesoría
         </Link>

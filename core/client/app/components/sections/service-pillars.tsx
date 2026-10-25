@@ -7,7 +7,7 @@ export function ServicePillars({ service }: { service: Service }) {
     <section className="bg-ink-950 py-20">
       <Container>
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <h2 className="font-display text-2xl font-semibold leading-snug text-white sm:text-3xl">
+          <h2 className="font-display text-2xl font-medium tracking-[-0.02em] leading-snug text-white sm:text-3xl">
             {service.pillarsHeading}
           </h2>
           <p className="leading-relaxed text-white/70">{service.pillarsIntro}</p>

@@ -1,25 +1,29 @@
+import { GlowBackdrop } from "@/components/layout/glow-backdrop";
 import { Container } from "@/components/ui/container";
 
 export function AboutWelcome() {
   return (
     <section className="bg-white py-24">
       <Container className="grid gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-10">
-        <div className="rounded-lg bg-ink-950 p-8 sm:p-10">
-          <p className="text-xs font-medium text-glow-300">Bienvenido a DDS</p>
-          <p className="mt-4 font-display text-2xl font-semibold leading-snug text-white/80 sm:text-[1.75rem]">
-            Somos DDS:{" "}
-            <span className="text-glow-300">tecnología con propósito</span>,{" "}
-            <span className="text-glow-300">soluciones con impacto</span>.
-            En Data Discovery Solutions, combinamos{" "}
-            <span className="text-glow-300">experiencia, pasión</span> y
-            herramientas de{" "}
-            <span className="text-glow-300">última generación</span> para
-            ayudarte a tomar mejores decisiones, automatizar tus procesos y{" "}
-            <span className="text-glow-300">
-              liberar el verdadero potencial de tus datos
-            </span>
-            .
-          </p>
+        <div className="relative overflow-hidden rounded-2xl p-8 sm:p-10">
+          <GlowBackdrop glow="beam" />
+          <div className="relative">
+            <p className="text-xs font-mono tracking-[0.1em] uppercase text-glow-300">Bienvenido a DDS</p>
+            <p className="mt-4 font-display text-2xl font-medium tracking-[-0.02em] leading-snug text-white/80 sm:text-[1.75rem]">
+              Somos DDS:{" "}
+              <span className="text-glow-300">tecnología con propósito</span>,{" "}
+              <span className="text-glow-300">soluciones con impacto</span>.
+              En Data Discovery Solutions, combinamos{" "}
+              <span className="text-glow-300">experiencia, pasión</span> y
+              herramientas de{" "}
+              <span className="text-glow-300">última generación</span> para
+              ayudarte a tomar mejores decisiones, automatizar tus procesos y{" "}
+              <span className="text-glow-300">
+                liberar el verdadero potencial de tus datos
+              </span>
+              .
+            </p>
+          </div>
         </div>
 
         <div className="flex flex-col gap-8">

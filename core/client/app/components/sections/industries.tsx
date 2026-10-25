@@ -8,7 +8,7 @@ export function Industries() {
       <Container>
         <div className="max-w-2xl">
           <Eyebrow>Sectores</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
             Soluciones inteligentes para cada sector
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-700">

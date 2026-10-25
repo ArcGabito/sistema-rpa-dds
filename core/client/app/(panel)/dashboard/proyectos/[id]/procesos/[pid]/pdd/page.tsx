@@ -31,8 +31,8 @@ export default async function PddDocumentoPage({ params }: { params: Promise<{ i
       <article className="rounded-lg bg-white p-8 shadow-card sm:p-12 print:rounded-none print:p-0 print:shadow-none">
         <header className="flex flex-wrap items-start justify-between gap-6 border-b border-line pb-8 print:flex-nowrap">
           <div className="min-w-0">
-            <p className="text-xs font-semibold tracking-wide text-brand-700 uppercase">Documento de definición del proceso (PDD)</p>
-            <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-950">{p.nombre}</h1>
+            <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-brand-700 uppercase">Documento de definición del proceso (PDD)</p>
+            <h1 className="mt-2 font-display text-3xl font-medium tracking-[-0.03em] text-ink-950">{p.nombre}</h1>
             <p className="mt-1 text-sm text-ink-500">
               {p.empresaNombre}
               {p.area && ` · ${p.area}`} · {SERVICIO_LABELS[p.servicio] ?? p.servicio}
@@ -102,7 +102,7 @@ export default async function PddDocumentoPage({ params }: { params: Promise<{ i
           ].map((firma) => (
             // The name may take two lines: the signature line stays at the bottom, level on both sides.
             <div key={firma.por} className="flex flex-col">
-              <p className="text-xs font-semibold tracking-wide text-ink-500 uppercase">{firma.por === p.empresaNombre ? "Aprobación del cliente" : "Elaborado por"}</p>
+              <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-ink-500 uppercase">{firma.por === p.empresaNombre ? "Aprobación del cliente" : "Elaborado por"}</p>
               <p className="mt-1 font-semibold text-ink-950">{firma.por}</p>
               <div className="mt-auto border-t border-ink-400 pt-2 text-xs text-ink-500">
                 {firma.quien ?? "Nombre"} · {firma.fecha ? `Aprobado el ${formatDate(firma.fecha)}` : "Firma y fecha"}

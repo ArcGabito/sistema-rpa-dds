@@ -4,7 +4,7 @@ export function CoreValues() {
   return (
     <div className="mx-auto mt-20 grid max-w-5xl gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {CORE_VALUES.map((value) => (
-        <div key={value.title} className="border-t-2 border-brand-600 pt-5">
+        <div key={value.title} className="border-t border-ink-950 pt-5">
           <h3 className="font-display text-base font-semibold text-ink-950">
             {value.title}
           </h3>

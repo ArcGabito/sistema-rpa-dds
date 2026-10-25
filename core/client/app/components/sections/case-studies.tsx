@@ -11,7 +11,7 @@ export function CaseStudies() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <Eyebrow>Proyectos destacados</Eyebrow>
-            <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+            <h2 className="mt-3 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
               Casos reales de transformación digital
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-ink-700">
@@ -35,7 +35,7 @@ export function CaseStudies() {
                 {study.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-brand-100 px-2.5 py-1 text-xs font-semibold text-brand-700"
+                    className="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] font-medium tracking-[0.08em] text-ink-500 uppercase"
                   >
                     {tag}
                   </span>

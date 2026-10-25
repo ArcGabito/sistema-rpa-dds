@@ -4,10 +4,10 @@ export function VisionStatement() {
   return (
     <section className="bg-ink-950 py-24">
       <Container className="max-w-3xl">
-        <span className="inline-flex items-center rounded-full border border-white/10 px-4 py-1.5 text-xs font-medium text-white">
+        <span className="inline-flex items-center rounded-full border border-white/15 px-4 py-1.5 font-mono text-[11px] font-medium tracking-[0.1em] text-white uppercase">
           Nuestra Visión y Propósito
         </span>
-        <p className="mt-6 font-display text-2xl font-semibold leading-snug text-white sm:text-3xl">
+        <p className="mt-6 font-display text-2xl font-medium tracking-[-0.02em] leading-snug text-white sm:text-3xl">
           Equilibramos los desafíos de hoy con la visión del mañana.
         </p>
         <div className="mt-6 flex flex-col gap-4 text-white/70">

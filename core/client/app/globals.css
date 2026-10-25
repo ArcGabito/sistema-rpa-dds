@@ -3,41 +3,40 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #17273a;
+  --foreground: #0a0a0b;
 
-  /* Palette taken from the hero robot illustration
-     (public/assets/hero-porada.svg), used across the site, the login and
-     the dashboard. */
+  /* Monochrome with one electric blue, after the dark AI landing pages the
+     site is styled on: near-black bands and panels lit by a grainy blue
+     glow, light grey and white surfaces split by hairlines, and black
+     actions. Used across the site, the login and the dashboard. */
 
-  /* Ink — the robot's navy: headings and body text on light surfaces, and
-     the dark bands, frame and facade. 950/900/700 are the robot's own
-     tones; 500/400 are lighter tints of 700 for secondary text. */
-  --color-ink-950: #17273a;
-  --color-ink-900: #1a3a60;
-  --color-ink-800: #24456b;
-  --color-ink-700: #345574;
-  --color-ink-500: #5b7a96;
-  --color-ink-400: #8ea7bd;
+  /* Ink — neutral blacks and greys: text on light surfaces, the dark bands,
+     the dashboard sidebar and primary actions. 500/400 for secondary text. */
+  --color-ink-950: #0a0a0b;
+  --color-ink-900: #151517;
+  --color-ink-800: #232326;
+  --color-ink-700: #3f3f46;
+  --color-ink-500: #6b6b74;
+  --color-ink-400: #a1a1aa;
 
-  /* Brand — the robot's blues, from its pale glass to its deep blue.
-     700 is the primary action color: the only blue dark enough to carry
-     white text accessibly. */
-  --color-brand-50: #f5faff;
-  --color-brand-100: #ebf5ff;
-  --color-brand-200: #c8e5fe;
-  --color-brand-300: #9dcaf1;
-  --color-brand-400: #68a7df;
-  --color-brand-500: #359cfd;
-  --color-brand-600: #2080d9;
-  --color-brand-700: #0857a0;
+  /* Brand — 50 is the neutral grey of light surfaces and hovers; 100–700
+     are the glow's blue, the accent for links, active states, badges and
+     charts. 700 is the only one dark enough to carry white text. */
+  --color-brand-50: #f4f4f5;
+  --color-brand-100: #e8effd;
+  --color-brand-200: #c9dafb;
+  --color-brand-300: #9dbcf7;
+  --color-brand-400: #6797f0;
+  --color-brand-500: #3b74e8;
+  --color-brand-600: #2563d9;
+  --color-brand-700: #1d4fc0;
 
-  /* Glow — the robot's bright cyan, for actions and accents on dark
-     surfaces (always with ink-950 text on top). */
-  --color-glow-300: #94e2ff;
-  --color-glow-400: #70d9ff;
+  /* Glow — the light blue of the glow, for accents on dark surfaces. */
+  --color-glow-300: #8fb4ff;
+  --color-glow-400: #5b8dff;
 
-  /* Line — the robot's cool grey, for borders and dividers. */
-  --color-line: #d9e0e6;
+  /* Line — hairlines for borders, dividers and frames. */
+  --color-line: #e4e4e7;
 }
 
 @theme inline {
@@ -65,15 +64,34 @@
 
   --color-line: var(--color-line);
 
-  /* Fluent depth shadows (Microsoft's design system, as on azure.com):
-     cards rest at depth 4, lift to depth 16 on hover; menus use depth 64. */
-  --shadow-card: 0 1.6px 3.6px 0 rgb(23 39 58 / 0.13), 0 0.3px 0.9px 0 rgb(23 39 58 / 0.11);
-  --shadow-card-hover: 0 6.4px 14.4px 0 rgb(23 39 58 / 0.13), 0 1.2px 3.6px 0 rgb(23 39 58 / 0.11);
-  --shadow-flyout: 0 25.6px 57.6px 0 rgb(23 39 58 / 0.22), 0 4.8px 14.4px 0 rgb(23 39 58 / 0.18);
+  /* Flat surfaces: cards are drawn by a hairline ring with barely any
+     depth and lift softly on hover; menus float on a wide, soft shadow. */
+  --shadow-card: 0 0 0 1px rgb(10 10 11 / 0.07), 0 1px 2px 0 rgb(10 10 11 / 0.04);
+  --shadow-card-hover: 0 0 0 1px rgb(10 10 11 / 0.09), 0 12px 32px -12px rgb(10 10 11 / 0.18);
+  --shadow-flyout: 0 0 0 1px rgb(10 10 11 / 0.06), 0 24px 48px -12px rgb(10 10 11 / 0.28);
+  /* Under the dark primary button, as if it sat above the page. */
+  --shadow-button: 0 8px 18px -8px rgb(10 10 11 / 0.55), inset 0 1px 0 0 rgb(255 255 255 / 0.12);
 
-  --font-sans: var(--font-instrument-sans);
-  --font-display: var(--font-instrument-sans);
-  --font-mono: var(--font-roboto-mono);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Softer, larger corners than Tailwind's defaults, everywhere at once:
+   controls round to 10px, cards to 16px, panels to 24px and more. */
+@theme {
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 1.75rem;
+}
+
+/* Film grain over the dark glow panels (see GlowBackdrop). */
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
 }
 
 body {
@@ -105,6 +123,6 @@ html {
 }
 
 ::selection {
-  background: var(--color-brand-700);
+  background: var(--color-brand-600);
   color: #ffffff;
 }

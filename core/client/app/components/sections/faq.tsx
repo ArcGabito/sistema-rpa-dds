@@ -16,7 +16,7 @@ export function Faq() {
     <section id="faq" className="scroll-mt-24 bg-white py-24">
       <Container className="max-w-3xl">
         <Eyebrow>Ayuda</Eyebrow>
-        <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+        <h2 className="mt-3 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
           Preguntas frecuentes
         </h2>
 

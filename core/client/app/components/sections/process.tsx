@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { GlowBackdrop } from "@/components/layout/glow-backdrop";
 import { ActionLink } from "@/components/ui/action-link";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -15,12 +16,13 @@ export function Process() {
   return (
     <section
       id="proceso"
-      className="scroll-mt-24 bg-[linear-gradient(135deg,var(--color-ink-950)_0%,var(--color-ink-900)_60%,var(--color-brand-700)_140%)] py-24"
+      className="relative scroll-mt-24 overflow-hidden py-24"
     >
-      <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+      <GlowBackdrop glow="low" />
+      <Container className="relative grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
           <Eyebrow tone="dark">Nuestro proceso</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-medium tracking-[-0.02em] text-white sm:text-4xl">
             Guiamos a líderes de negocio y tecnología hacia las mejores
             soluciones en datos, RPA e IA
           </h2>
@@ -45,10 +47,10 @@ export function Process() {
                   aria-expanded={isOpen}
                   className="flex w-full items-center gap-5 py-5 text-left"
                 >
-                  <span className="font-display text-sm font-semibold text-glow-300">
-                    {String(index + 1).padStart(2, "0")}
+                  <span className="font-mono text-xs text-glow-300">
+                    /{String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="flex-1 font-display text-base font-semibold text-white">
+                  <span className="flex-1 font-display text-base font-medium text-white">
                     {step.title}
                   </span>
                   <ChevronDown
@@ -66,7 +68,7 @@ export function Process() {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 pl-9 text-sm leading-relaxed text-white/70">
+                      <p className="pb-6 pl-11 text-sm leading-relaxed text-white/70">
                         {step.description}
                       </p>
                     </motion.div>

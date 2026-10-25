@@ -7,7 +7,7 @@ export function ServiceHighlights({ service }: { service: Service }) {
       <Container>
         <div className="grid gap-x-8 gap-y-10 sm:grid-cols-3">
           {service.highlights.map((highlight) => (
-            <div key={highlight.title} className="border-t-2 border-brand-600 pt-5">
+            <div key={highlight.title} className="border-t border-ink-950 pt-5">
               <h3 className="font-display text-base font-semibold text-ink-950">
                 {highlight.title}
               </h3>

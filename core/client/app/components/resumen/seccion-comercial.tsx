@@ -48,13 +48,13 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
       <dl className={`${CARD} mt-4 grid grid-cols-2 gap-px overflow-hidden bg-line lg:grid-cols-4`}>
         <div className="bg-white p-5 sm:p-6">
           <dt className="text-sm text-ink-500">Oportunidades abiertas</dt>
-          <dd className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <dd className="mt-2 font-display text-3xl font-medium tracking-[-0.03em] text-ink-950 sm:text-4xl">
             {data.oportunidadesAbiertas}
           </dd>
         </div>
         <div className="bg-white p-5 sm:p-6">
           <dt className="text-sm text-ink-500">Valor del embudo</dt>
-          <dd className="mt-2 font-display text-3xl font-semibold tracking-tight whitespace-nowrap text-ink-950 sm:text-4xl">
+          <dd className="mt-2 font-display text-3xl font-medium tracking-[-0.03em] whitespace-nowrap text-ink-950 sm:text-4xl">
             {/* The full amount doesn't fit half a phone's width. */}
             <span className="sm:hidden">{solesCompacto(data.valorEmbudo)}</span>
             <span className="max-sm:hidden">{formatSoles(data.valorEmbudo)}</span>
@@ -62,7 +62,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
         </div>
         <div className="bg-white p-5 sm:p-6">
           <dt className="text-sm text-ink-500">Tasa de cierre</dt>
-          <dd className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <dd className="mt-2 font-display text-3xl font-medium tracking-[-0.03em] text-ink-950 sm:text-4xl">
             {data.tasaCierre === null ? "—" : `${Math.round(data.tasaCierre * 100)}%`}
           </dd>
           <dd className="mt-1 text-xs text-ink-400">
@@ -72,7 +72,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
         <div className="bg-white p-5 sm:p-6">
           <dt className="text-sm text-ink-500">Acciones vencidas</dt>
           <dd
-            className={`mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl ${
+            className={`mt-2 font-display text-3xl font-medium tracking-[-0.03em] sm:text-4xl ${
               data.accionesVencidas > 0 ? "text-red-600" : "text-ink-950"
             }`}
           >

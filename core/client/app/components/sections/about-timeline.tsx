@@ -19,7 +19,7 @@ export function AboutTimeline() {
     <section className="bg-ink-950 py-24">
       <Container>
         <div className="flex items-end justify-between gap-6">
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          <h2 className="font-display text-2xl font-medium tracking-[-0.02em] text-white sm:text-3xl">
             Nuestra historia
           </h2>
           <div className="hidden shrink-0 gap-2 sm:flex">
@@ -51,7 +51,7 @@ export function AboutTimeline() {
               key={milestone.title}
               className="w-72 shrink-0 snap-start border-t border-white/10 pt-6"
             >
-              <p className="text-xs font-medium text-glow-300">
+              <p className="text-xs font-mono tracking-[0.1em] uppercase text-glow-300">
                 {milestone.years}
               </p>
               <h3 className="mt-2 font-display text-lg font-semibold text-white">

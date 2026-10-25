@@ -6,7 +6,7 @@ export function AboutWhyChoose() {
     <section className="bg-white py-24">
       <Container>
         <div className="max-w-2xl">
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <h2 className="font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
             ¿Por qué elegir Data Discovery Solutions?
           </h2>
         </div>

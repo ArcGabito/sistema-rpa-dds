@@ -97,7 +97,7 @@ function Vista({ control, costoHora }: { control: Control<ProcesoValues>; costoH
 
   return (
     <aside className="rounded-lg bg-brand-50 p-5 lg:sticky lg:top-0">
-      <p className="text-xs font-semibold tracking-wide text-ink-500 uppercase">Estimación</p>
+      <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-ink-500 uppercase">Estimación</p>
       <div className="mt-3 flex items-center justify-between gap-3">
         <CuadranteBadge cuadrante={c.cuadrante} />
         <span className="text-sm text-ink-700">

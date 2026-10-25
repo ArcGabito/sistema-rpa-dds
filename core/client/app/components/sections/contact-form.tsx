@@ -5,12 +5,12 @@ import { SERVICE_OPTIONS } from "@/lib/contact-schema";
 import { useContact } from "@/hooks/use-contact";
 
 const FIELD_BASE =
-  "w-full rounded-md border bg-white px-3.5 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400";
+  "w-full rounded-xl border bg-brand-50 px-4 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400";
 
 function fieldState(hasError: boolean) {
   return hasError
     ? "border-red-400 focus:border-red-500"
-    : "border-line focus:border-brand-500";
+    : "border-transparent focus:border-ink-400 focus:bg-white";
 }
 
 export function ContactForm() {
@@ -131,7 +131,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-brand-700 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-900 disabled:opacity-60 sm:w-auto sm:self-start"
+        className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-ink-950 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-800 disabled:opacity-60 sm:w-auto sm:self-start"
       >
         {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
         {isSubmitting ? "Enviando..." : "Enviar solicitud"}

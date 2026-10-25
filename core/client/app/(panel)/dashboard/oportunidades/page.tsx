@@ -148,7 +148,7 @@ export default async function OportunidadesPage({
           <div className={`${CARD} overflow-hidden`}>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-line bg-brand-50 text-xs text-ink-500">
+                <thead className="border-b border-line bg-brand-50 font-mono text-[11px] tracking-[0.06em] uppercase text-ink-500">
                   <tr>
                     <th className="px-5 py-3 font-medium">Oportunidad</th>
                     <th className="px-5 py-3 font-medium">Servicio</th>

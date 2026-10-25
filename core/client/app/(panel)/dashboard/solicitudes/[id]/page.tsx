@@ -100,7 +100,7 @@ export default async function ClienteDetailsPage({
       </Link>
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-ink-950 sm:text-3xl">
+        <h1 className="font-display text-2xl font-medium tracking-[-0.03em] text-ink-950 sm:text-3xl">
           {client.fullName}
         </h1>
         <ClientStatusBadge status={client.status} />

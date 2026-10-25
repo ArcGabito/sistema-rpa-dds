@@ -8,7 +8,7 @@ export function ContactPanel() {
     <section className="bg-brand-50 py-16 sm:py-20">
       <Container className="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <h2 className="font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
             ¡Colaboremos!
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-700">
@@ -18,7 +18,7 @@ export function ContactPanel() {
 
           <div className="mt-10 flex flex-col gap-6">
             <div className="flex items-start gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-700 text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink-950 text-white">
                 <MessageCircle className="h-4 w-4" />
               </span>
               <div>
@@ -37,7 +37,7 @@ export function ContactPanel() {
             </div>
 
             <div className="flex items-start gap-3">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-700 text-white">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink-950 text-white">
                 <Mail className="h-4 w-4" />
               </span>
               <div>

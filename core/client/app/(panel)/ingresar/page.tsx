@@ -4,66 +4,80 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Eye, EyeOff, Loader2, ShieldAlert } from "lucide-react";
-import { FacadeBackdrop } from "@/components/layout/facade-backdrop";
+import { GlowBackdrop } from "@/components/layout/glow-backdrop";
 import { useAuth } from "@/hooks/use-auth";
+import { CLIENTS } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
 
 const FIELD_BASE =
-  "h-11 w-full rounded-md border bg-white px-3.5 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400";
+  "h-12 w-full rounded-xl border bg-brand-50 px-4 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400 focus:bg-white";
 
+// A white card floating on grey: on the left a dark panel lit by a column
+// of blue light with the tagline, on the right the sign-in form.
 export default function IngresarPage() {
   const { register, errors, isSubmitting, locked, secondsLeft, onSubmit } = useAuth();
   const countdown = `${Math.floor(secondsLeft / 60)}:${String(secondsLeft % 60).padStart(2, "0")}`;
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-brand-50">
-      <FacadeBackdrop tone="light" />
+    <div className="flex min-h-screen items-center justify-center bg-[#e4e4e7] p-3 sm:p-6 lg:p-10">
+      <div className="flex w-full max-w-6xl flex-col gap-3 rounded-[2rem] bg-white p-3 shadow-[0_30px_80px_-30px_rgb(10_10_11/0.35)] lg:min-h-[44rem] lg:flex-row">
+        <div className="relative flex min-h-56 flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 lg:flex-[1.05] lg:p-10">
+          <GlowBackdrop glow="beam" />
 
-      <div className="relative flex min-h-screen flex-col gap-3 p-3 sm:p-4 lg:flex-row lg:gap-4">
-        <div className="flex flex-col justify-between px-3 py-3 sm:px-5 lg:flex-1 lg:px-10 lg:py-8">
-          <div className="flex items-center justify-between gap-4">
+          <div className="relative flex items-center justify-between gap-4">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-white shadow-card">
-                <Image src="/assets/icon.png" alt="" width={24} height={24} className="h-6 w-6" />
-              </span>
-              <span className="whitespace-nowrap font-display text-[15px] font-semibold text-ink-950">
+              <Image src="/assets/icon.png" alt="" width={28} height={28} className="h-7 w-7" />
+              <span className="whitespace-nowrap font-display text-[15px] font-semibold text-white">
                 <span className="sm:hidden">{SITE.shortName}</span>
                 <span className="hidden sm:inline">{SITE.name}</span>
               </span>
             </Link>
             <Link
               href="/"
-              className="flex items-center gap-1.5 whitespace-nowrap text-sm text-ink-700 transition-colors hover:text-ink-950"
+              className="flex items-center gap-1.5 whitespace-nowrap text-sm text-white/80 transition-colors hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" />
               Volver al sitio
             </Link>
           </div>
 
-          <div className="hidden max-w-lg lg:block">
-            <h1 className="font-display text-5xl font-semibold leading-[1.1] tracking-tight text-ink-950">
+          <div className="relative mt-16 hidden lg:block">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-1 pr-3 pl-1 text-xs text-white/85 backdrop-blur">
+              <span className="flex -space-x-1.5">
+                {["BCP", "AFP", "SCP"].map((sigla) => (
+                  <span
+                    key={sigla}
+                    className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[8px] font-semibold text-ink-950 ring-2 ring-ink-950"
+                  >
+                    {sigla}
+                  </span>
+                ))}
+              </span>
+              Más de 30 empresas confían en DDS
+            </span>
+            <h1 className="mt-5 max-w-lg font-display text-5xl leading-[1.05] font-medium tracking-[-0.03em] text-white xl:text-6xl">
               {SITE.tagline}
             </h1>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-700">
-              Gestiona los leads del sitio, el seguimiento de clientes y los
-              accesos de tu equipo desde un solo panel.
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+              Gestiona el ciclo completo de tus clientes, de la oportunidad al
+              bot en producción, desde un solo panel.
             </p>
           </div>
         </div>
 
-        <main className="flex flex-1 items-center justify-center rounded-lg bg-white shadow-card-hover px-6 py-12 sm:px-12 lg:flex-none lg:basis-[44%] lg:px-16">
+        <main className="flex flex-1 flex-col justify-center px-4 py-10 sm:px-10 lg:px-14">
           <div className="w-full max-w-[26rem]">
-            <h2 className="font-display text-3xl font-semibold tracking-tight text-ink-950">
+            <Image src="/assets/icon.png" alt="" width={32} height={32} className="h-8 w-8" />
+            <h2 className="mt-6 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
               Bienvenido de nuevo
             </h2>
             <p className="mt-2 text-sm text-ink-500">
               Ingresa para acceder al panel de administración.
             </p>
-
             <form onSubmit={onSubmit} noValidate className="mt-8 flex flex-col gap-5">
               <div>
-                <label htmlFor="email" className="text-sm font-medium text-ink-950">
+                <label htmlFor="email" className="text-sm text-ink-950">
                   Correo
                 </label>
                 <input
@@ -73,8 +87,8 @@ export default function IngresarPage() {
                   placeholder="tu@dds.pe"
                   aria-invalid={errors.email ? true : undefined}
                   aria-describedby={errors.email ? "email-error" : undefined}
-                  className={`mt-1.5 ${FIELD_BASE} ${
-                    errors.email ? "border-red-400 focus:border-red-500" : "border-line focus:border-brand-500"
+                  className={`mt-2 ${FIELD_BASE} ${
+                    errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-ink-400"
                   }`}
                   {...register("email")}
                 />
@@ -86,10 +100,10 @@ export default function IngresarPage() {
               </div>
 
               <div>
-                <label htmlFor="password" className="text-sm font-medium text-ink-950">
+                <label htmlFor="password" className="text-sm text-ink-950">
                   Contraseña
                 </label>
-                <div className="relative mt-1.5">
+                <div className="relative mt-2">
                   <input
                     id="password"
                     type={showPassword ? "text" : "password"}
@@ -98,7 +112,7 @@ export default function IngresarPage() {
                     aria-invalid={errors.password ? true : undefined}
                     aria-describedby={errors.password ? "password-error" : undefined}
                     className={`${FIELD_BASE} pr-11 ${
-                      errors.password ? "border-red-400 focus:border-red-500" : "border-line focus:border-brand-500"
+                      errors.password ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-ink-400"
                     }`}
                     {...register("password")}
                   />
@@ -126,7 +140,7 @@ export default function IngresarPage() {
                 <label className="flex items-center gap-2 text-sm text-ink-500">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 rounded-[4px] border-line accent-brand-700"
+                    className="h-4 w-4 rounded-[4px] border-line accent-ink-950"
                     {...register("rememberMe")}
                   />
                   Recordarme
@@ -144,7 +158,7 @@ export default function IngresarPage() {
               {locked && (
                 <p
                   role="status"
-                  className="flex items-start gap-2.5 rounded-md border border-line bg-brand-50 px-3.5 py-3 text-sm text-ink-700"
+                  className="flex items-start gap-2.5 rounded-xl bg-brand-50 px-4 py-3 text-sm text-ink-700"
                 >
                   <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
                   <span>
@@ -157,24 +171,35 @@ export default function IngresarPage() {
               <button
                 type="submit"
                 disabled={isSubmitting || locked}
-                className="mt-1 inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-brand-700 text-sm font-semibold text-white transition-colors hover:bg-ink-900 disabled:opacity-60"
+                className="mt-2 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[linear-gradient(to_bottom,var(--color-ink-800),var(--color-ink-950))] text-base font-medium text-white shadow-button transition-[filter,opacity] hover:brightness-125 disabled:opacity-60"
               >
                 {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                 {isSubmitting ? "Ingresando..." : locked ? `Espera ${countdown}` : "Ingresar"}
               </button>
             </form>
 
-            <p className="mt-10 text-center text-sm text-ink-500">
+            <p className="mt-8 text-sm text-ink-500">
               ¿No tienes cuenta?{" "}
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent(
                   "Solicitud de acceso al panel",
                 )}`}
-                className="font-semibold text-ink-950 hover:underline"
+                className="font-medium text-ink-950 hover:underline"
               >
                 Solicita acceso
               </a>
             </p>
+
+            <div className="mt-14">
+              <p className="text-sm text-ink-950">Trabajan con nosotros</p>
+              <ul className="mt-4 flex flex-wrap items-center gap-x-7 gap-y-2">
+                {CLIENTS.slice(0, 4).map((name) => (
+                  <li key={name} className="font-display text-lg font-semibold tracking-tight text-ink-950">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </main>
       </div>

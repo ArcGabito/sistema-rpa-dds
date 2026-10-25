@@ -6,7 +6,7 @@ export function ServiceProcess({ service }: { service: Service }) {
   return (
     <section className="bg-ink-950 py-20">
       <Container>
-        <p className="text-center text-xs font-medium text-glow-300">
+        <p className="text-center text-xs font-mono tracking-[0.1em] uppercase text-glow-300">
           {service.stepsHeading}
         </p>
 
@@ -14,7 +14,7 @@ export function ServiceProcess({ service }: { service: Service }) {
           {service.steps.map((step, index) => (
             <div key={step.title} className="flex items-start gap-3 lg:items-stretch">
               <div className="flex-1 border-l-2 border-white/10 pl-5 lg:border-l-0 lg:border-t-2 lg:pl-0 lg:pt-6">
-                <p className="text-xs font-medium text-glow-300">
+                <p className="text-xs font-mono tracking-[0.1em] uppercase text-glow-300">
                   Paso {String(index + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mt-2 font-display text-base font-semibold text-white">

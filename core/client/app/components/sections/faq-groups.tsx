@@ -17,7 +17,7 @@ export function FaqGroups() {
         <div className="flex flex-col gap-16">
           {FAQ_GROUPS.map((group, groupIndex) => (
             <div key={group.heading}>
-              <h2 className="font-display text-2xl font-semibold tracking-tight text-ink-950 sm:text-3xl">
+              <h2 className="font-display text-2xl font-medium tracking-[-0.02em] text-ink-950 sm:text-3xl">
                 {group.heading}
               </h2>
               <p className="mt-3 text-ink-700">{group.intro}</p>

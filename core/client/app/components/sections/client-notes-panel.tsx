@@ -73,13 +73,13 @@ export function ClientNotesPanel({ clientId, notes }: { clientId: number; notes:
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Escribe una nota interna..."
-          className="h-11 w-full rounded-md border border-line bg-white px-3.5 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-500"
+          className="h-11 w-full rounded-md border border-transparent bg-brand-50 px-3.5 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400 focus:border-ink-400 focus:bg-white"
         />
         <button
           type="submit"
           disabled={submitting || !message.trim()}
           aria-label="Agregar nota"
-          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-brand-700 text-white transition-colors hover:bg-ink-900 disabled:opacity-40"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-ink-950 text-white transition-colors hover:bg-ink-800 disabled:opacity-40"
         >
           <Send className="h-4 w-4" />
         </button>

@@ -69,15 +69,15 @@ export default async function DocumentoPropuestaPage({ params }: { params: Promi
 
       <article className="rounded-lg bg-white p-8 shadow-card sm:p-12 print:rounded-none print:p-0 print:shadow-none">
         {p.estado === "borrador" && (
-          <p className="mb-6 rounded-md border border-dashed border-line px-4 py-2 text-center text-xs font-semibold tracking-wide text-ink-500 uppercase">
+          <p className="mb-6 rounded-md border border-dashed border-line px-4 py-2 text-center font-mono text-[11px] font-medium tracking-[0.1em] text-ink-500 uppercase">
             Borrador — aún no enviado al cliente
           </p>
         )}
 
         <header className="flex flex-wrap items-start justify-between gap-6 border-b border-line pb-8 print:flex-nowrap">
           <div className="min-w-0">
-            <p className="text-xs font-semibold tracking-wide text-brand-700 uppercase">Propuesta técnica y económica</p>
-            <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-ink-950">{p.titulo}</h1>
+            <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-brand-700 uppercase">Propuesta técnica y económica</p>
+            <h1 className="mt-2 font-display text-3xl font-medium tracking-[-0.03em] text-ink-950">{p.titulo}</h1>
             <p className="mt-2 text-sm text-ink-700">
               Para <span className="font-semibold text-ink-950">{p.empresaRazonSocial ?? p.empresaNombre}</span>
               {p.empresaRuc && <span className="text-ink-500"> · RUC {p.empresaRuc}</span>}
@@ -161,7 +161,7 @@ export default async function DocumentoPropuestaPage({ params }: { params: Promi
 
         <Seccion numero={numero("inversion")} titulo="Inversión">
           <table className="w-full text-left">
-            <thead className="border-b border-line text-xs text-ink-500">
+            <thead className="border-b border-line font-mono text-[11px] tracking-[0.06em] uppercase text-ink-500">
               <tr>
                 <th className="py-2 font-medium">Implementación</th>
                 <th className="py-2 text-right font-medium">Cant.</th>
@@ -209,7 +209,7 @@ export default async function DocumentoPropuestaPage({ params }: { params: Promi
 
           {mensual.length > 0 && (
             <table className="mt-6 w-full text-left">
-              <thead className="border-b border-line text-xs text-ink-500">
+              <thead className="border-b border-line font-mono text-[11px] tracking-[0.06em] uppercase text-ink-500">
                 <tr>
                   <th className="py-2 font-medium">Servicio mensual</th>
                   <th className="py-2 text-right font-medium">Al mes</th>
@@ -291,7 +291,7 @@ export default async function DocumentoPropuestaPage({ params }: { params: Promi
           ].map((firma) => (
             // The name may take two lines: the signature line stays at the bottom, level on both sides.
             <div key={firma.por} className="flex flex-col">
-              <p className="text-xs font-semibold tracking-wide text-ink-500 uppercase">Aceptación</p>
+              <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-ink-500 uppercase">Aceptación</p>
               <p className="mt-1 font-semibold text-ink-950">{firma.por}</p>
               <div className="mt-auto border-t border-ink-400 pt-2 text-xs text-ink-500">
                 {firma.quien ?? "Nombre"} · Firma y fecha

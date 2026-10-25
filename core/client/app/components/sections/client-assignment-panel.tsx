@@ -12,7 +12,7 @@ const STATUS_OPTIONS = [
 ];
 
 const FIELD_BASE =
-  "h-11 w-full rounded-md border border-line bg-white px-3 text-sm text-ink-950 outline-none transition-colors focus:border-brand-500 disabled:opacity-60";
+  "h-11 w-full rounded-md border border-transparent bg-brand-50 px-3 text-sm text-ink-950 outline-none transition-colors focus:border-ink-400 focus:bg-white disabled:opacity-60";
 
 export function ClientAssignmentPanel({
   clientId,

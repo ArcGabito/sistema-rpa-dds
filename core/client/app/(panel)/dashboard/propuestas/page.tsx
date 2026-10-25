@@ -116,7 +116,7 @@ export default async function PropuestasPage({
 
             <div className="hidden overflow-x-auto md:block">
               <table className="w-full text-left text-sm">
-                <thead className="border-b border-line bg-brand-50 text-xs text-ink-500">
+                <thead className="border-b border-line bg-brand-50 font-mono text-[11px] tracking-[0.06em] uppercase text-ink-500">
                   <tr>
                     <th className="px-5 py-3 font-medium">Propuesta</th>
                     <th className="px-3 py-3 text-right font-medium">Implementación</th>

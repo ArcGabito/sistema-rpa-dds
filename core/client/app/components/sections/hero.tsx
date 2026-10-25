@@ -1,53 +1,64 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { FacadeBackdrop } from "@/components/layout/facade-backdrop";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { GlowBackdrop } from "@/components/layout/glow-backdrop";
+import { FrameMarks } from "@/components/ui/frame-marks";
+import { CLIENTS } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
 
+// Centered over the horizon glow, inside a hairline frame, with a strip of
+// clients sitting on the light at the bottom.
 export function Hero() {
   return (
-    <section id="top" className="relative scroll-mt-24 overflow-hidden pt-14 pb-20 lg:pt-20 lg:pb-24">
-      <FacadeBackdrop tone="light" />
+    <section id="top" className="relative scroll-mt-24 overflow-hidden">
+      <GlowBackdrop glow="horizon" />
 
-      <Container className="relative grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div className="max-w-2xl">
-          <Eyebrow>Automatiza. Analiza. Transforma.</Eyebrow>
-          <h1 className="mt-5 text-balance font-display text-[2.75rem] font-semibold leading-[1.05] tracking-tight text-ink-950 sm:text-6xl">
+      <Container className="relative">
+        <div className="relative border-x border-white/10 px-2 pt-20 pb-28 text-center sm:pt-28 sm:pb-40">
+          <FrameMarks tone="dark" />
+
+          <span className="inline-flex items-center rounded-full bg-white px-3 py-1 font-mono text-[10px] font-medium tracking-[0.12em] text-ink-950 uppercase">
+            {SITE.tagline}
+          </span>
+          <h1 className="mx-auto mt-7 max-w-4xl text-balance font-display text-[2.6rem] leading-[1.05] font-medium tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl">
             Soluciones inteligentes en Analítica, RPA e IA
           </h1>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-700">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
             Más de 30 organizaciones ya confían en nosotros para transformar
             sus operaciones y potenciar su crecimiento.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
             <a
               href="#servicios"
-              className="inline-flex h-11 items-center rounded-md bg-brand-700 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-900"
+              className="inline-flex h-11 items-center gap-3 rounded-md border border-white/15 bg-white/5 pr-1.5 pl-5 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/10"
             >
               Explorar servicios
+              <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-white text-ink-950">
+                <ArrowRight className="h-4 w-4" />
+              </span>
             </a>
             <Link
               href={SITE.contactUrl}
-              className="inline-flex h-11 items-center rounded-md border border-ink-950 bg-white px-6 text-sm font-semibold text-ink-950 transition-colors hover:bg-brand-50"
+              className="inline-flex h-11 items-center rounded-md px-5 text-sm font-medium text-white/75 transition-colors hover:text-white"
             >
               Solicitar diagnóstico
             </Link>
           </div>
-
-          <p className="mt-12 max-w-md text-sm leading-relaxed text-ink-500">
-            Trabajamos con Power BI, Qlik, Looker, Rocketbot y modelos de
-            lenguaje (LLM).
-          </p>
         </div>
 
-        <div className="flex justify-center lg:justify-end">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/hero-porada.svg"
-            alt=""
-            className="w-full max-w-md lg:max-w-none"
-          />
+        <div className="relative grid gap-6 border-x border-t border-white/10 px-2 py-8 sm:grid-cols-[12rem_1fr] sm:items-center sm:px-6">
+          <p className="text-center text-sm leading-snug text-white/80 sm:text-left">
+            Más de 30 empresas
+            <br className="hidden sm:block" /> confían en DDS
+          </p>
+          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 sm:justify-between">
+            {CLIENTS.slice(0, 7).map((name) => (
+              <li key={name} className="font-display text-base font-medium tracking-[-0.02em] text-white sm:text-lg">
+                {name}
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>

@@ -58,7 +58,7 @@ function Totales({ control }: { control: Control<PropuestaValues> }) {
   return (
     <div className="flex flex-col gap-4 text-sm">
       <div>
-        <p className="text-xs font-semibold tracking-wide text-ink-500 uppercase">Implementación</p>
+        <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-ink-500 uppercase">Implementación</p>
         <dl className="mt-2 flex flex-col gap-1.5">
           <div className="flex justify-between gap-3">
             <dt className="text-ink-500">Subtotal</dt>
@@ -81,7 +81,7 @@ function Totales({ control }: { control: Control<PropuestaValues> }) {
         </dl>
       </div>
       <div>
-        <p className="text-xs font-semibold tracking-wide text-ink-500 uppercase">Mensual</p>
+        <p className="font-mono text-[11px] font-medium tracking-[0.1em] text-ink-500 uppercase">Mensual</p>
         <dl className="mt-2 flex flex-col gap-1.5">
           <div className="flex justify-between gap-3">
             <dt className="text-ink-500">Base + IGV</dt>

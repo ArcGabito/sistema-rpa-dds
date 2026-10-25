@@ -14,7 +14,7 @@ export function SesionInvalida() {
         <h1 className="mt-4 font-display text-xl font-semibold text-ink-950">Tu sesión ya no es válida</h1>
         <p className="mt-2 text-sm text-ink-500">Tu usuario fue desactivado o eliminado. Si crees que es un error, habla con un administrador.</p>
         <div className="mt-6">
-          <LogoutButton />
+          <LogoutButton tone="light" />
         </div>
       </div>
     </main>

@@ -216,7 +216,7 @@ export function MedicionesPanel({
       ) : (
         <>
           <table className="hidden w-full border-t border-line text-sm md:table">
-            <thead className="bg-brand-50 text-left text-xs whitespace-nowrap text-ink-500">
+            <thead className="bg-brand-50 text-left font-mono text-[11px] tracking-[0.06em] uppercase whitespace-nowrap text-ink-500">
               <tr>
                 <th className="px-5 py-2.5 font-medium">Mes</th>
                 <th className="px-3 py-2.5 text-right font-medium">Ejecuciones</th>

@@ -9,7 +9,7 @@ export function About() {
     <section id="nosotros" className="scroll-mt-24 bg-white py-24">
       <Container className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
         <div>
-          <p className="font-display text-6xl font-semibold text-ink-950">
+          <p className="font-display text-6xl font-medium tracking-[-0.02em] text-ink-950">
             <StatCounter target={10} suffix="+" />
           </p>
           <p className="mt-2 max-w-[14rem] text-sm text-ink-700">
@@ -19,7 +19,7 @@ export function About() {
 
         <div>
           <Eyebrow>Nosotros</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink-950 sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">
             Haz crecer tu empresa con soluciones inteligentes en datos,
             automatización e IA
           </h2>
