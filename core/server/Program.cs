@@ -65,6 +65,9 @@ builder.Services.AddAuthorization();
 builder.Services.AddRateLimits();
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<LoginThrottle>();
+// Outgoing mail (password resets), sent in the background (Services/Correo.cs).
+builder.Services.AddSingleton<Correo>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<Correo>());
 
 var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
     ?? ["http://localhost:3000"];

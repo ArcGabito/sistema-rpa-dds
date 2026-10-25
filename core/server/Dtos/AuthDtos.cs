@@ -28,3 +28,24 @@ public class AdminUserResponse
     public required string FullName { get; set; }
     public required string Role { get; set; }
 }
+
+public class RecuperarClaveRequest
+{
+    [Required(ErrorMessage = "Ingresa tu correo."), EmailAddress(ErrorMessage = "Correo no válido."), MaxLength(256)]
+    public required string Email { get; set; }
+}
+
+public class VerificarEnlaceRequest
+{
+    [Required, MaxLength(100)]
+    public required string Token { get; set; }
+}
+
+public class RestablecerClaveRequest
+{
+    [Required, MaxLength(100)]
+    public required string Token { get; set; }
+
+    [Required(ErrorMessage = "Ingresa la nueva contraseña."), MinLength(8, ErrorMessage = "La nueva contraseña debe tener al menos 8 caracteres."), MaxLength(128)]
+    public required string Nueva { get; set; }
+}

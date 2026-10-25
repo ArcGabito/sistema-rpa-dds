@@ -10,6 +10,8 @@ namespace Server.Services;
 // - "login": 10 attempts per IP in any 5 minutes (plus LoginThrottle's
 //   per-account lockout);
 // - "contact": 5 contact-form submissions per IP every 10 minutes;
+// - "recuperar": 5 password-reset requests (or reset attempts) per IP in any
+//   15 minutes, so the form can't be used to flood inboxes;
 // - "boveda": 30 secrets revealed per user in any 5 minutes, so an account
 //   in the wrong hands can't dump the vault in one go;
 // - "ia": 10 AI drafts per user in any 10 minutes (each one is a paid call);
@@ -21,6 +23,7 @@ public static class RateLimiting
 {
     public const string Login = "login";
     public const string Contact = "contact";
+    public const string Recuperar = "recuperar";
     public const string Boveda = "boveda";
     public const string Ia = "ia";
     public const string Usuarios = "usuarios";
@@ -78,6 +81,15 @@ public static class RateLimiting
                         SegmentsPerWindow = 5,
                         QueueLimit = 0,
                     }));
+
+            options.AddPolicy(Recuperar, context =>
+                RateLimitPartition.GetSlidingWindowLimiter(ClientIp.Resolve(context), _ => new SlidingWindowRateLimiterOptions
+                {
+                    PermitLimit = 5,
+                    Window = TimeSpan.FromMinutes(15),
+                    SegmentsPerWindow = 5,
+                    QueueLimit = 0,
+                }));
 
             options.AddPolicy(Usuarios, context =>
                 RateLimitPartition.GetSlidingWindowLimiter(

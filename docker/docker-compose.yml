@@ -51,6 +51,13 @@ services:
       Admin__Password: ${ADMIN_PASSWORD}
       Admin__FullName: ${ADMIN_FULL_NAME:-Administrador}
       Cors__AllowedOrigins__0: ${CLIENT_ORIGIN:-http://localhost:3000}
+      # Password-reset e-mails: the links point at the panel, over SMTP.
+      App__SiteUrl: ${CLIENT_ORIGIN:-http://localhost:3000}
+      Correo__Host: ${SMTP_HOST:-}
+      Correo__Puerto: ${SMTP_PORT:-587}
+      Correo__Usuario: ${SMTP_USER:-}
+      Correo__Clave: ${SMTP_PASSWORD:-}
+      Correo__Remitente: ${SMTP_FROM:-}
       # Fill the empty local database with demo companies and pipeline.
       Seed__DatosDemo: ${SEED_DATOS_DEMO:-true}
     ports:

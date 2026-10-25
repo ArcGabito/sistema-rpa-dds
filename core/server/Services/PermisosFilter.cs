@@ -33,7 +33,8 @@ public class PermisosFilter(PermisosService permisos) : IAsyncAuthorizationFilte
         if (http.User.Identity?.IsAuthenticated != true) return;
 
         if (!int.TryParse(http.User.FindFirstValue(ClaimTypes.NameIdentifier), out var usuarioId)
-            || await permisos.ObtenerAsync(usuarioId, http.RequestAborted) is not { Activo: true } p)
+            || await permisos.ObtenerAsync(usuarioId, http.RequestAborted) is not { Activo: true } p
+            || AnteriorAlRestablecimiento(http.User, p))
         {
             context.Result = new UnauthorizedObjectResult(new { message = "Tu sesión ya no es válida. Vuelve a ingresar." });
             return;
@@ -56,6 +57,15 @@ public class PermisosFilter(PermisosService permisos) : IAsyncAuthorizationFilte
                     ? $"No tienes acceso a {Models.Modulo.Label(modulo.Modulo)}."
                     : $"Tu acceso a {Models.Modulo.Label(modulo.Modulo)} es de solo lectura.");
         }
+    }
+
+    // A session started before the password was reset from an e-mailed link
+    // (or one without an issue time, from before they carried one).
+    private static bool AnteriorAlRestablecimiento(ClaimsPrincipal user, PermisosEfectivos p)
+    {
+        if (p.SesionesDesdeUtc is not { } desde) return false;
+        return !long.TryParse(user.FindFirstValue("iat"), out var iat)
+            || DateTimeOffset.FromUnixTimeSeconds(iat).UtcDateTime < desde.AddSeconds(-1);
     }
 
     private static ObjectResult Prohibido(string message) => new(new { message }) { StatusCode = StatusCodes.Status403Forbidden };

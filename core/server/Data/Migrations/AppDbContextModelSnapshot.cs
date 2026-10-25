@@ -146,6 +146,9 @@ namespace server.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<DateTime?>("SesionesDesdeUtc")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
@@ -1401,6 +1404,45 @@ namespace server.Data.Migrations
                     b.ToTable("Proyectos");
                 });
 
+            modelBuilder.Entity("Server.Models.RestablecimientoClave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiraAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Ip")
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<DateTime?>("UsadoAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique();
+
+                    b.HasIndex("UsuarioId", "CreatedAtUtc");
+
+                    b.ToTable("RestablecimientosClave");
+                });
+
             modelBuilder.Entity("Server.Models.Secreto", b =>
                 {
                     b.Property<int>("Id")
@@ -1952,6 +1994,17 @@ namespace server.Data.Migrations
                     b.Navigation("Propuesta");
 
                     b.Navigation("Responsable");
+                });
+
+            modelBuilder.Entity("Server.Models.RestablecimientoClave", b =>
+                {
+                    b.HasOne("Server.Models.AdminUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Server.Models.Secreto", b =>

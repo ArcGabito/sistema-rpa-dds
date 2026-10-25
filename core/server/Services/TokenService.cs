@@ -24,6 +24,8 @@ public class TokenService(IOptions<JwtOptions> jwtOptions)
             new Claim("name", user.FullName),
             new Claim("role", user.Role),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            // When it was issued: a password reset ends the sessions before it.
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Secret));

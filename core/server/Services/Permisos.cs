@@ -52,7 +52,7 @@ public static class PermisosRol
 
 // A signed-in user's effective access: their role's preset with their own
 // adjustments on top.
-public sealed record PermisosEfectivos(int UsuarioId, string Rol, bool Activo, IReadOnlyDictionary<string, string> Modulos)
+public sealed record PermisosEfectivos(int UsuarioId, string Rol, bool Activo, IReadOnlyDictionary<string, string> Modulos, DateTime? SesionesDesdeUtc = null)
 {
     public bool EsAdmin => Rol == AdminRole.Admin;
 
@@ -66,7 +66,7 @@ public sealed record PermisosEfectivos(int UsuarioId, string Rol, bool Activo, I
         if (u.Role != AdminRole.Admin)
             foreach (var p in u.Permisos.Where(p => Modulo.All.Contains(p.Modulo) && NivelAcceso.All.Contains(p.Nivel)))
                 modulos[p.Modulo] = p.Nivel;
-        return new PermisosEfectivos(u.Id, u.Role, u.Activo, modulos);
+        return new PermisosEfectivos(u.Id, u.Role, u.Activo, modulos, u.SesionesDesdeUtc);
     }
 }
 
