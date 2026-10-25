@@ -9,6 +9,10 @@ import { useAuth } from "@/hooks/use-auth";
 import { CLIENTS } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
 
+// This is a public demo with fictitious data: the fields show the demo
+// admin's credentials so visitors know how to get in.
+const DEMO = { email: "admin@dds.pe", password: "Admin123!" };
+
 export default function IngresarPage() {
   const { register, errors, isSubmitting, locked, secondsLeft, onSubmit } = useAuth();
   const countdown = `${Math.floor(secondsLeft / 60)}:${String(secondsLeft % 60).padStart(2, "0")}`;
@@ -25,7 +29,7 @@ export default function IngresarPage() {
             id="email"
             type="email"
             autoComplete="email"
-            placeholder="tu@dds.pe"
+            placeholder={DEMO.email}
             aria-invalid={errors.email ? true : undefined}
             aria-describedby={errors.email ? "email-error" : undefined}
             className={`mt-2 ${AUTH_FIELD} ${
@@ -49,7 +53,7 @@ export default function IngresarPage() {
               id="password"
               type={showPassword ? "text" : "password"}
               autoComplete="current-password"
-              placeholder="Ingresa tu contraseña"
+              placeholder={DEMO.password}
               aria-invalid={errors.password ? true : undefined}
               aria-describedby={errors.password ? "password-error" : undefined}
               className={`${AUTH_FIELD} pr-11 ${
