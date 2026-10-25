@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
 using Server.Dtos;
@@ -42,6 +43,7 @@ public class UsersController(AppDbContext db, PasswordHasher<AdminUser> password
 
     [HttpPost]
     [SoloAdmin]
+    [EnableRateLimiting(RateLimiting.Usuarios)]
     public async Task<ActionResult<UserResponse>> Create(CreateUserRequest request, CancellationToken ct)
     {
         if (!AdminRole.All.Contains(request.Role))
@@ -60,6 +62,7 @@ public class UsersController(AppDbContext db, PasswordHasher<AdminUser> password
 
     [HttpPatch("{id:int}")]
     [SoloAdmin]
+    [EnableRateLimiting(RateLimiting.Usuarios)]
     public async Task<ActionResult<UserDetailResponse>> Update(int id, UpdateUserRequest request, CancellationToken ct)
     {
         var user = await db.AdminUsers.Include(u => u.Permisos).FirstOrDefaultAsync(u => u.Id == id, ct);
@@ -118,6 +121,7 @@ public class UsersController(AppDbContext db, PasswordHasher<AdminUser> password
 
     [HttpDelete("{id:int}")]
     [SoloAdmin]
+    [EnableRateLimiting(RateLimiting.Usuarios)]
     public async Task<IActionResult> Delete(int id, CancellationToken ct)
     {
         var user = await db.AdminUsers.FindAsync([id], ct);

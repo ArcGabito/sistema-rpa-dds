@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, UserPlus } from "lucide-react";
-import { PageHeader } from "@/components/ui/page-header";
+import { ConfiguracionHeader } from "@/components/configuracion/configuracion-header";
 import { BUTTON_PRIMARY, CARD } from "@/components/ui/panel-styles";
 import { apiGet } from "@/lib/api";
 import { formatDate } from "@/lib/format-date";
@@ -26,11 +26,12 @@ export default async function UsuariosPage() {
 
   return (
     <div>
-      <PageHeader
-        title="Usuarios"
+      <ConfiguracionHeader
+        activa="usuarios"
+        esAdmin
         description="Quién entra al panel, con qué rol y qué puede hacer en cada módulo."
         actions={
-          <Link href="/dashboard/usuarios/nuevo" className={BUTTON_PRIMARY}>
+          <Link href="/dashboard/configuracion/usuarios/nuevo" className={BUTTON_PRIMARY}>
             <UserPlus className="h-4 w-4" />
             Nuevo usuario
           </Link>
@@ -38,10 +39,10 @@ export default async function UsuariosPage() {
       />
 
       {!users ? (
-        <p className={`${CARD} mt-8 p-6 text-sm text-ink-500`}>No se pudieron cargar los usuarios. Intenta de nuevo más tarde.</p>
+        <p className={`${CARD} mt-6 p-6 text-sm text-ink-500`}>No se pudieron cargar los usuarios. Intenta de nuevo más tarde.</p>
       ) : (
-        grupos.map(({ titulo, lista }, i) => (
-            <section key={titulo} className={`${CARD} ${i === 0 ? "mt-8" : "mt-6"} overflow-hidden`}>
+        grupos.map(({ titulo, lista }) => (
+            <section key={titulo} className={`${CARD} mt-6 overflow-hidden`}>
               <h2 className="p-5 text-base font-semibold text-ink-950">
                 {titulo} <span className="font-normal text-ink-500">{lista.length}</span>
               </h2>
@@ -49,7 +50,7 @@ export default async function UsuariosPage() {
                 {lista.map((u) => (
                   <li key={u.id}>
                     <Link
-                      href={`/dashboard/usuarios/${u.id}`}
+                      href={`/dashboard/configuracion/usuarios/${u.id}`}
                       className="group grid gap-2 px-5 py-3.5 hover:bg-brand-50 sm:grid-cols-[minmax(0,1fr)_12rem_9rem_auto] sm:items-center sm:gap-4"
                     >
                       <div className="min-w-0">

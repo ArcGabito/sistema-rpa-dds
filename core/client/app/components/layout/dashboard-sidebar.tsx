@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { UserRound, X } from "lucide-react";
+import { X } from "lucide-react";
 import { GlowBackdrop } from "@/components/layout/glow-backdrop";
 import { LogoutButton } from "@/components/sections/logout-button";
 import { DASHBOARD_NAV } from "@/lib/dashboard-nav";
@@ -119,15 +119,6 @@ export function DashboardSidebar({
               <p className="truncate text-xs text-white/45">{user?.email}</p>
             </div>
           </div>
-          <Link
-            href="/dashboard/cuenta"
-            onClick={onNavigate}
-            aria-current={pathname === "/dashboard/cuenta" ? "page" : undefined}
-            className="-mt-1 inline-flex items-center gap-1.5 text-xs font-medium text-white/50 hover:text-white aria-[current=page]:text-glow-300"
-          >
-            <UserRound className="h-3.5 w-3.5" />
-            Mi cuenta y contraseña
-          </Link>
           <LogoutButton />
         </div>
       </div>

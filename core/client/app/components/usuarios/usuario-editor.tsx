@@ -188,7 +188,7 @@ export function UsuarioEditor({ user, roles, esPropio }: { user: UserDetail; rol
               <EliminarButton
                 path={`users/${user.id}`}
                 confirmText={`¿Eliminar a ${user.fullName}? Su historial quedará como “Usuario eliminado”. Esta acción no se puede deshacer.`}
-                redirectTo="/dashboard/usuarios"
+                redirectTo="/dashboard/configuracion/usuarios"
                 successTitle="Usuario eliminado"
               />
             </div>

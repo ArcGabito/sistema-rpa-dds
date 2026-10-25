@@ -1,4 +1,4 @@
-import { Bot, Building2, CalendarClock, ClipboardList, FileText, FolderKanban, Inbox, LifeBuoy, Rocket, SquareKanban, LayoutDashboard, UserCog, Vault } from "lucide-react";
+import { Bot, Building2, CalendarClock, ClipboardList, FileText, FolderKanban, Inbox, LifeBuoy, Rocket, Settings, SquareKanban, LayoutDashboard, Vault } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Modulo } from "@/lib/permisos";
 
@@ -46,7 +46,8 @@ export const DASHBOARD_NAV: DashboardNavGroup[] = [
     ],
   },
   {
-    title: "Administración",
-    items: [{ label: "Usuarios", href: "/dashboard/usuarios", icon: UserCog, adminOnly: true }],
+    title: "Sistema",
+    // Everyone: their account and the roles. Users only show inside for admins.
+    items: [{ label: "Configuración", href: "/dashboard/configuracion", icon: Settings }],
   },
 ];

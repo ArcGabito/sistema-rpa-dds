@@ -16,7 +16,7 @@ export default async function UsuarioPage({ params }: { params: Promise<{ id: st
   return (
     <div>
       <PageHeader
-        back={{ href: "/dashboard/usuarios", label: "Usuarios" }}
+        back={{ href: "/dashboard/configuracion/usuarios", label: "Usuarios" }}
         title={user.fullName}
         badges={
           <>

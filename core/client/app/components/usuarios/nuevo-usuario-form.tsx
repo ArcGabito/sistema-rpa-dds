@@ -37,7 +37,7 @@ export function NuevoUsuarioForm({ roles }: { roles: RolPreset[] }) {
       return;
     }
     sileo.success({ title: "Usuario creado", description: `${values.fullName} ya puede ingresar con la contraseña temporal.` });
-    router.push(`/dashboard/usuarios/${result.data.id}`);
+    router.push(`/dashboard/configuracion/usuarios/${result.data.id}`);
     router.refresh();
   });
 
@@ -83,7 +83,7 @@ export function NuevoUsuarioForm({ roles }: { roles: RolPreset[] }) {
         )}
       </div>
       <div className="flex flex-col-reverse gap-3 border-t border-line px-6 py-5 sm:flex-row sm:justify-end sm:px-8">
-        <Link href="/dashboard/usuarios" className={BUTTON_SECONDARY}>
+        <Link href="/dashboard/configuracion/usuarios" className={BUTTON_SECONDARY}>
           Cancelar
         </Link>
         <button type="submit" disabled={isSubmitting} className={BUTTON_PRIMARY}>

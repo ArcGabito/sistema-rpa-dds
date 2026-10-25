@@ -9,7 +9,7 @@ export default async function NuevoUsuarioPage() {
   return (
     <div>
       <PageHeader
-        back={{ href: "/dashboard/usuarios", label: "Usuarios" }}
+        back={{ href: "/dashboard/configuracion/usuarios", label: "Usuarios" }}
         title="Nuevo usuario"
         description="Un acceso al panel para alguien del equipo, con una contraseña temporal."
       />
