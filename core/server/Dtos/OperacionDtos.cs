@@ -26,10 +26,9 @@ public class BotRequest
     public decimal MinutosPorCaso { get; set; }
 }
 
-// From a project's process (its company, figures and stage), or for a company.
+// For a company. A project's process goes live from Implementaciones.
 public class CreateBotRequest : BotRequest
 {
-    public int? ProcesoProyectoId { get; set; }
     public int? EmpresaId { get; set; }
 }
 
@@ -39,7 +38,7 @@ public class UpdateBotRequest : BotRequest
     public DateTime? RetiradoEl { get; set; }
 }
 
-// What the new-bot form starts from, for a process.
+// What the go-live form starts from, for a process.
 public class BorradorBotResponse
 {
     public required string Nombre { get; set; }

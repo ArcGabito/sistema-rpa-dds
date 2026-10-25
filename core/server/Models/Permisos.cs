@@ -9,11 +9,13 @@ public static class Modulo
     public const string Propuestas = "propuestas";
     // Projects, their tasks and PDDs.
     public const string Proyectos = "proyectos";
+    // Each process's go-live checklist and its move to production.
+    public const string Implementaciones = "implementaciones";
     public const string Boveda = "boveda";
     // Bots, incidents and expirations.
     public const string Operacion = "operacion";
 
-    public static readonly string[] All = [Comercial, Diagnosticos, Propuestas, Proyectos, Boveda, Operacion];
+    public static readonly string[] All = [Comercial, Diagnosticos, Propuestas, Proyectos, Implementaciones, Boveda, Operacion];
 
     public static string Label(string modulo) => modulo switch
     {
@@ -21,6 +23,7 @@ public static class Modulo
         Diagnosticos => "Diagnósticos",
         Propuestas => "Propuestas",
         Proyectos => "Proyectos",
+        Implementaciones => "Implementaciones",
         Boveda => "Bóveda",
         Operacion => "Operación",
         _ => modulo,

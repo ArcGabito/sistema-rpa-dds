@@ -197,15 +197,28 @@ export function PddEditor({ proceso, iaConfigurada, iaModelo }: { proceso: Proce
               </select>
             </Field>
           </div>
-          <Field id="pdd-etapa" label="Etapa">
+          <Field
+            id="pdd-etapa"
+            label="Etapa"
+            hint={
+              proceso.etapa === "produccion"
+                ? undefined
+                : "El desarrollo empieza con el PDD aprobado; la puesta en producción se hace desde Implementaciones."
+            }
+          >
             <select id="pdd-etapa" className={input(false)} {...register("etapa")}>
               {ETAPAS_DESARROLLO.map((s) => (
-                <option key={s.value} value={s.value}>
+                <option key={s.value} value={s.value} disabled={s.value === "produccion" && proceso.etapa !== "produccion"}>
                   {s.label}
                 </option>
               ))}
             </select>
           </Field>
+          {["desarrollo", "pruebas"].includes(proceso.etapa) && (
+            <Link href={`/dashboard/implementaciones/${proceso.id}`} className="-mt-2 text-xs font-medium text-brand-700 hover:underline">
+              Ver su checklist de pase a producción
+            </Link>
+          )}
           <Field id="pdd-estado" label="Estado del PDD" hint={proceso.pddEstado === "aprobado" ? "Cambiar el texto de un PDD aprobado crea una versión nueva, en borrador." : undefined}>
             <select id="pdd-estado" className={input(false)} {...register("pddEstado")}>
               {PDD_ESTADOS.map((s) => (

@@ -9,6 +9,7 @@ export const MODULOS = [
   { value: "diagnosticos", label: "Diagnósticos", ayuda: "Levantamiento de procesos y cálculo de ROI." },
   { value: "propuestas", label: "Propuestas", ayuda: "Propuestas técnicas y económicas." },
   { value: "proyectos", label: "Proyectos", ayuda: "Hitos, tareas y PDD de cada proceso." },
+  { value: "implementaciones", label: "Implementaciones", ayuda: "Checklist de pase y puesta en producción de cada proceso." },
   { value: "boveda", label: "Bóveda", ayuda: "Credenciales de los clientes y de DDS." },
   { value: "operacion", label: "Operación", ayuda: "Bots en producción, incidencias y vencimientos." },
 ] as const;
@@ -26,8 +27,8 @@ export const NIVEL_LABELS: Record<string, string> = Object.fromEntries(NIVELES.m
 export const ROLES = [
   { value: "Admin", label: "Administrador", ayuda: "Todo, más usuarios, eliminaciones, credenciales restringidas y el registro de la Bóveda." },
   { value: "Comercial", label: "Comercial", ayuda: "Vende: embudo, diagnósticos y propuestas. Ve proyectos y operación; no entra a la Bóveda." },
-  { value: "Consultor", label: "Consultor", ayuda: "Entrega: diagnósticos, proyectos y PDD, y la Bóveda. Ve el embudo, las propuestas y la operación." },
-  { value: "Soporte", label: "Soporte", ayuda: "Opera: bots, incidencias, vencimientos y la Bóveda. Ve clientes y proyectos." },
+  { value: "Consultor", label: "Consultor", ayuda: "Entrega: diagnósticos, proyectos y PDD, implementaciones y la Bóveda. Ve el embudo, las propuestas y la operación." },
+  { value: "Soporte", label: "Soporte", ayuda: "Opera: implementaciones, bots, incidencias, vencimientos y la Bóveda. Ve clientes y proyectos." },
 ] as const;
 
 export const ROL_LABELS: Record<string, string> = Object.fromEntries(ROLES.map((r) => [r.value, r.label]));

@@ -34,17 +34,20 @@ function toBody(v: BotValues) {
   };
 }
 
-// Registers a bot in production — from a project's process (its company
-// and the diagnosis's figures come with it) or for a company — or edits one.
+// Registers a bot in production — a project's process going live from
+// Implementaciones (its company and the diagnosis's figures come with it;
+// `bloqueo` says why it can't go yet) or one for a company — or edits one.
 export function BotForm({
   bot,
   borrador,
+  bloqueo,
   users,
   defaultResponsableId,
   today,
 }: {
   bot?: Bot;
   borrador?: BorradorBot | null;
+  bloqueo?: string | null;
   users: TeamUser[];
   defaultResponsableId?: number;
   today: string;
@@ -112,23 +115,22 @@ export function BotForm({
       setEmpresaError(true);
       return;
     }
-    const result = await panelFetch<{ id: number; botId?: number }>("bots", {
-      method: "POST",
-      body: { ...body, procesoProyectoId: borrador?.procesoProyectoId ?? null, empresaId: borrador ? null : empresa?.id },
-    });
+    const result = borrador?.procesoProyectoId
+      ? await panelFetch<{ id: number }>(`implementaciones/${borrador.procesoProyectoId}/produccion`, { method: "POST", body })
+      : await panelFetch<{ id: number }>("bots", { method: "POST", body: { ...body, empresaId: empresa?.id } });
     if (!result.ok) {
-      sileo.error({ title: "No se pudo registrar el bot", description: result.message });
+      sileo.error({ title: borrador ? "No se pudo poner en producción" : "No se pudo registrar el bot", description: result.message });
       return;
     }
     sileo.success({
-      title: "Bot registrado",
+      title: borrador ? "En producción" : "Bot registrado",
       description: borrador ? "El proceso pasó a producción y su tarea quedó marcada como hecha." : undefined,
     });
     router.push(`/dashboard/bots/${result.data.id}`);
     router.refresh();
   });
 
-  const cancelar = bot ? `/dashboard/bots/${bot.id}` : borrador?.proyectoId ? `/dashboard/proyectos/${borrador.proyectoId}` : "/dashboard/bots";
+  const cancelar = bot ? `/dashboard/bots/${bot.id}` : borrador ? null : "/dashboard/bots";
 
   return (
     <form onSubmit={onSubmit} noValidate className={`${CARD} max-w-3xl`}>
@@ -228,13 +230,16 @@ export function BotForm({
           </p>
         </fieldset>
       </div>
-      <div className="flex flex-col-reverse gap-3 border-t border-line px-6 py-5 sm:flex-row sm:justify-end sm:px-8">
-        <Link href={cancelar} className={BUTTON_SECONDARY}>
-          Cancelar
-        </Link>
-        <button type="submit" disabled={isSubmitting} className={BUTTON_PRIMARY}>
+      <div className="flex flex-col-reverse gap-3 border-t border-line px-6 py-5 sm:flex-row sm:items-center sm:justify-end sm:px-8">
+        {bloqueo && <p className="text-sm text-ink-500 sm:mr-auto">{bloqueo}</p>}
+        {cancelar && (
+          <Link href={cancelar} className={BUTTON_SECONDARY}>
+            Cancelar
+          </Link>
+        )}
+        <button type="submit" disabled={isSubmitting || !!bloqueo} className={BUTTON_PRIMARY}>
           {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
-          {bot ? "Guardar cambios" : "Registrar bot"}
+          {bot ? "Guardar cambios" : borrador ? "Poner en producción" : "Registrar bot"}
         </button>
       </div>
     </form>

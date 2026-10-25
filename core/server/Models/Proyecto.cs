@@ -162,4 +162,7 @@ public class ProcesoProyecto
 
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAtUtc { get; set; } = DateTime.UtcNow;
+
+    // Its go-live checklist (see Services/PaseProduccion.cs).
+    public List<ItemPase> Pase { get; set; } = [];
 }

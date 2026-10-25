@@ -19,6 +19,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Hito> Hitos => Set<Hito>();
     public DbSet<Tarea> Tareas => Set<Tarea>();
     public DbSet<ProcesoProyecto> ProcesosProyecto => Set<ProcesoProyecto>();
+    public DbSet<ItemPase> ItemsPase => Set<ItemPase>();
     public DbSet<Bot> Bots => Set<Bot>();
     public DbSet<MedicionBot> MedicionesBot => Set<MedicionBot>();
     public DbSet<Incidencia> Incidencias => Set<Incidencia>();
@@ -304,6 +305,16 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 entity.Property(campo).HasMaxLength(6000);
             entity.Property(p => p.PddAprobadoPor).HasMaxLength(200);
             entity.HasOne(p => p.Proyecto).WithMany(x => x.Procesos).HasForeignKey(p => p.ProyectoId).OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<ItemPase>(entity =>
+        {
+            entity.HasIndex(i => new { i.ProcesoProyectoId, i.Clave }).IsUnique();
+            entity.Property(i => i.Clave).HasMaxLength(40).IsRequired();
+            entity.Property(i => i.Estado).HasMaxLength(20).IsRequired();
+            entity.Property(i => i.Nota).HasMaxLength(500);
+            entity.HasOne(i => i.ProcesoProyecto).WithMany(p => p.Pase).HasForeignKey(i => i.ProcesoProyectoId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(i => i.ActualizadoPor).WithMany().HasForeignKey(i => i.ActualizadoPorId).OnDelete(DeleteBehavior.SetNull);
         });
 
         // Operación y soporte. Bots, incidents, contracts and licenses go with

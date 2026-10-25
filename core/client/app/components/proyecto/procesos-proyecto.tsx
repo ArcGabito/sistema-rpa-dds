@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Bot, ChevronRight, Loader2, Plus } from "lucide-react";
+import { Bot, ChevronRight, Loader2, Plus, Rocket } from "lucide-react";
 import { sileo } from "sileo";
 import { EtapaDesarrolloBadge, PddEstadoBadge } from "@/components/ui/proyecto-badges";
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, INPUT_BASE, inputState } from "@/components/ui/panel-styles";
@@ -11,23 +11,23 @@ import { SERVICIOS, SERVICIO_CORTO } from "@/lib/comercial";
 import type { ProcesoProyectoItem } from "@/lib/proyecto";
 import { panelFetch } from "@/lib/panel-api";
 
-// Stages at which the process's bot can be registered as in production.
-const LISTO_PARA_BOT = ["pruebas", "produccion"];
+// Stages a process goes through in Implementaciones, on its way to production.
+const EN_IMPLEMENTACION = ["desarrollo", "pruebas"];
 
 // The processes the project automates, each with its stage and its PDD, and
-// its bot once it's in production.
+// its implementation or its bot once it's in production.
 export function ProcesosProyecto({
   proyectoId,
   procesos,
   puedeAgregar = true,
   verBots = true,
-  puedeRegistrarBot = true,
+  verImplementacion = true,
 }: {
   proyectoId: number;
   procesos: ProcesoProyectoItem[];
   puedeAgregar?: boolean;
   verBots?: boolean;
-  puedeRegistrarBot?: boolean;
+  verImplementacion?: boolean;
 }) {
   const router = useRouter();
   const [agregando, setAgregando] = useState(false);
@@ -108,7 +108,7 @@ export function ProcesosProyecto({
                 </div>
                 <ChevronRight className="h-4 w-4 shrink-0 text-ink-400" />
               </Link>
-              {((verBots && p.botId) || (puedeRegistrarBot && !p.botId && LISTO_PARA_BOT.includes(p.etapa))) && (
+              {((verBots && p.botId) || (verImplementacion && !p.botId && EN_IMPLEMENTACION.includes(p.etapa))) && (
                 <div className="-mt-1 px-5 pb-3">
                   {p.botId ? (
                     <Link href={`/dashboard/bots/${p.botId}`} className="inline-flex items-center gap-1 text-xs font-medium text-brand-700 hover:underline">
@@ -116,9 +116,9 @@ export function ProcesosProyecto({
                       Ver su bot en producción
                     </Link>
                   ) : (
-                    <Link href={`/dashboard/bots/nuevo?procesoId=${p.id}`} className="inline-flex items-center gap-1 rounded-md border border-line bg-white px-2 py-1 text-xs font-medium text-ink-950 hover:bg-brand-50">
-                      <Bot className="h-3.5 w-3.5" />
-                      Registrar su bot en producción
+                    <Link href={`/dashboard/implementaciones/${p.id}`} className="inline-flex items-center gap-1 rounded-md border border-line bg-white px-2 py-1 text-xs font-medium text-ink-950 hover:bg-brand-50">
+                      <Rocket className="h-3.5 w-3.5" />
+                      Ver su implementación
                     </Link>
                   )}
                 </div>

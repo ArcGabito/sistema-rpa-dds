@@ -94,39 +94,6 @@ public class BotsController(AppDbContext db) : ControllerBase
         });
     }
 
-    // What the new-bot form starts from for a process: its company, and the
-    // figures of the diagnosis it came from.
-    [HttpGet("borrador")]
-    public async Task<ActionResult<BorradorBotResponse>> GetBorrador([FromQuery] int procesoId, CancellationToken ct)
-    {
-        var p = await db.ProcesosProyecto.AsNoTracking()
-            .Include(x => x.Proyecto).ThenInclude(y => y!.Empresa)
-            .FirstOrDefaultAsync(x => x.Id == procesoId, ct);
-        if (p is null) return NotFound();
-
-        var borrador = new BorradorBotResponse
-        {
-            Nombre = p.Nombre,
-            EmpresaId = p.Proyecto!.EmpresaId,
-            EmpresaNombre = p.Proyecto.Empresa?.NombreComercial ?? "—",
-            ProyectoId = p.ProyectoId,
-            ProyectoNombre = p.Proyecto.Nombre,
-            ProcesoProyectoId = p.Id,
-            Servicio = p.Servicio,
-            DesdeDiagnostico = false,
-            BotExistenteId = await db.Bots.Where(b => b.ProcesoProyectoId == p.Id).Select(b => (int?)b.Id).FirstOrDefaultAsync(ct),
-        };
-        if (p.ProcesoOrigenId is { } oid && await db.ProcesosEvaluados.AsNoTracking().Include(x => x.Diagnostico).FirstOrDefaultAsync(x => x.Id == oid, ct) is { } origen)
-        {
-            var costoHora = origen.CostoHora ?? origen.Diagnostico!.CostoHora;
-            borrador.HorasMesEstimadas = Roi.Calcular(origen, origen.Diagnostico!.CostoHora).HorasLiberadasMes;
-            borrador.CostoHora = costoHora;
-            borrador.MinutosPorCaso = origen.MinutosPorEjecucion;
-            borrador.DesdeDiagnostico = true;
-        }
-        return Ok(borrador);
-    }
-
     [HttpGet("{id:int}")]
     public async Task<ActionResult<BotResponse>> GetById(int id, CancellationToken ct)
     {
@@ -187,47 +154,26 @@ public class BotsController(AppDbContext db) : ControllerBase
         return Ok(r);
     }
 
-    // From a project's process (one bot each): the process moves to
-    // production and its launch task is ticked off. Or for a company.
+    // A bot that didn't come out of a project. A project's process goes live
+    // from Implementaciones (ImplementacionesController.PonerEnProduccion),
+    // once its checklist is complete.
     [HttpPost]
     public async Task<IActionResult> Create(CreateBotRequest request, CancellationToken ct)
     {
         var autorId = await db.GetCurrentUserIdAsync(User, ct);
         if (autorId is null) return Unauthorized();
         if (await ValidarAsync(request, ct) is { } error) return error;
+        if (request.EmpresaId is null || !await db.Empresas.AnyAsync(e => e.Id == request.EmpresaId, ct))
+            return BadRequest(new { message = "Elige la empresa del bot." });
 
-        var bot = new Bot { Nombre = "", Servicio = request.Servicio, Estado = BotEstado.Activo };
+        var bot = new Bot { Nombre = "", Servicio = request.Servicio, Estado = BotEstado.Activo, EmpresaId = request.EmpresaId.Value };
         Aplicar(bot, request);
         bot.ResponsableId ??= autorId;
-        int? oportunidadId = null;
-
-        if (request.ProcesoProyectoId is { } procesoId)
-        {
-            var proceso = await db.ProcesosProyecto.Include(p => p.Proyecto).FirstOrDefaultAsync(p => p.Id == procesoId, ct);
-            if (proceso is null) return BadRequest(new { message = "El proceso no existe." });
-            if (await db.Bots.Where(b => b.ProcesoProyectoId == procesoId).Select(b => (int?)b.Id).FirstOrDefaultAsync(ct) is { } existente)
-                return Conflict(new { message = "Este proceso ya tiene su bot.", botId = existente });
-
-            bot.EmpresaId = proceso.Proyecto!.EmpresaId;
-            bot.ProyectoId = proceso.ProyectoId;
-            bot.ProcesoProyectoId = proceso.Id;
-            oportunidadId = proceso.Proyecto.OportunidadId;
-            proceso.Etapa = EtapaDesarrollo.Produccion;
-            proceso.UpdatedAtUtc = DateTime.UtcNow;
-            await MarcarPuestaEnProduccionAsync(proceso, ct);
-        }
-        else
-        {
-            if (request.EmpresaId is null || !await db.Empresas.AnyAsync(e => e.Id == request.EmpresaId, ct))
-                return BadRequest(new { message = "Elige la empresa del bot." });
-            bot.EmpresaId = request.EmpresaId.Value;
-        }
 
         db.Bots.Add(bot);
         db.Actividades.Add(new Actividad
         {
             EmpresaId = bot.EmpresaId,
-            OportunidadId = oportunidadId,
             Tipo = ActividadTipo.Nota,
             Descripcion = $"Bot «{bot.Nombre}» en producción desde el {bot.EnProduccionDesde:dd/MM/yyyy}.",
             AutorId = autorId,
@@ -377,17 +323,21 @@ public class BotsController(AppDbContext db) : ControllerBase
         };
     }
 
-    private async Task<ObjectResult?> ValidarAsync(BotRequest r, CancellationToken ct)
+    private async Task<ObjectResult?> ValidarAsync(BotRequest r, CancellationToken ct) =>
+        await ErrorAsync(db, r, ct) is { } error ? BadRequest(new { message = error }) : null;
+
+    // Shared with the go-live in ImplementacionesController.
+    internal static async Task<string?> ErrorAsync(AppDbContext db, BotRequest r, CancellationToken ct)
     {
         if (!ServicioTipo.All.Contains(r.Servicio))
-            return BadRequest(new { message = $"Servicio inválido. Usa uno de: {string.Join(", ", ServicioTipo.All)}." });
+            return $"Servicio inválido. Usa uno de: {string.Join(", ", ServicioTipo.All)}.";
         if (r.ResponsableId.HasValue && !await db.AdminUsers.AnyAsync(u => u.Id == r.ResponsableId, ct))
-            return BadRequest(new { message = "El responsable no existe." });
-        if (r.EnProduccionDesde == default) return BadRequest(new { message = "Indica desde cuándo está en producción." });
+            return "El responsable no existe.";
+        if (r.EnProduccionDesde == default) return "Indica desde cuándo está en producción.";
         return null;
     }
 
-    private static void Aplicar(Bot b, BotRequest r)
+    internal static void Aplicar(Bot b, BotRequest r)
     {
         static string? N(string? v) => string.IsNullOrWhiteSpace(v) ? null : v.Trim();
         b.Nombre = r.Nombre.Trim();
@@ -400,20 +350,5 @@ public class BotsController(AppDbContext db) : ControllerBase
         b.HorasMesEstimadas = Math.Round(r.HorasMesEstimadas, 2);
         b.CostoHora = Math.Round(r.CostoHora, 2);
         b.MinutosPorCaso = Math.Round(r.MinutosPorCaso, 2);
-    }
-
-    // Ticks off "Puesta en producción: …", the process's last task.
-    private async Task MarcarPuestaEnProduccionAsync(ProcesoProyecto p, CancellationToken ct)
-    {
-        var titulo = $"Puesta en producción: {p.Nombre}";
-        var proyecto = await db.Proyectos.Include(x => x.Tareas).Include(x => x.Hitos).AsSplitQuery().FirstAsync(x => x.Id == p.ProyectoId, ct);
-        foreach (var tarea in proyecto.Tareas.Where(t => t.Titulo == titulo && t.Estado != TareaEstado.Hecha))
-        {
-            tarea.Estado = TareaEstado.Hecha;
-            tarea.CompletadaAtUtc = DateTime.UtcNow;
-            tarea.Bloqueo = null;
-            ProyectoPlan.Sincronizar(proyecto, proyecto.Hitos.FirstOrDefault(h => h.Id == tarea.HitoId));
-        }
-        proyecto.UpdatedAtUtc = DateTime.UtcNow;
     }
 }

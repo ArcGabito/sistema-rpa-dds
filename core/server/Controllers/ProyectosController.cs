@@ -394,10 +394,10 @@ public class ProyectosController(AppDbContext db, IaRedactor ia) : ControllerBas
         var antes = Contenido(p);
         var nombreAnterior = p.Nombre;
 
+        var etapaAnterior = p.Etapa;
         p.Nombre = request.Nombre.Trim();
         p.Area = Normalize(request.Area);
         p.Servicio = request.Servicio;
-        p.Etapa = request.Etapa;
         p.NotasLevantamiento = Normalize(request.NotasLevantamiento);
         p.PddObjetivo = Normalize(request.PddObjetivo);
         p.PddAlcance = Normalize(request.PddAlcance);
@@ -419,6 +419,17 @@ public class ProyectosController(AppDbContext db, IaRedactor ia) : ControllerBas
             estado = estado == PddEstado.Aprobado ? PddEstado.Borrador : estado;
         }
         else if (request.PddConIa) p.PddConIa = true;
+
+        // Checked against the PDD as it ends up (a changed approved PDD is a
+        // new draft), so it can't be approved and skipped past in one save
+        // without someone from the client named.
+        if (request.Etapa != etapaAnterior)
+        {
+            var tieneBot = await db.Bots.AnyAsync(b => b.ProcesoProyectoId == pid, ct);
+            if (PaseProduccion.ErrorEtapa(etapaAnterior, request.Etapa, estado, tieneBot) is { } errorEtapa)
+                return BadRequest(new { message = errorEtapa });
+            p.Etapa = request.Etapa;
+        }
 
         if (estado == PddEstado.Aprobado && p.PddEstado != PddEstado.Aprobado)
         {

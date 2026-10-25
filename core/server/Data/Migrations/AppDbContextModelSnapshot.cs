@@ -702,6 +702,47 @@ namespace server.Data.Migrations
                     b.ToTable("Incidencias");
                 });
 
+            modelBuilder.Entity("Server.Models.ItemPase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ActualizadoAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ActualizadoPorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Clave")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Nota")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("ProcesoProyectoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActualizadoPorId");
+
+                    b.HasIndex("ProcesoProyectoId", "Clave")
+                        .IsUnique();
+
+                    b.ToTable("ItemsPase");
+                });
+
             modelBuilder.Entity("Server.Models.Licencia", b =>
                 {
                     b.Property<int>("Id")
@@ -1722,6 +1763,24 @@ namespace server.Data.Migrations
                     b.Navigation("Responsable");
                 });
 
+            modelBuilder.Entity("Server.Models.ItemPase", b =>
+                {
+                    b.HasOne("Server.Models.AdminUser", "ActualizadoPor")
+                        .WithMany()
+                        .HasForeignKey("ActualizadoPorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Server.Models.ProcesoProyecto", "ProcesoProyecto")
+                        .WithMany("Pase")
+                        .HasForeignKey("ProcesoProyectoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActualizadoPor");
+
+                    b.Navigation("ProcesoProyecto");
+                });
+
             modelBuilder.Entity("Server.Models.Licencia", b =>
                 {
                     b.HasOne("Server.Models.Bot", "Bot")
@@ -1982,6 +2041,11 @@ namespace server.Data.Migrations
             modelBuilder.Entity("Server.Models.Oportunidad", b =>
                 {
                     b.Navigation("Actividades");
+                });
+
+            modelBuilder.Entity("Server.Models.ProcesoProyecto", b =>
+                {
+                    b.Navigation("Pase");
                 });
 
             modelBuilder.Entity("Server.Models.Propuesta", b =>

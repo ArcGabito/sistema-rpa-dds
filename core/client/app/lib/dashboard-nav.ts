@@ -1,4 +1,4 @@
-import { Bot, Building2, CalendarClock, ClipboardList, FileText, FolderKanban, Inbox, LifeBuoy, SquareKanban, LayoutDashboard, UserCog, Vault } from "lucide-react";
+import { Bot, Building2, CalendarClock, ClipboardList, FileText, FolderKanban, Inbox, LifeBuoy, Rocket, SquareKanban, LayoutDashboard, UserCog, Vault } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Modulo } from "@/lib/permisos";
 
@@ -33,6 +33,7 @@ export const DASHBOARD_NAV: DashboardNavGroup[] = [
     title: "Entrega",
     items: [
       { label: "Proyectos", href: "/dashboard/proyectos", icon: FolderKanban, modulo: "proyectos" },
+      { label: "Implementaciones", href: "/dashboard/implementaciones", icon: Rocket, modulo: "implementaciones" },
       { label: "Bóveda", href: "/dashboard/boveda", icon: Vault, modulo: "boveda" },
     ],
   },

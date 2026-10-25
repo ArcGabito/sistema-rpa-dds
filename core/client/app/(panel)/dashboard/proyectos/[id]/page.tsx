@@ -104,7 +104,7 @@ export default async function ProyectoPage({ params }: { params: Promise<{ id: s
             procesos={proyecto.procesosLista}
             puedeAgregar={editar}
             verBots={puede(me, "operacion")}
-            puedeRegistrarBot={puede(me, "operacion", "editar")}
+            verImplementacion={puede(me, "implementaciones")}
           />
           {editar && <ProyectoAjustes proyecto={proyecto} users={users ?? []} />}
         </div>
