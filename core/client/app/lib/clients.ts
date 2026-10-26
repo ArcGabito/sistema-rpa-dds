@@ -23,3 +23,10 @@ export const CLIENTS = [
 ] as const;
 
 export type Client = (typeof CLIENTS)[number];
+
+// The same logo in white on transparent, for dark and blue surfaces:
+// public/assets/clientes-blanco, made from each PNG with the pixel's
+// darkness as its opacity.
+export function logoBlanco(client: Client) {
+  return client.logo.replace("/assets/", "/assets/clientes-blanco/");
+}

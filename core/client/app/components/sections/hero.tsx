@@ -1,65 +1,55 @@
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
-import { GlowBackdrop } from "@/components/layout/glow-backdrop";
-import { ClientLogo } from "@/components/ui/client-logo";
-import { FrameMarks } from "@/components/ui/frame-marks";
-import { CLIENTS } from "@/lib/clients";
+import { H1, Mark } from "@/components/ui/band";
+import { ArrowButton } from "@/components/ui/site-buttons";
+import { CLIENTS, logoBlanco } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
 
-// Centered over the horizon glow, inside a hairline frame, with a strip of
-// clients sitting on the light at the bottom.
+// Centred over a blue horizon glow that rises from the bottom edge, inside
+// the page frame, with the clients' logos in white on the light below.
+const GLOW = [
+  "radial-gradient(75% 85% at 50% 100%, #a9cbff 0%, #5b95f7 22%, rgb(37 99 235 / 0.75) 46%, rgb(29 78 216 / 0) 78%)",
+  "linear-gradient(to bottom, rgb(19 19 21 / 0) 0%, rgb(30 64 175 / 0.3) 60%, rgb(59 130 246 / 0.9) 100%)",
+].join(", ");
+
 export function Hero() {
   return (
-    <section id="top" className="relative scroll-mt-24 overflow-hidden">
-      <GlowBackdrop glow="horizon" />
+    <section id="top" className="relative overflow-hidden bg-night-950">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[52%]" style={{ backgroundImage: GLOW }} aria-hidden="true" />
+      <div className="grain pointer-events-none absolute inset-0 opacity-30" aria-hidden="true" />
 
       <Container className="relative">
-        <div className="relative border-x border-white/10 px-2 pt-20 pb-28 text-center sm:pt-28 sm:pb-40">
-          <FrameMarks tone="dark" />
-
-          <span className="inline-flex items-center rounded-full bg-white px-3 py-1 font-mono text-[10px] font-medium tracking-[0.12em] text-ink-950 uppercase">
+        <div className="border-x border-white/[0.08] px-4 pt-16 pb-28 text-center sm:pt-24 sm:pb-40">
+          <span className="inline-flex items-center rounded-full bg-white px-3 py-1 font-mono text-[10px] font-medium tracking-[0.14em] text-ink-950 uppercase">
             {SITE.tagline}
           </span>
-          <h1 className="mx-auto mt-7 max-w-4xl text-balance font-display text-[2.6rem] leading-[1.05] font-medium tracking-[-0.03em] text-white sm:text-6xl lg:text-7xl">
-            Soluciones inteligentes en Analítica, RPA e IA
+          <h1 className={`mx-auto mt-7 max-w-4xl text-balance text-white ${H1}`}>
+            Soluciones inteligentes en Analítica, RPA e IA.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
-            Más de 30 organizaciones ya confían en nosotros para transformar
-            sus operaciones y potenciar su crecimiento.
+          <p className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-white/55 sm:text-[15px]">
+            Convertimos procesos manuales y datos dispersos en sistemas que trabajan solos.
+            Automatización, analítica e inteligencia artificial al ritmo de tu equipo.
           </p>
-
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
-            <a
-              href="#servicios"
-              className="inline-flex h-11 items-center gap-3 rounded-md border border-white/15 bg-white/5 pr-1.5 pl-5 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/10"
-            >
-              Explorar servicios
-              <span className="flex h-8 w-8 items-center justify-center rounded-sm bg-white text-ink-950">
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </a>
-            <Link
-              href={SITE.contactUrl}
-              className="inline-flex h-11 items-center rounded-md px-5 text-sm font-medium text-white/75 transition-colors hover:text-white"
-            >
-              Solicitar diagnóstico
-            </Link>
+          <div className="mt-10">
+            <ArrowButton href={SITE.contactUrl}>Solicita tu diagnóstico</ArrowButton>
           </div>
         </div>
 
-        <div className="relative grid gap-6 border-x border-t border-white/10 px-2 py-8 sm:grid-cols-[12rem_1fr] sm:items-center sm:px-6">
-          <p className="text-center text-sm leading-snug text-white/80 sm:text-left">
+        <div className="relative grid grid-cols-3 border-x border-t border-white/15 sm:grid-cols-[minmax(10rem,1.2fr)_repeat(6,1fr)]">
+          <Mark tone="night" className="-top-[5px] -left-[5px] !text-white/70" />
+          <Mark tone="night" className="-top-[5px] -right-[5px] !text-white/70" />
+          <p className="col-span-3 px-5 py-5 text-[13px] leading-snug text-white sm:col-span-1 sm:py-7">
             Más de 30 empresas
             <br className="hidden sm:block" /> confían en DDS
           </p>
-          <ul className="flex flex-wrap items-center justify-center gap-3 sm:justify-between">
-            {CLIENTS.slice(0, 6).map((client) => (
-              <li key={client.name}>
-                <ClientLogo client={client} tile className="h-11" />
-              </li>
-            ))}
-          </ul>
+          {CLIENTS.slice(0, 6).map((client, index) => (
+            <div
+              key={client.name}
+              className={`flex items-center justify-center border-t border-white/15 px-3 py-5 sm:border-t-0 sm:border-l sm:py-7 ${index % 3 ? "border-l" : ""}`}
+            >
+              <Image src={logoBlanco(client)} alt={client.name} width={150} height={50} className="h-8 w-auto sm:h-9" />
+            </div>
+          ))}
         </div>
       </Container>
     </section>

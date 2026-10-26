@@ -1,20 +1,26 @@
-import { Check } from "lucide-react";
-import { Container } from "@/components/ui/container";
+import { Band, HAIRLINE, MonoLabel } from "@/components/ui/band";
 import { VALUES } from "@/lib/values";
 
+const CELL_BORDERS = [
+  "",
+  "border-t sm:border-t-0 sm:border-l",
+  "border-t lg:border-t-0 lg:border-l",
+  "border-t sm:border-l lg:border-t-0",
+];
+
+// The team's four values, one per cell.
 export function AboutValues() {
   return (
-    <section className="bg-brand-50 py-14">
-      <Container>
-        <ul className="flex flex-wrap justify-center gap-x-10 gap-y-4">
-          {VALUES.map((value) => (
-            <li key={value} className="flex items-center gap-2.5">
-              <Check className="h-4 w-4 shrink-0 text-brand-600" strokeWidth={2.5} />
-              <span className="text-sm font-medium text-ink-950">{value}</span>
-            </li>
-          ))}
-        </ul>
-      </Container>
-    </section>
+    <Band tone="mist">
+      <MonoLabel className="px-5 pt-10 sm:px-10 lg:px-12">Cómo trabajamos</MonoLabel>
+      <ul className={`mt-6 grid border-t sm:grid-cols-2 lg:grid-cols-4 ${HAIRLINE.mist}`}>
+        {VALUES.map((value, index) => (
+          <li key={value} className={`flex gap-3 px-5 py-6 sm:px-6 ${HAIRLINE.mist} ${CELL_BORDERS[index % 4]}`}>
+            <span className="font-mono text-[13px] text-ink-400">+</span>
+            <span className="text-[15px] leading-snug font-semibold tracking-[-0.01em]">{value}</span>
+          </li>
+        ))}
+      </ul>
+    </Band>
   );
 }

@@ -1,69 +1,30 @@
-"use client";
-
-import { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Container } from "@/components/ui/container";
+import { Band, H2, HAIRLINE, MonoLabel } from "@/components/ui/band";
 import { TIMELINE } from "@/lib/timeline";
 
+const BOTTOM_GLOW =
+  "radial-gradient(50% 100% at 50% 100%, rgb(59 130 246 / 0.45) 0%, rgb(29 78 216 / 0.14) 45%, rgb(19 19 21 / 0) 75%)";
+
+// DDS's history on a dark band, one hairline row per milestone.
 export function AboutTimeline() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-
-  const scrollBy = (direction: 1 | -1) => {
-    scrollerRef.current?.scrollBy({
-      left: direction * 320,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <section className="bg-ink-950 py-24">
-      <Container>
-        <div className="flex items-end justify-between gap-6">
-          <h2 className="font-display text-2xl font-medium tracking-[-0.02em] text-white sm:text-3xl">
-            Nuestra historia
-          </h2>
-          <div className="hidden shrink-0 gap-2 sm:flex">
-            <button
-              type="button"
-              onClick={() => scrollBy(-1)}
-              aria-label="Anterior"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 transition-colors hover:border-white/40 hover:text-white"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollBy(1)}
-              aria-label="Siguiente"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 transition-colors hover:border-white/40 hover:text-white"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-
-        <div
-          ref={scrollerRef}
-          className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {TIMELINE.map((milestone) => (
-            <div
-              key={milestone.title}
-              className="w-72 shrink-0 snap-start border-t border-white/10 pt-6"
-            >
-              <p className="text-xs font-mono tracking-[0.1em] uppercase text-glow-300">
-                {milestone.years}
-              </p>
-              <h3 className="mt-2 font-display text-lg font-semibold text-white">
-                {milestone.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/70">
-                {milestone.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
+    <Band
+      tone="night"
+      backdrop={<div className="pointer-events-none absolute inset-x-0 bottom-0 h-48" style={{ backgroundImage: BOTTOM_GLOW }} aria-hidden="true" />}
+    >
+      <div className="flex flex-col gap-6 px-5 pt-16 sm:px-10 sm:pt-20 lg:flex-row lg:items-start lg:justify-between lg:px-12">
+        <h2 className={H2}>Nuestra historia</h2>
+        <MonoLabel tone="night" className="max-w-[15rem] leading-relaxed lg:text-right">Más de una década en la operación de empresas peruanas.</MonoLabel>
+      </div>
+      <ol className={`mt-14 border-b ${HAIRLINE.night}`}>
+        {TIMELINE.map((milestone) => (
+          <li key={milestone.title} className={`grid gap-2 border-t px-5 py-6 sm:grid-cols-[10rem_14rem_1fr] sm:gap-8 sm:px-10 lg:px-12 ${HAIRLINE.night}`}>
+            <span className="font-mono text-[12px] tracking-[0.1em] text-white/45 uppercase">{milestone.years}</span>
+            <span className="text-[15px] font-semibold tracking-[-0.01em]">{milestone.title}</span>
+            <span className="text-[13px] leading-relaxed text-white/55">{milestone.description}</span>
+          </li>
+        ))}
+      </ol>
+      <div className="h-20 sm:h-24" />
+    </Band>
   );
 }

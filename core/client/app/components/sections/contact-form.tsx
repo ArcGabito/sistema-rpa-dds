@@ -1,20 +1,21 @@
 "use client";
 
-import { Loader2, Send } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { SERVICE_OPTIONS } from "@/lib/contact-schema";
 import { useContact } from "@/hooks/use-contact";
 
 const FIELD_BASE =
-  "w-full rounded-xl border bg-brand-50 px-4 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400";
+  "w-full rounded-[6px] border bg-white px-4 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400";
 
 function fieldState(hasError: boolean) {
   return hasError
     ? "border-red-400 focus:border-red-500"
-    : "border-transparent focus:border-ink-400 focus:bg-white";
+    : "border-ink-950/10 focus:border-ink-950/40";
 }
 
-export function ContactForm() {
-  const { register, errors, isSubmitting, onSubmit } = useContact();
+// The e-mail can arrive filled in from the footer's field.
+export function ContactForm({ defaultEmail }: { defaultEmail?: string }) {
+  const { register, errors, isSubmitting, onSubmit } = useContact(defaultEmail);
 
   return (
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
@@ -131,10 +132,12 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-ink-950 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-800 disabled:opacity-60 sm:w-auto sm:self-start"
+        className="group inline-flex h-10 items-center justify-between gap-3 self-start rounded-[7px] bg-night-950 pr-1.5 pl-4 text-[13px] font-medium text-white transition-colors hover:bg-night-800 disabled:opacity-60"
       >
-        {isSubmitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
         {isSubmitting ? "Enviando..." : "Enviar solicitud"}
+        <span className="flex h-7 w-7 items-center justify-center rounded-[5px] bg-white text-ink-950">
+          {isSubmitting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.25} />}
+        </span>
       </button>
     </form>
   );

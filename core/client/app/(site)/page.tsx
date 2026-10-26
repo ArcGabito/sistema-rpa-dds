@@ -1,14 +1,10 @@
 import { Hero } from "@/components/sections/hero";
-import { HomeSubnav } from "@/components/sections/home-subnav";
-import { LogoCloud } from "@/components/sections/logo-cloud";
-import { ServicesOverview } from "@/components/sections/services-overview";
-import { About } from "@/components/sections/about";
-import { Industries } from "@/components/sections/industries";
-import { Process } from "@/components/sections/process";
-import { Benefits } from "@/components/sections/benefits";
-import { CaseStudies } from "@/components/sections/case-studies";
-import { Faq } from "@/components/sections/faq";
+import { Approach } from "@/components/sections/approach";
+import { WhyUs } from "@/components/sections/why-us";
+import { Expertise } from "@/components/sections/expertise";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { Ecosystem } from "@/components/sections/ecosystem";
+import { Faq } from "@/components/sections/faq";
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata({
@@ -21,19 +17,12 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <HomeSubnav />
-      <LogoCloud />
-      <ServicesOverview />
-      <About />
-      <Industries />
-      <Process />
-      <Benefits />
-      <CaseStudies />
+      <Approach />
+      <WhyUs />
+      <Expertise />
+      <CtaBanner heading="Sin intermediarios. Habla directo con quienes lo construyen." buttonLabel="Solicita tu diagnóstico" />
+      <Ecosystem />
       <Faq />
-      <CtaBanner
-        heading="Siempre estamos listos para ayudarte. Conversemos y construyamos soluciones juntos."
-        buttonLabel="Contáctanos"
-      />
     </>
   );
 }

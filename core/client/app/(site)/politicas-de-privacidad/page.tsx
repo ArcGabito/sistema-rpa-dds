@@ -1,6 +1,7 @@
-import { PrivacyHero } from "@/components/sections/privacy-hero";
+import { PageHero } from "@/components/sections/page-hero";
 import { PrivacyContent } from "@/components/sections/privacy-content";
 import { pageMetadata } from "@/lib/metadata";
+import { PRIVACY_LAST_UPDATED } from "@/lib/privacy-data";
 
 export const metadata = pageMetadata({
   title: "Políticas de Privacidad | Data Discovery Solutions",
@@ -11,7 +12,7 @@ export const metadata = pageMetadata({
 export default function PoliticasDePrivacidadPage() {
   return (
     <>
-      <PrivacyHero />
+      <PageHero heading="Políticas de Privacidad" label={`Actualizado el ${PRIVACY_LAST_UPDATED}`} />
       <PrivacyContent />
     </>
   );

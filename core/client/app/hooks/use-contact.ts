@@ -5,9 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { sileo } from "sileo";
 import { contactSchema, type ContactFormValues } from "@/lib/contact-schema";
 
-export function useContact() {
+export function useContact(defaultEmail?: string) {
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
+    defaultValues: defaultEmail ? { email: defaultEmail } : undefined,
   });
 
   const onSubmit = form.handleSubmit(async (values) => {

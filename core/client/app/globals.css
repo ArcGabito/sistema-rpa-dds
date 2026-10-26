@@ -37,6 +37,13 @@
 
   /* Line — hairlines for borders, dividers and frames. */
   --color-line: #e4e4e7;
+
+  /* Public site — the dark bands are a soft near-black (night), panels on
+     them a step lighter; light bands alternate paper (brand-50) and mist. */
+  --color-night-950: #131315;
+  --color-night-900: #18181b;
+  --color-night-800: #202024;
+  --color-mist: #e9e9eb;
 }
 
 @theme inline {
@@ -63,6 +70,11 @@
   --color-glow-400: var(--color-glow-400);
 
   --color-line: var(--color-line);
+
+  --color-night-950: var(--color-night-950);
+  --color-night-900: var(--color-night-900);
+  --color-night-800: var(--color-night-800);
+  --color-mist: var(--color-mist);
 
   /* Flat surfaces: cards are drawn by a hairline ring with barely any
      depth and lift softly on hover; menus float on a wide, soft shadow. */

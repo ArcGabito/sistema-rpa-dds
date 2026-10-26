@@ -8,14 +8,18 @@ export const metadata = pageMetadata({
   path: "/contactenos",
 });
 
-export default function ContactenosPage() {
+// ?email= comes from the footer's "Conversemos" field.
+export default async function ContactenosPage({ searchParams }: { searchParams: Promise<{ email?: string }> }) {
+  const { email } = await searchParams;
+  const defaultEmail = typeof email === "string" && email.length <= 256 ? email.trim() : undefined;
+
   return (
     <>
       <PageHero
         heading="Contáctenos"
         intro="No solo implementamos tecnología, construimos confianza y resultados. Nuestro compromiso es ayudarte a crecer con soluciones inteligentes y accesibles."
       />
-      <ContactPanel />
+      <ContactPanel defaultEmail={defaultEmail} />
     </>
   );
 }

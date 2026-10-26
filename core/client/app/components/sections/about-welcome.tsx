@@ -1,67 +1,46 @@
-import { GlowBackdrop } from "@/components/layout/glow-backdrop";
-import { Container } from "@/components/ui/container";
+import { Band, HAIRLINE, MonoLabel } from "@/components/ui/band";
 
+// Who DDS is: a statement on the left (the key words in full ink, the rest
+// muted), the longer story in blocks on the right.
 export function AboutWelcome() {
+  const strong = "text-ink-950";
   return (
-    <section className="bg-white py-24">
-      <Container className="grid gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-10">
-        <div className="relative overflow-hidden rounded-2xl p-8 sm:p-10">
-          <GlowBackdrop glow="beam" />
-          <div className="relative">
-            <p className="text-xs font-mono tracking-[0.1em] uppercase text-glow-300">Bienvenido a DDS</p>
-            <p className="mt-4 font-display text-2xl font-medium tracking-[-0.02em] leading-snug text-white/80 sm:text-[1.75rem]">
-              Somos DDS:{" "}
-              <span className="text-glow-300">tecnología con propósito</span>,{" "}
-              <span className="text-glow-300">soluciones con impacto</span>.
-              En Data Discovery Solutions, combinamos{" "}
-              <span className="text-glow-300">experiencia, pasión</span> y
-              herramientas de{" "}
-              <span className="text-glow-300">última generación</span> para
-              ayudarte a tomar mejores decisiones, automatizar tus procesos y{" "}
-              <span className="text-glow-300">
-                liberar el verdadero potencial de tus datos
-              </span>
-              .
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-8">
-          <p className="leading-relaxed text-ink-700">
-            Integramos herramientas como Power BI, Qlik, Looker, Rocketbot y
-            GPT-4 en soluciones prácticas y escalables, hechas a la medida de
-            cada negocio. Trabajamos con organizaciones de los sectores
-            educativo, hotelero, financiero, de seguros, minero y
-            tecnológico, entregando resultados medibles.
+    <Band tone="paper">
+      <div className="grid lg:grid-cols-2">
+        <div className="px-5 py-16 sm:px-10 sm:py-20 lg:px-12">
+          <MonoLabel>Bienvenido a DDS</MonoLabel>
+          <p className="mt-6 font-display text-[1.5rem] leading-[1.25] font-semibold tracking-[-0.03em] text-ink-400 sm:text-[1.9rem]">
+            Somos DDS: <span className={strong}>tecnología con propósito</span>, <span className={strong}>soluciones con impacto</span>.
+            Combinamos <span className={strong}>experiencia</span> y herramientas de <span className={strong}>última generación</span> para
+            ayudarte a decidir mejor, automatizar tus procesos y <span className={strong}>liberar el potencial de tus datos</span>.
           </p>
-
-          <div>
-            <h2 className="font-display text-xl font-semibold text-ink-950">
-              Nuestro compromiso en DDS
-            </h2>
-            <p className="mt-3 leading-relaxed text-ink-700">
-              Nacimos para cerrar la brecha entre la tecnología y las
-              necesidades reales del negocio. Nos posicionamos como socios
-              estratégicos que acompañan a nuestros clientes durante toda su
-              transformación digital, diseñando soluciones a medida que
-              combinan datos, automatización e IA con empatía y eficiencia.
-            </p>
-          </div>
-
-          <div className="border-t border-line pt-6">
-            <h3 className="font-display text-lg font-semibold text-ink-950">
-              ¿Por qué elegir Data Discovery Solutions?
-            </h3>
-            <p className="mt-3 leading-relaxed text-ink-700">
-              En DDS no solo implementamos tecnología: nos convertimos en tu
-              aliado estratégico. Nuestro objetivo es conocer a fondo tu
-              negocio, optimizar tus procesos con soluciones de analítica,
-              automatización e inteligencia artificial y ayudarte a tomar
-              decisiones con la información que realmente importa.
-            </p>
-          </div>
         </div>
-      </Container>
-    </section>
+
+        <div className={`border-t lg:border-t-0 lg:border-l ${HAIRLINE.paper}`}>
+          {[
+            {
+              title: "Lo que hacemos",
+              body: "Integramos Power BI, Qlik, Looker, Rocketbot y modelos de IA en soluciones prácticas y escalables, hechas a la medida de cada negocio. Trabajamos con organizaciones de los sectores educativo, hotelero, financiero, de seguros, minero y tecnológico, entregando resultados medibles.",
+            },
+            {
+              title: "Nuestro compromiso",
+              body: "Nacimos para cerrar la brecha entre la tecnología y las necesidades reales del negocio. Acompañamos a nuestros clientes durante toda su transformación digital, con soluciones que combinan datos, automatización e IA con empatía y eficiencia.",
+            },
+            {
+              title: "¿Por qué elegir DDS?",
+              body: "No solo implementamos tecnología: nos convertimos en tu aliado estratégico. Conocemos a fondo tu negocio, optimizamos tus procesos y te ayudamos a decidir con la información que realmente importa.",
+            },
+          ].map((block, index) => (
+            <div key={block.title} className={`px-5 py-8 sm:px-10 lg:px-8 ${index ? `border-t ${HAIRLINE.paper}` : "lg:pt-20"}`}>
+              <p className="flex gap-4 text-[15px] font-semibold tracking-[-0.01em]">
+                <span className="font-mono text-[13px] font-normal text-ink-400">/{String(index + 1).padStart(2, "0")}</span>
+                {block.title}
+              </p>
+              <p className="mt-3 text-[13px] leading-relaxed text-ink-500 sm:pl-10">{block.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Band>
   );
 }
