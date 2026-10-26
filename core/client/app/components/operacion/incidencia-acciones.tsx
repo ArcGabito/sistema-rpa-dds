@@ -41,7 +41,7 @@ function ResolverDialog({ causaInicial, onClose, onConfirm }: { causaInicial: st
         }}
         className="flex flex-col gap-4 p-6"
       >
-        <h2 className="text-base font-semibold text-ink-950">Resolver la incidencia</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Resolver la incidencia</h2>
         <Field id="res-causa" label="Causa">
           <select id="res-causa" value={causa} onChange={(e) => setCausa(e.target.value)} className={input}>
             <option value="" disabled>

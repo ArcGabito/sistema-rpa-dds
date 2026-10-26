@@ -9,8 +9,9 @@ import { SITE } from "@/lib/site-config";
 import type { Me } from "@/lib/permisos";
 import type { SessionUser } from "@/lib/session";
 
-// A dark sidebar floating as a rounded panel beside a light grey workspace,
-// where each page lays its content out in white hairline cards. The workspace
+// The public site's look: a dark sidebar flush with the left edge beside a
+// light grey workspace, where each page lays its content out in white
+// hairline cards. The workspace
 // scrolls on its own so the sidebar stays put. When printing (a diagnosis
 // report, say), only the page's content is printed, on white.
 export function DashboardShell({
@@ -26,7 +27,7 @@ export function DashboardShell({
 
   return (
     <div className="flex h-dvh overflow-hidden bg-brand-50 print:block print:h-auto print:overflow-visible print:bg-white">
-      <div className="hidden p-3 pr-0 lg:flex print:hidden">
+      <div className="hidden lg:flex print:hidden">
         <DashboardSidebar user={user} me={me} />
       </div>
 
@@ -49,7 +50,7 @@ export function DashboardShell({
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-14 shrink-0 items-center justify-between bg-ink-950 px-4 lg:hidden print:hidden">
+        <header className="flex h-14 shrink-0 items-center justify-between border-b border-white/[0.08] bg-night-950 px-4 lg:hidden print:hidden">
           <Link href="/dashboard" className="flex items-center gap-2.5">
             <Image src="/assets/icon.png" alt="" width={24} height={24} className="h-6 w-6" />
             <span className="font-display text-sm font-semibold text-white">{SITE.shortName}</span>

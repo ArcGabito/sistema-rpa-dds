@@ -43,7 +43,7 @@ export default async function UsuariosPage() {
       ) : (
         grupos.map(({ titulo, lista }) => (
             <section key={titulo} className={`${CARD} mt-6 overflow-hidden`}>
-              <h2 className="p-5 text-base font-semibold text-ink-950">
+              <h2 className="p-5 text-base font-semibold tracking-[-0.02em] text-ink-950">
                 {titulo} <span className="font-normal text-ink-500">{lista.length}</span>
               </h2>
               <ul className="divide-y divide-line border-t border-line">

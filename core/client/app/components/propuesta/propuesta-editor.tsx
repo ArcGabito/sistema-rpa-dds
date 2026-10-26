@@ -225,7 +225,7 @@ export function PropuestaEditor({ propuesta, users }: { propuesta: Propuesta; us
     <form onSubmit={onSubmit} noValidate className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
       <div className="flex min-w-0 flex-col gap-6">
         <section className={`${CARD} grid gap-5 p-6 sm:grid-cols-2`}>
-          <h2 className="text-base font-semibold text-ink-950 sm:col-span-2">Datos</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950 sm:col-span-2">Datos</h2>
           <Field id="prop-titulo" label="Título" error={errors.titulo?.message} className="sm:col-span-2">
             <input id="prop-titulo" className={input(!!errors.titulo)} {...register("titulo")} />
           </Field>
@@ -263,7 +263,7 @@ export function PropuestaEditor({ propuesta, users }: { propuesta: Propuesta; us
 
         <section className={`${CARD} p-6`}>
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-base font-semibold text-ink-950">Alcance e inversión</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Alcance e inversión</h2>
             <div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => nuevoItem("implementacion")} className={`${BUTTON_SECONDARY} h-9 px-3`}>
                 <Plus className="h-4 w-4" />
@@ -327,7 +327,7 @@ export function PropuestaEditor({ propuesta, users }: { propuesta: Propuesta; us
 
         <section className={`${CARD} p-6`}>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="text-base font-semibold text-ink-950">Cronograma</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Cronograma</h2>
             <button
               type="button"
               onClick={() => fases.append({ nombre: "", descripcion: "", semanas: 1 }, { shouldFocus: true })}
@@ -361,7 +361,7 @@ export function PropuestaEditor({ propuesta, users }: { propuesta: Propuesta; us
         </section>
 
         <section className={`${CARD} grid gap-5 p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Textos del documento</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Textos del documento</h2>
           <Field id="prop-intro" label="Contexto" optional error={errors.introduccion?.message}>
             <textarea id="prop-intro" rows={4} className={`${input(!!errors.introduccion)} h-auto resize-y py-2.5`} {...register("introduccion")} />
           </Field>
@@ -381,7 +381,7 @@ export function PropuestaEditor({ propuesta, users }: { propuesta: Propuesta; us
 
       <aside className="flex flex-col gap-4 xl:sticky xl:top-0 xl:self-start">
         <section className={`${CARD} p-5`}>
-          <h2 className="mb-4 text-base font-semibold text-ink-950">Totales</h2>
+          <h2 className="mb-4 text-base font-semibold tracking-[-0.02em] text-ink-950">Totales</h2>
           <Totales control={control} />
         </section>
         <button type="submit" disabled={isSubmitting || !isDirty} className={BUTTON_PRIMARY}>

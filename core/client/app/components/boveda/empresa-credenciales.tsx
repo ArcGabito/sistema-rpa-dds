@@ -23,7 +23,7 @@ export function EmpresaCredenciales({
   return (
     <section className={`${CARD} overflow-hidden`}>
       <div className="flex items-center justify-between gap-4 p-5">
-        <h2 className="text-base font-semibold text-ink-950">
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">
           Credenciales {secretos && <span className="font-normal text-ink-500">{secretos.length}</span>}
         </h2>
         {puedeAgregar && (

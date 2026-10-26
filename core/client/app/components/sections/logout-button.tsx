@@ -27,10 +27,10 @@ export function LogoutButton({ tone = "dark" }: { tone?: "dark" | "light" }) {
       type="button"
       onClick={handleLogout}
       disabled={loading}
-      className={`inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border text-sm font-medium transition-colors disabled:opacity-60 ${
+      className={`inline-flex h-10 w-full items-center justify-center gap-2 rounded-[7px] text-[13px] font-medium ring-1 ring-inset transition-colors disabled:opacity-60 ${
         tone === "dark"
-          ? "border-white/10 bg-white/5 text-white/75 hover:bg-white/10 hover:text-white"
-          : "border-line text-ink-700 hover:bg-brand-50 hover:text-ink-950"
+          ? "bg-white/[0.07] text-white/80 ring-white/10 hover:bg-white/[0.12] hover:text-white"
+          : "bg-white text-ink-700 ring-ink-950/10 hover:bg-brand-50 hover:text-ink-950"
       }`}
     >
       {loading ? "Saliendo..." : "Cerrar sesión"}

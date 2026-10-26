@@ -14,7 +14,7 @@ export function PropuestaResumen({ propuesta: p }: { propuesta: Propuesta }) {
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
       <div className="flex min-w-0 flex-col gap-6">
         <section className={`${CARD} overflow-hidden`}>
-          <h2 className="p-5 text-base font-semibold text-ink-950">Alcance e inversión</h2>
+          <h2 className="p-5 text-base font-semibold tracking-[-0.02em] text-ink-950">Alcance e inversión</h2>
           {grupos.map((g) => {
             const items = p.items.filter((i) => i.tipo === g.tipo);
             if (items.length === 0) return null;
@@ -41,7 +41,7 @@ export function PropuestaResumen({ propuesta: p }: { propuesta: Propuesta }) {
         </section>
 
         <section className={`${CARD} p-5`}>
-          <h2 className="text-base font-semibold text-ink-950">
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">
             Cronograma <span className="font-normal text-ink-500">{p.totales.semanas} semanas</span>
           </h2>
           <ol className="mt-3 divide-y divide-line border-t border-line text-sm">
@@ -61,7 +61,7 @@ export function PropuestaResumen({ propuesta: p }: { propuesta: Propuesta }) {
       </div>
 
       <aside className={`${CARD} h-fit p-5 text-sm`}>
-        <h2 className="mb-3 text-base font-semibold text-ink-950">Totales</h2>
+        <h2 className="mb-3 text-base font-semibold tracking-[-0.02em] text-ink-950">Totales</h2>
         <dl className="flex flex-col gap-1.5">
           <div className="flex justify-between gap-3">
             <dt className="text-ink-500">Implementación</dt>

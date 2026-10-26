@@ -123,7 +123,7 @@ export function ChecklistPase({
   return (
     <section className={`${CARD} overflow-hidden`}>
       <div className="flex items-center justify-between gap-3 p-5">
-        <h2 className="text-base font-semibold text-ink-950">Checklist de pase a producción</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Checklist de pase a producción</h2>
         <span className="text-sm text-ink-500 tabular-nums">
           {listos}/{items.length}
         </span>

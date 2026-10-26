@@ -76,7 +76,7 @@ export default async function DiagnosticoPage({ params }: { params: Promise<{ id
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <section className={`${CARD} min-w-0 p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Matriz de priorización</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Matriz de priorización</h2>
           {diagnostico.procesos.length > 0 ? (
             <>
               <p className="mt-1 text-sm text-ink-500">Arriba a la derecha, lo que más ahorra y más fácil se automatiza.</p>

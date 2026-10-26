@@ -1,6 +1,7 @@
 import { PROPUESTA_ESTADO_LABELS, estadoVisible } from "@/lib/propuesta";
+import { BADGE_BASE } from "@/components/ui/panel-styles";
 
-const BADGE = "inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap";
+const BADGE = BADGE_BASE;
 
 const STYLES: Record<string, string> = {
   borrador: "bg-brand-50 text-ink-700 ring-1 ring-inset ring-line",

@@ -184,7 +184,7 @@ export function ProcesoEditor({
     >
       <form onSubmit={onSubmit} noValidate className="flex max-h-[92dvh] flex-col">
         <header className="flex items-center justify-between gap-4 border-b border-line px-6 py-4">
-          <h2 className="text-base font-semibold text-ink-950">{proceso ? "Editar proceso" : "Agregar proceso"}</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">{proceso ? "Editar proceso" : "Agregar proceso"}</h2>
           <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-md p-1.5 text-ink-500 hover:bg-brand-50 hover:text-ink-950">
             <X className="h-5 w-5" />
           </button>

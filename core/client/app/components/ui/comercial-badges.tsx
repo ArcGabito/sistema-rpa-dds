@@ -1,6 +1,7 @@
 import { EMPRESA_ESTADO_LABELS, ETAPA_LABELS } from "@/lib/comercial";
+import { BADGE_BASE } from "@/components/ui/panel-styles";
 
-const BADGE = "inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-medium";
+const BADGE = BADGE_BASE;
 
 // Open stages darken as the deal advances; a win is the one solid badge,
 // a loss recedes.

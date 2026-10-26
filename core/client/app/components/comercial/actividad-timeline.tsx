@@ -61,7 +61,7 @@ export function ActividadTimeline({
 
   return (
     <section className={`${CARD} p-6`}>
-      <h2 className="text-base font-semibold text-ink-950">Actividad</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Actividad</h2>
 
       {!soloLectura && (
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3">

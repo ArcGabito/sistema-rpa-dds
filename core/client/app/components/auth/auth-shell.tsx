@@ -1,74 +1,92 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { GlowBackdrop } from "@/components/layout/glow-backdrop";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { CLIENTS, logoBlanco } from "@/lib/clients";
 import { SITE } from "@/lib/site-config";
 
 export const AUTH_FIELD =
-  "h-12 w-full rounded-xl border bg-brand-50 px-4 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400 focus:bg-white";
+  "h-11 w-full rounded-[6px] border bg-white px-4 text-sm text-ink-950 outline-none transition-colors placeholder:text-ink-400";
 
 export const AUTH_BUTTON =
-  "inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[linear-gradient(to_bottom,var(--color-ink-800),var(--color-ink-950))] text-base font-medium text-white shadow-button transition-[filter,opacity] hover:brightness-125 disabled:opacity-60";
+  "group inline-flex h-11 w-full items-center justify-between gap-3 rounded-[7px] bg-night-950 pr-1.5 pl-4 text-[13px] font-medium tracking-[-0.01em] text-white transition-colors hover:bg-night-800 disabled:opacity-60";
+
+export const AUTH_LABEL = "font-mono text-[10px] font-medium tracking-[0.14em] text-ink-500 uppercase sm:text-[11px]";
 
 export function authFieldState(hasError: boolean) {
-  return hasError ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-ink-400";
+  return hasError ? "border-red-400 focus:border-red-500" : "border-ink-950/10 focus:border-ink-950/40";
 }
 
-// The sign-in pages (/ingresar, /recuperar, /restablecer): full screen,
-// split in two — on the left a dark panel lit by a column of blue light with
-// the tagline, on the right the page's own form under its title.
+// The white square with an arrow at the end of the site's dark buttons.
+export function ArrowSquare({ children }: { children?: React.ReactNode }) {
+  return (
+    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[5px] bg-white text-ink-950">
+      {children ?? <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={2.25} />}
+    </span>
+  );
+}
+
+const GLOW = [
+  "radial-gradient(85% 60% at 50% 100%, #a9cbff 0%, #5b95f7 24%, rgb(37 99 235 / 0.75) 48%, rgb(29 78 216 / 0) 80%)",
+  "linear-gradient(to bottom, rgb(19 19 21 / 0) 0%, rgb(30 64 175 / 0.3) 62%, rgb(59 130 246 / 0.9) 100%)",
+].join(", ");
+
+// The sign-in pages (/ingresar, /recuperar, /restablecer), in the public
+// site's style: on the left a dark panel lit by the blue horizon, with the
+// tagline and the clients' logos; on the right the page's own form.
 export function AuthShell({ title, description, children }: { title: string; description: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-white lg:flex-row">
-      <div className="relative flex min-h-56 flex-col justify-between overflow-hidden p-6 sm:p-8 lg:min-h-screen lg:flex-[1.05] lg:p-12 xl:p-16">
-        <GlowBackdrop glow="beam" />
+    <div className="flex min-h-screen flex-col bg-brand-50 lg:flex-row">
+      <div className="relative flex min-h-64 flex-col overflow-hidden bg-night-950 lg:min-h-screen lg:flex-[1.05]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%]" style={{ backgroundImage: GLOW }} aria-hidden="true" />
+        <div className="grain pointer-events-none absolute inset-0 opacity-30" aria-hidden="true" />
 
-        <div className="relative flex items-center justify-between gap-4">
+        <div className="relative flex items-center justify-between gap-4 border-b border-white/[0.08] px-6 py-5 sm:px-10">
           <Link href="/" className="flex items-center gap-2.5">
             <Image src="/assets/icon.png" alt="" width={28} height={28} className="h-7 w-7" />
-            <span className="whitespace-nowrap font-display text-[15px] font-semibold text-white">
+            <span className="whitespace-nowrap font-display text-[15px] font-semibold tracking-[-0.02em] text-white">
               <span className="sm:hidden">{SITE.shortName}</span>
               <span className="hidden sm:inline">{SITE.name}</span>
             </span>
           </Link>
           <Link
             href="/"
-            className="flex items-center gap-1.5 whitespace-nowrap text-sm text-white/80 transition-colors hover:text-white"
+            className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] whitespace-nowrap text-white/70 uppercase transition-colors hover:text-white"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-3.5 w-3.5" />
             Volver al sitio
           </Link>
         </div>
 
-        <div className="relative mt-16 hidden lg:block">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-1 pr-3 pl-1 text-xs text-white/85 backdrop-blur">
-            <span className="flex -space-x-1.5">
-              {["BCP", "AFP", "SCP"].map((sigla) => (
-                <span
-                  key={sigla}
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[8px] font-semibold text-ink-950 ring-2 ring-ink-950"
-                >
-                  {sigla}
-                </span>
-              ))}
-            </span>
-            Más de 30 empresas confían en DDS
+        <div className="relative hidden flex-1 flex-col justify-center px-10 lg:flex xl:px-16">
+          <span className="inline-flex self-start rounded-full bg-white px-3 py-1 font-mono text-[10px] font-medium tracking-[0.14em] text-ink-950 uppercase">
+            Panel de administración
           </span>
-          <h1 className="mt-5 max-w-lg font-display text-5xl leading-[1.05] font-medium tracking-[-0.03em] text-white xl:text-6xl">
+          <h1 className="mt-7 max-w-lg font-display text-5xl leading-[1.04] font-medium tracking-[-0.04em] text-white xl:text-6xl">
             {SITE.tagline}
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
-            Gestiona el ciclo completo de tus clientes, de la oportunidad al
-            bot en producción, desde un solo panel.
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
+            Gestiona el ciclo completo de tus clientes, de la oportunidad al bot en producción, desde un solo panel.
           </p>
+        </div>
+
+        <div className="relative mt-auto hidden grid-cols-[1.2fr_repeat(3,1fr)] border-t border-white/15 lg:grid">
+          <p className="px-10 py-6 text-[13px] leading-snug text-white">
+            Más de 30 empresas
+            <br /> confían en DDS
+          </p>
+          {CLIENTS.slice(0, 3).map((client) => (
+            <div key={client.name} className="flex items-center justify-center border-l border-white/15 px-3 py-6">
+              <Image src={logoBlanco(client)} alt={client.name} width={150} height={50} className="h-8 w-auto" />
+            </div>
+          ))}
         </div>
       </div>
 
-      <main className="flex flex-1 flex-col items-center justify-center px-4 py-10 sm:px-10 lg:px-14">
+      <main className="flex flex-1 flex-col items-center justify-center px-5 py-12 sm:px-10 lg:px-14">
         <div className="w-full max-w-[26rem]">
           <Image src="/assets/icon.png" alt="" width={32} height={32} className="h-8 w-8" />
-          <h2 className="mt-6 font-display text-3xl font-medium tracking-[-0.02em] text-ink-950 sm:text-4xl">{title}</h2>
-          <p className="mt-2 text-sm text-ink-500">{description}</p>
+          <h2 className="mt-6 font-display text-[2rem] leading-[1.08] font-semibold tracking-[-0.04em] text-ink-950 sm:text-[2.4rem]">{title}</h2>
+          <p className="mt-3 text-sm leading-relaxed text-ink-500">{description}</p>
           {children}
         </div>
       </main>

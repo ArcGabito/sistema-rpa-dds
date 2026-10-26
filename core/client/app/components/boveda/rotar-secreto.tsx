@@ -62,7 +62,7 @@ export function RotarSecreto({
   return (
     <section className={`${CARD} p-6`}>
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-base font-semibold text-ink-950">Rotar valor</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Rotar valor</h2>
         {!abierto && (
           <button type="button" onClick={() => setAbierto(true)} className={`${BUTTON_SECONDARY} h-9 px-3`}>
             <RefreshCw className="h-4 w-4" />

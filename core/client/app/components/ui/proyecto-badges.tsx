@@ -1,6 +1,7 @@
 import { ETAPA_DESARROLLO_LABELS, PDD_ESTADO_LABELS, PROYECTO_ESTADO_LABELS } from "@/lib/proyecto";
+import { BADGE_BASE } from "@/components/ui/panel-styles";
 
-const BADGE = "inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap";
+const BADGE = BADGE_BASE;
 
 const PROYECTO: Record<string, string> = {
   planificado: "bg-brand-50 text-ink-700 ring-1 ring-inset ring-line",

@@ -87,7 +87,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
             into it (flex-1) instead of leaving a blank strip below. */}
         <section className={`${CARD} flex min-w-0 flex-col p-6 xl:col-span-2`}>
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h2 className="text-base font-semibold text-ink-950">Ventas ganadas por mes</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Ventas ganadas por mes</h2>
             <p className="text-sm text-ink-500">
               <span className="font-semibold text-ink-950">{formatSoles(ganadoSeisMeses)}</span> en los últimos 6 meses
             </p>
@@ -98,7 +98,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
         </section>
 
         <section className={`${CARD} min-w-0 p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Embudo por servicio</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Embudo por servicio</h2>
           <div className="mt-5">
             <ServiciosChart servicios={data.porServicio} />
           </div>
@@ -108,7 +108,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
       <div className="mt-6 grid gap-6 xl:grid-cols-2">
         <section className={`${CARD} flex min-w-0 flex-col p-6`}>
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-base font-semibold text-ink-950">Embudo por etapa</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Embudo por etapa</h2>
             <ActionLink href="/dashboard/oportunidades">Ver tablero</ActionLink>
           </div>
           <div className="relative mt-4 min-h-56 flex-1">
@@ -121,7 +121,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
         </section>
 
         <section className={`${CARD} min-w-0 p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Próximas acciones</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Próximas acciones</h2>
           {data.proximasAcciones.length === 0 ? (
             <p className="mt-3 border-t border-line pt-4 text-sm text-ink-500">
               No hay seguimientos programados en oportunidades abiertas.
@@ -148,7 +148,7 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
 
       <section className={`${CARD} mt-6 p-6`}>
         <div className="flex items-center justify-between gap-4">
-          <h2 className="flex flex-wrap items-center gap-2 text-base font-semibold text-ink-950">
+          <h2 className="flex flex-wrap items-center gap-2 text-base font-semibold tracking-[-0.02em] text-ink-950">
             Solicitudes web recientes
             {data.clientsNew > 0 && (
               <span className="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-medium text-white">

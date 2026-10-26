@@ -29,7 +29,7 @@ export function ConvertirSolicitudPanel({
   if (oportunidadId) {
     return (
       <section className={`${CARD} p-6`}>
-        <h2 className="text-base font-semibold text-ink-950">En el embudo</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">En el embudo</h2>
         <p className="mt-1.5 text-sm text-ink-500">Esta solicitud ya es una oportunidad comercial.</p>
         <ActionLink href={`/dashboard/oportunidades/${oportunidadId}`} className="mt-4">
           Ver la oportunidad
@@ -61,7 +61,7 @@ export function ConvertirSolicitudPanel({
 
   return (
     <form onSubmit={convertir} className={`${CARD} p-6`}>
-      <h2 className="text-base font-semibold text-ink-950">Convertir en oportunidad</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Convertir en oportunidad</h2>
       <p className="mt-1.5 text-sm text-ink-500">
         La persona queda como contacto de la empresa y su mensaje, en el historial.
       </p>

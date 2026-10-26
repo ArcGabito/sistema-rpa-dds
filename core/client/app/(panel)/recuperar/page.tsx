@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Loader2, MailCheck } from "lucide-react";
 import { sileo } from "sileo";
-import { AUTH_BUTTON, AUTH_FIELD, AuthShell, authFieldState } from "@/components/auth/auth-shell";
+import { AUTH_BUTTON, AUTH_FIELD, AuthShell, authFieldState, ArrowSquare, AUTH_LABEL } from "@/components/auth/auth-shell";
 
 // "¿Olvidaste tu contraseña?": asks for the e-mail and has the API send a
 // one-time link. The answer is the same whether or not the account exists.
@@ -45,7 +45,7 @@ export default function RecuperarPage() {
     <AuthShell title="Recupera tu acceso" description="Te enviaremos un enlace para elegir una nueva contraseña.">
       {enviado ? (
         <div className="mt-8">
-          <p role="status" className="flex items-start gap-3 rounded-xl bg-brand-50 px-4 py-4 text-sm text-ink-700">
+          <p role="status" className="flex items-start gap-3 rounded-[6px] bg-white px-4 py-4 text-sm text-ink-700 ring-1 ring-ink-950/10 ring-inset">
             <MailCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
             <span>
               {enviado} El enlace vence en 30 minutos y sirve una sola vez. Si no llega, revisa la carpeta de spam.
@@ -58,7 +58,7 @@ export default function RecuperarPage() {
       ) : (
         <form onSubmit={enviar} noValidate className="mt-8 flex flex-col gap-5">
           <div>
-            <label htmlFor="email" className="text-sm text-ink-950">
+            <label htmlFor="email" className={AUTH_LABEL}>
               Correo
             </label>
             <input
@@ -80,8 +80,8 @@ export default function RecuperarPage() {
             )}
           </div>
           <button type="submit" disabled={enviando} className={`mt-2 ${AUTH_BUTTON}`}>
-            {enviando && <Loader2 className="h-4 w-4 animate-spin" />}
             {enviando ? "Enviando..." : "Enviar enlace"}
+            <ArrowSquare>{enviando ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : undefined}</ArrowSquare>
           </button>
         </form>
       )}

@@ -71,7 +71,7 @@ export function DiagnosticoAjustes({ diagnostico, users }: { diagnostico: Diagno
 
   return (
     <form onSubmit={onSubmit} noValidate className={`${CARD} flex flex-col gap-4 p-5`}>
-      <h2 className="text-base font-semibold text-ink-950">Ajustes</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Ajustes</h2>
       <Field id="diag-titulo" label="Título" error={errors.titulo?.message}>
         <input id="diag-titulo" className={input(!!errors.titulo)} {...register("titulo")} />
       </Field>

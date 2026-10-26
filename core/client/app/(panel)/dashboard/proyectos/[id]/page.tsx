@@ -86,7 +86,7 @@ export default async function ProyectoPage({ params }: { params: Promise<{ id: s
       </dl>
 
       <section className={`${CARD} mt-6 p-6`}>
-        <h2 className="text-base font-semibold text-ink-950">Cronograma</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Cronograma</h2>
         <div className="mt-4">
           <Cronograma hitos={proyecto.hitos} inicio={proyecto.fechaInicio} fin={proyecto.fechaFinPlan} today={today} />
         </div>

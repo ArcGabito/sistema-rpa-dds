@@ -1,3 +1,5 @@
+import { BADGE_BASE } from "@/components/ui/panel-styles";
+
 // Scale by urgency: a new lead (still to contact) is the one that stands
 // out in the deep brand blue; closed ones recede.
 const STATUS_STYLES: Record<string, string> = {
@@ -17,7 +19,7 @@ export function ClientStatusBadge({ status }: { status: string }) {
   const label = STATUS_LABELS[status] ?? status;
 
   return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${style}`}>
+    <span className={`${BADGE_BASE} ${style}`}>
       {label}
     </span>
   );

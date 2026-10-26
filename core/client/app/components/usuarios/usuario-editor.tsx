@@ -57,7 +57,7 @@ export function UsuarioEditor({ user, roles, esPropio }: { user: UserDetail; rol
       <section className={`${CARD} min-w-0 p-6`}>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2 className="text-base font-semibold text-ink-950">Rol y permisos</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Rol y permisos</h2>
             <p className="mt-1 text-sm text-ink-500">El rol trae sus permisos; puedes subir o bajar cualquier módulo solo para esta persona.</p>
           </div>
           {!esAdminRol && !iguales(permisos, base) && (
@@ -114,7 +114,7 @@ export function UsuarioEditor({ user, roles, esPropio }: { user: UserDetail; rol
 
       <div className="flex min-w-0 flex-col gap-6">
         <section className={`${CARD} p-5`}>
-          <h2 className="text-base font-semibold text-ink-950">Perfil</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Perfil</h2>
           <Field id="ue-nombre" label="Nombre completo" className="mt-3">
             <input id="ue-nombre" value={nombre} maxLength={200} onChange={(e) => setNombre(e.target.value)} className={input} />
           </Field>
@@ -133,7 +133,7 @@ export function UsuarioEditor({ user, roles, esPropio }: { user: UserDetail; rol
         </section>
 
         <section className={`${CARD} p-5`}>
-          <h2 className="text-base font-semibold text-ink-950">Acceso</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Acceso</h2>
           <p className="mt-1 text-sm text-ink-500">
             {user.activo
               ? "Puede ingresar al panel. Desactivarlo cierra sus sesiones al instante; su nombre queda en todo lo que hizo."
@@ -159,7 +159,7 @@ export function UsuarioEditor({ user, roles, esPropio }: { user: UserDetail; rol
         </section>
 
         <section className={`${CARD} p-5`}>
-          <h2 className="text-base font-semibold text-ink-950">Contraseña</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Contraseña</h2>
           <p className="mt-1 text-sm text-ink-500">Define una temporal si la olvidó; luego la cambia en Mi cuenta.</p>
           <form
             onSubmit={async (e) => {
@@ -182,7 +182,7 @@ export function UsuarioEditor({ user, roles, esPropio }: { user: UserDetail; rol
 
         {!esPropio && (
           <section className={`${CARD} p-5`}>
-            <h2 className="text-base font-semibold text-ink-950">Eliminar</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Eliminar</h2>
             <p className="mt-1 text-sm text-ink-500">Prefiere desactivarlo: eliminarlo deja su historial como “Usuario eliminado”.</p>
             <div className="mt-3 [&_button]:px-0">
               <EliminarButton

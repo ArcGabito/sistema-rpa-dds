@@ -14,7 +14,7 @@ export default async function CuentaPage() {
       <ConfiguracionHeader activa="cuenta" esAdmin={me.esAdmin} description={`${me.fullName} · ${me.email}`} />
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
         <section className={`${CARD} min-w-0 p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Lo que puedes hacer</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Lo que puedes hacer</h2>
           <p className="mt-1 text-sm text-ink-500">
             Rol <span className="font-medium text-ink-950">{me.roleLabel}</span>. {ROLES.find((r) => r.value === me.role)?.ayuda} Si necesitas otro acceso,
             pídeselo a un administrador.
@@ -24,7 +24,7 @@ export default async function CuentaPage() {
           </div>
         </section>
         <section className={`${CARD} p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Cambiar contraseña</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Cambiar contraseña</h2>
           <div className="mt-4">
             <CambiarClaveForm />
           </div>

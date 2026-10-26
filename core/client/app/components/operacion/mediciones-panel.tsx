@@ -98,7 +98,7 @@ function MedicionDialog({
     >
       <form onSubmit={onSubmit} noValidate className="flex max-h-[92dvh] flex-col">
         <header className="flex items-center justify-between gap-4 border-b border-line px-6 py-4">
-          <h2 className="text-base font-semibold text-ink-950">{medicion ? `Registro de ${nombreMes(medicion.mes)}` : "Registrar mes"}</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">{medicion ? `Registro de ${nombreMes(medicion.mes)}` : "Registrar mes"}</h2>
           <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-md p-1.5 text-ink-500 hover:bg-brand-50 hover:text-ink-950">
             <X className="h-5 w-5" />
           </button>
@@ -193,7 +193,7 @@ export function MedicionesPanel({
   return (
     <section className={`${CARD} overflow-hidden`}>
       <div className="flex items-center justify-between gap-3 p-5">
-        <h2 className="text-base font-semibold text-ink-950">
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">
           Registro mensual <span className="font-normal text-ink-500">{mediciones.length}</span>
         </h2>
         {meses.length > 0 && (

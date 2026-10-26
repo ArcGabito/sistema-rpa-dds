@@ -98,7 +98,7 @@ export default async function IncidenciaPage({ params }: { params: Promise<{ id:
         <div className="flex min-w-0 flex-col gap-6">
           {resuelta && incidencia.solucion && (
             <section className={`${CARD} border-l-4 border-brand-700 p-6`}>
-              <h2 className="flex items-center gap-2 text-base font-semibold text-ink-950">
+              <h2 className="flex items-center gap-2 text-base font-semibold tracking-[-0.02em] text-ink-950">
                 <CheckCircle2 className="h-4 w-4 text-brand-700" />
                 Solución
               </h2>
@@ -108,7 +108,7 @@ export default async function IncidenciaPage({ params }: { params: Promise<{ id:
           )}
           {incidencia.descripcion && (
             <section className={`${CARD} p-6`}>
-              <h2 className="text-base font-semibold text-ink-950">Qué pasa</h2>
+              <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Qué pasa</h2>
               <p className="mt-3 text-sm leading-relaxed whitespace-pre-line text-ink-700">{incidencia.descripcion}</p>
             </section>
           )}
@@ -118,7 +118,7 @@ export default async function IncidenciaPage({ params }: { params: Promise<{ id:
         <div className="flex min-w-0 flex-col gap-6">
           <section className={`${CARD} p-5`}>
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-ink-950">SLA</h2>
+              <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">SLA</h2>
               <SlaBadge sla={sla} ahora={ahora} />
             </div>
             <p className="mt-1 text-xs text-ink-500">
@@ -158,7 +158,7 @@ export default async function IncidenciaPage({ params }: { params: Promise<{ id:
 
           {!editar && (
             <section className={`${CARD} p-5`}>
-              <h2 className="text-base font-semibold text-ink-950">Detalles</h2>
+              <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Detalles</h2>
               <dl className="mt-3 divide-y divide-line border-t border-line text-sm">
                 {(
                   [

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2, ShieldAlert } from "lucide-react";
-import { AUTH_FIELD, AuthShell } from "@/components/auth/auth-shell";
+import { ArrowSquare, AUTH_BUTTON, AUTH_FIELD, AUTH_LABEL, AuthShell, authFieldState } from "@/components/auth/auth-shell";
 import { ClientLogo } from "@/components/ui/client-logo";
 import { useAuth } from "@/hooks/use-auth";
 import { CLIENTS } from "@/lib/clients";
@@ -22,7 +22,7 @@ export default function IngresarPage() {
     <AuthShell title="Bienvenido de nuevo" description="Ingresa para acceder al panel de administración.">
       <form onSubmit={onSubmit} noValidate className="mt-8 flex flex-col gap-5">
         <div>
-          <label htmlFor="email" className="text-sm text-ink-950">
+          <label htmlFor="email" className={AUTH_LABEL}>
             Correo
           </label>
           <input
@@ -33,7 +33,7 @@ export default function IngresarPage() {
             aria-invalid={errors.email ? true : undefined}
             aria-describedby={errors.email ? "email-error" : undefined}
             className={`mt-2 ${AUTH_FIELD} ${
-              errors.email ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-ink-400"
+              authFieldState(!!errors.email)
             }`}
             {...register("email")}
           />
@@ -45,7 +45,7 @@ export default function IngresarPage() {
         </div>
 
         <div>
-          <label htmlFor="password" className="text-sm text-ink-950">
+          <label htmlFor="password" className={AUTH_LABEL}>
             Contraseña
           </label>
           <div className="relative mt-2">
@@ -57,7 +57,7 @@ export default function IngresarPage() {
               aria-invalid={errors.password ? true : undefined}
               aria-describedby={errors.password ? "password-error" : undefined}
               className={`${AUTH_FIELD} pr-11 ${
-                errors.password ? "border-red-400 focus:border-red-500" : "border-transparent focus:border-ink-400"
+                authFieldState(!!errors.password)
               }`}
               {...register("password")}
             />
@@ -98,7 +98,7 @@ export default function IngresarPage() {
         {locked && (
           <p
             role="status"
-            className="flex items-start gap-2.5 rounded-xl bg-brand-50 px-4 py-3 text-sm text-ink-700"
+            className="flex items-start gap-2.5 rounded-[6px] bg-white px-4 py-3 text-sm text-ink-700 ring-1 ring-ink-950/10 ring-inset"
           >
             <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
             <span>
@@ -111,10 +111,10 @@ export default function IngresarPage() {
         <button
           type="submit"
           disabled={isSubmitting || locked}
-          className="mt-2 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[linear-gradient(to_bottom,var(--color-ink-800),var(--color-ink-950))] text-base font-medium text-white shadow-button transition-[filter,opacity] hover:brightness-125 disabled:opacity-60"
+          className={`mt-2 ${AUTH_BUTTON}`}
         >
-          {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
           {isSubmitting ? "Ingresando..." : locked ? `Espera ${countdown}` : "Ingresar"}
+          <ArrowSquare>{isSubmitting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : undefined}</ArrowSquare>
         </button>
       </form>
 
@@ -130,8 +130,9 @@ export default function IngresarPage() {
         </a>
       </p>
 
-      <div className="mt-14">
-        <p className="text-sm text-ink-950">Trabajan con nosotros</p>
+      {/* On wide screens the logos are in the dark panel. */}
+      <div className="mt-14 lg:hidden">
+        <p className={AUTH_LABEL}>Trabajan con nosotros</p>
         <ul className="mt-4 grid grid-cols-3 items-center gap-x-4 gap-y-3">
           {CLIENTS.slice(0, 6).map((client) => (
             <li key={client.name}>

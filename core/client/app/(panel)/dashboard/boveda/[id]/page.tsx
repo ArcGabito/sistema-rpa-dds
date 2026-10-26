@@ -85,7 +85,7 @@ export default async function SecretoPage({ params }: { params: Promise<{ id: st
           <RevelarSecreto id={secreto.id} nombre={secreto.nombre} bloqueado={bloqueado} />
 
           <section className={`${CARD} p-6`}>
-            <h2 className="text-base font-semibold text-ink-950">Historial de accesos</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Historial de accesos</h2>
             <p className="mt-1 text-xs text-ink-500">Los últimos 50 movimientos sobre esta credencial.</p>
             <div className="mt-3 border-t border-line">
               <AccesosList accesos={secreto.accesos.map((a) => ({ ...a, createdAtLabel: formatDateTime(a.createdAtUtc) }))} />
@@ -95,7 +95,7 @@ export default async function SecretoPage({ params }: { params: Promise<{ id: st
 
         <div className="flex min-w-0 flex-col gap-6">
           <section className={`${CARD} p-5`}>
-            <h2 className="text-base font-semibold text-ink-950">Datos</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Datos</h2>
             <dl className="mt-3 divide-y divide-line border-t border-line text-sm">
               {datos.map(([label, value]) => (
                 <div key={label} className="flex items-center justify-between gap-4 py-2.5">

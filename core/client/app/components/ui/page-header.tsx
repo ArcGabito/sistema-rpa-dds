@@ -22,16 +22,16 @@ export function PageHeader({
       {back && (
         <Link
           href={back.href}
-          className="mb-4 inline-flex items-center gap-1.5 text-sm text-ink-500 transition-colors hover:text-ink-950"
+          className="mb-4 inline-flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] text-ink-500 uppercase transition-colors hover:text-ink-950"
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-3.5 w-3.5" />
           {back.label}
         </Link>
       )}
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-display text-2xl font-medium tracking-[-0.02em] text-ink-950 sm:text-3xl">{title}</h1>
+            <h1 className="font-display text-[1.75rem] leading-tight font-semibold tracking-[-0.035em] text-ink-950 sm:text-[2.1rem]">{title}</h1>
             {badges}
           </div>
           {description && <p className="mt-1.5 text-sm text-ink-500">{description}</p>}

@@ -101,7 +101,7 @@ export default async function EmpresaPage({ params }: { params: Promise<{ id: st
       <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="flex min-w-0 flex-col gap-6">
           <section className={`${CARD} overflow-hidden`}>
-            <h2 className="p-5 text-base font-semibold text-ink-950">
+            <h2 className="p-5 text-base font-semibold tracking-[-0.02em] text-ink-950">
               Oportunidades <span className="font-normal text-ink-500">{empresa.oportunidades.length}</span>
             </h2>
             {empresa.oportunidades.length === 0 ? (
@@ -145,7 +145,7 @@ export default async function EmpresaPage({ params }: { params: Promise<{ id: st
 
         <div className="flex flex-col gap-6">
           <section className={`${CARD} p-5`}>
-            <h2 className="text-base font-semibold text-ink-950">Datos</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Datos</h2>
             <dl className="mt-3 divide-y divide-line border-t border-line text-sm">
               {datos.map(([label, value]) => (
                 <div key={label} className="flex justify-between gap-4 py-2.5">

@@ -76,28 +76,28 @@
   --color-night-800: var(--color-night-800);
   --color-mist: var(--color-mist);
 
-  /* Flat surfaces: cards are drawn by a hairline ring with barely any
-     depth and lift softly on hover; menus float on a wide, soft shadow. */
-  --shadow-card: 0 0 0 1px rgb(10 10 11 / 0.07), 0 1px 2px 0 rgb(10 10 11 / 0.04);
-  --shadow-card-hover: 0 0 0 1px rgb(10 10 11 / 0.09), 0 12px 32px -12px rgb(10 10 11 / 0.18);
-  --shadow-flyout: 0 0 0 1px rgb(10 10 11 / 0.06), 0 24px 48px -12px rgb(10 10 11 / 0.28);
-  /* Under the dark primary button, as if it sat above the page. */
-  --shadow-button: 0 8px 18px -8px rgb(10 10 11 / 0.55), inset 0 1px 0 0 rgb(255 255 255 / 0.12);
+  /* Flat surfaces, as on the public site: cards are a hairline frame with
+     no depth (a darker line on hover); only menus and dialogs float, on a
+     wide soft shadow. */
+  --shadow-card: 0 0 0 1px rgb(10 10 11 / 0.09);
+  --shadow-card-hover: 0 0 0 1px rgb(10 10 11 / 0.2);
+  --shadow-flyout: 0 0 0 1px rgb(10 10 11 / 0.08), 0 24px 48px -12px rgb(10 10 11 / 0.28);
+  --shadow-button: none;
 
   --font-sans: var(--font-inter);
   --font-display: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
-/* Softer, larger corners than Tailwind's defaults, everywhere at once:
-   controls round to 10px, cards to 16px, panels to 24px and more. */
+/* The public site's shapes, everywhere at once: controls round to 6px,
+   cards and panels are nearly square. Pills (rounded-full) stay round. */
 @theme {
-  --radius-sm: 0.375rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 1.75rem;
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.375rem;
+  --radius-2xl: 0.5rem;
+  --radius-3xl: 0.625rem;
 }
 
 /* Film grain over the dark glow panels (see GlowBackdrop). */

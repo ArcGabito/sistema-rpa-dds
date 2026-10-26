@@ -36,7 +36,7 @@ export function SeguimientoPanel({ incidenciaId, items, soloLectura = false }: {
 
   return (
     <section className={`${CARD} p-6`}>
-      <h2 className="text-base font-semibold text-ink-950">Seguimiento</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Seguimiento</h2>
       <ol className="mt-4">
         {items.map((s, index) => {
           const cambio = s.tipo === "cambio";

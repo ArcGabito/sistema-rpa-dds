@@ -39,7 +39,7 @@ function Calendario({ items, me }: { items: VencimientoItem[]; me: Me | null }) 
         .filter(([, lista]) => lista.length > 0)
         .map(([titulo, lista]) => (
           <section key={titulo} className={`${CARD} overflow-hidden`}>
-            <h2 className="p-5 text-base font-semibold text-ink-950">
+            <h2 className="p-5 text-base font-semibold tracking-[-0.02em] text-ink-950">
               {titulo} <span className="font-normal text-ink-500">{lista.length}</span>
             </h2>
             <ul className="divide-y divide-line border-t border-line">
@@ -144,8 +144,8 @@ export default async function VencimientosPage({ searchParams }: { searchParams:
               key={v.value}
               href={v.value === "calendario" ? "/dashboard/vencimientos" : `/dashboard/vencimientos?vista=${v.value}`}
               aria-current={active ? "page" : undefined}
-              className={`border-b-2 px-3 pb-2.5 text-sm whitespace-nowrap transition-colors ${
-                active ? "border-brand-700 font-semibold text-brand-700" : "border-transparent text-ink-500 hover:text-ink-950"
+              className={`border-b-2 px-3 pb-2.5 font-mono text-[11px] tracking-[0.1em] whitespace-nowrap uppercase transition-colors ${
+                active ? "border-ink-950 font-semibold text-ink-950" : "border-transparent text-ink-500 hover:text-ink-950"
               }`}
             >
               {v.label}

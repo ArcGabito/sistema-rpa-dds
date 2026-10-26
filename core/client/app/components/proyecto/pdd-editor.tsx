@@ -131,7 +131,7 @@ export function PddEditor({ proceso, iaConfigurada, iaModelo }: { proceso: Proce
     <form onSubmit={onSubmit} noValidate className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
       <div className="flex min-w-0 flex-col gap-6">
         <section className={`${CARD} p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">Notas del levantamiento</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Notas del levantamiento</h2>
           <p className="mt-1 text-sm text-ink-500">Lo que contó el cliente en la sesión: cómo lo hacen, qué sistemas usan, qué casos raros aparecen.</p>
           <label htmlFor="pdd-notas" className="sr-only">
             Notas del levantamiento
@@ -163,7 +163,7 @@ export function PddEditor({ proceso, iaConfigurada, iaModelo }: { proceso: Proce
         )}
 
         <section className={`${CARD} grid gap-5 p-6`}>
-          <h2 className="text-base font-semibold text-ink-950">PDD</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">PDD</h2>
           {PDD_SECCIONES.map((s) => (
             <Field key={s.key} id={`pdd-${s.key}`} label={s.label} hint={s.ayuda} error={errors[s.key]?.message}>
               <textarea
@@ -179,7 +179,7 @@ export function PddEditor({ proceso, iaConfigurada, iaModelo }: { proceso: Proce
 
       <aside className="flex flex-col gap-4 xl:sticky xl:top-0 xl:self-start">
         <section className={`${CARD} flex flex-col gap-4 p-5`}>
-          <h2 className="text-base font-semibold text-ink-950">Proceso</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Proceso</h2>
           <Field id="pdd-nombre" label="Nombre" error={errors.nombre?.message}>
             <input id="pdd-nombre" className={input(!!errors.nombre)} {...register("nombre")} />
           </Field>

@@ -68,7 +68,7 @@ export function ProyectoAjustes({ proyecto, users }: { proyecto: Proyecto; users
 
   return (
     <form onSubmit={onSubmit} noValidate className={`${CARD} flex flex-col gap-4 p-5`}>
-      <h2 className="text-base font-semibold text-ink-950">Ajustes</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Ajustes</h2>
       <Field id="py-nombre" label="Nombre" error={errors.nombre?.message}>
         <input id="py-nombre" className={input(!!errors.nombre)} {...register("nombre")} />
       </Field>

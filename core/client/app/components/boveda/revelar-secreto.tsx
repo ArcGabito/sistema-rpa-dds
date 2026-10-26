@@ -81,7 +81,7 @@ export function RevelarSecreto({
 
   return (
     <section className={`${CARD} p-6`}>
-      <h2 className="text-base font-semibold text-ink-950">Valor</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Valor</h2>
       {bloqueado ? (
         <p className="mt-3 flex items-start gap-2.5 rounded-md bg-brand-50 px-3.5 py-3 text-sm text-ink-700">
           <LockKeyhole className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />

@@ -78,7 +78,7 @@ function HitoDialog({ proyectoId, hito, onClose }: { proyectoId: number; hito: H
     >
       <form onSubmit={guardar} className="flex flex-col gap-4 p-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold text-ink-950">{hito ? "Editar hito" : "Nuevo hito"}</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">{hito ? "Editar hito" : "Nuevo hito"}</h2>
           <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-md p-1 text-ink-500 hover:bg-brand-50">
             <X className="h-5 w-5" />
           </button>
@@ -242,7 +242,7 @@ export function TareasPanel({
   return (
     <section className={`${CARD} overflow-hidden`}>
       <div className="flex flex-wrap items-center justify-between gap-3 p-5">
-        <h2 className="text-base font-semibold text-ink-950">Tareas</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Tareas</h2>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-sm text-ink-500">
             <input type="checkbox" checked={ocultarHechas} onChange={(e) => setOcultarHechas(e.target.checked)} className="h-4 w-4 accent-brand-700" />

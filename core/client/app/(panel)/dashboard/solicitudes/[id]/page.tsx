@@ -112,7 +112,7 @@ export default async function ClienteDetailsPage({
       <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <div className="flex min-w-0 flex-col gap-6">
           <section className="rounded-lg bg-white shadow-card p-6">
-            <h2 className="text-base font-semibold text-ink-950">Datos de contacto</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Datos de contacto</h2>
             <dl className="mt-3 divide-y divide-line border-y border-line text-sm">
               <div className="flex justify-between gap-4 py-3">
                 <dt className="text-ink-500">Correo</dt>

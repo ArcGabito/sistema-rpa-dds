@@ -50,7 +50,7 @@ export function MotivoPerdidaDialog({
         }}
         className="p-6"
       >
-        <h2 className="text-base font-semibold text-ink-950">{encabezado}</h2>
+        <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">{encabezado}</h2>
         {titulo && <p className="mt-1 text-sm text-ink-500">{titulo}</p>}
         <label htmlFor="motivo-perdida" className="mt-5 mb-1.5 block text-sm font-medium text-ink-950">
           {pregunta}

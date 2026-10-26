@@ -103,8 +103,8 @@ export default async function IncidenciasPage({
                     key={option.value}
                     href={linkTo(option.value)}
                     aria-current={active ? "page" : undefined}
-                    className={`border-b-2 px-3 pb-2.5 text-sm whitespace-nowrap transition-colors ${
-                      active ? "border-brand-700 font-semibold text-brand-700" : "border-transparent text-ink-500 hover:text-ink-950"
+                    className={`border-b-2 px-3 pb-2.5 font-mono text-[11px] tracking-[0.1em] whitespace-nowrap uppercase transition-colors ${
+                      active ? "border-ink-950 font-semibold text-ink-950" : "border-transparent text-ink-500 hover:text-ink-950"
                     }`}
                   >
                     {option.label}
@@ -157,7 +157,7 @@ export default async function IncidenciasPage({
         <div className="flex flex-col gap-6">
           {resumen && resumen.porCausa90.length > 0 && (
             <section className={`${CARD} p-5`}>
-              <h2 className="text-base font-semibold text-ink-950">Causas</h2>
+              <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Causas</h2>
               <p className="mt-1 text-xs text-ink-500">De las resueltas en los últimos 90 días.</p>
               <ul className="mt-4 flex flex-col gap-3">
                 {resumen.porCausa90.map((c) => (
@@ -185,7 +185,7 @@ export default async function IncidenciasPage({
           )}
 
           <section className={`${CARD} p-5`}>
-            <h2 className="text-base font-semibold text-ink-950">Objetivos de SLA</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Objetivos de SLA</h2>
             <p className="mt-1 text-xs text-ink-500">Horas corridas desde el reporte. El reloj se detiene mientras se espera al cliente.</p>
             <table className="mt-3 w-full text-sm">
               <thead className="text-left font-mono text-[11px] tracking-[0.06em] uppercase text-ink-500">

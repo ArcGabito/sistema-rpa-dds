@@ -93,7 +93,7 @@ function ContratoDialog({ contrato, esAdmin, onClose }: { contrato: Contrato | n
       }} className={DIALOG}>
       <form onSubmit={guardar} className="flex max-h-[92dvh] flex-col">
         <header className="flex items-center justify-between gap-4 border-b border-line px-6 py-4">
-          <h2 className="text-base font-semibold text-ink-950">{contrato ? "Editar contrato" : "Nuevo contrato de soporte"}</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">{contrato ? "Editar contrato" : "Nuevo contrato de soporte"}</h2>
           <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-md p-1.5 text-ink-500 hover:bg-brand-50 hover:text-ink-950">
             <X className="h-5 w-5" />
           </button>
@@ -192,7 +192,7 @@ function RenovarDialog({ contrato, onClose }: { contrato: Contrato; onClose: () 
       }} className={DIALOG}>
       <form onSubmit={renovar} className="flex flex-col gap-4 p-6">
         <div>
-          <h2 className="text-base font-semibold text-ink-950">Renovar contrato</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Renovar contrato</h2>
           <p className="mt-1 text-sm text-ink-500">
             {contrato.empresaNombre} · hoy vence el {formatDay(contrato.fechaFin)}. Se extiende desde esa fecha.
           </p>
@@ -265,7 +265,7 @@ export function ContratosPanel({
     <section className={`${CARD} overflow-hidden`}>
       <div className="flex items-center justify-between gap-3 p-5">
         <div>
-          <h2 className="text-base font-semibold text-ink-950">
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">
             Contratos de soporte <span className="font-normal text-ink-500">{contratos.length}</span>
           </h2>
           <p className="mt-0.5 text-xs text-ink-500">Avisan 60 días antes de vencer, para negociar la renovación a tiempo.</p>

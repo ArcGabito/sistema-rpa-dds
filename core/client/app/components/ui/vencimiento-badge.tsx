@@ -1,6 +1,7 @@
 import { CalendarClock } from "lucide-react";
 import { vencimiento } from "@/lib/boveda";
 import { formatDay } from "@/lib/format-date";
+import { BADGE_BASE } from "@/components/ui/panel-styles";
 
 // When a secret expires, colored like the next actions: expired in red,
 // close to it in brand blue. `today` is "YYYY-MM-DD" from the server, so
@@ -25,7 +26,7 @@ export function VencimientoBadge({ venceEl, today }: { venceEl: string | null; t
         : `Vence el ${formatDay(venceEl!)}`;
 
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap ${style}`}>
+    <span className={`${BADGE_BASE} ${style}`}>
       <CalendarClock className="h-3.5 w-3.5" />
       {texto}
     </span>

@@ -45,7 +45,7 @@ export function SeccionOperacion({
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_24rem]">
         <section className={`${CARD} flex min-w-0 flex-col p-6`}>
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <h3 className="text-base font-semibold text-ink-950">Ahorro real frente al estimado</h3>
+            <h3 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Ahorro real frente al estimado</h3>
             <AhorroLeyenda />
           </div>
           {bots && bots.serie.length > 0 ? (
@@ -57,7 +57,7 @@ export function SeccionOperacion({
           )}
         </section>
         <section className={`${CARD} min-w-0 p-6`}>
-          <h3 className="text-base font-semibold text-ink-950">Vence en 30 días</h3>
+          <h3 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Vence en 30 días</h3>
           {proximos.length === 0 ? (
             <p className="mt-3 border-t border-line pt-4 text-sm text-ink-500">Nada vence en los próximos 30 días.</p>
           ) : (

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, CircleCheck, Eye, EyeOff, Link2Off, Loader2 } from "lucide-react";
 import { sileo } from "sileo";
-import { AUTH_BUTTON, AUTH_FIELD, authFieldState } from "@/components/auth/auth-shell";
+import { AUTH_BUTTON, AUTH_FIELD, authFieldState, ArrowSquare, AUTH_LABEL } from "@/components/auth/auth-shell";
 
 type Estado = "verificando" | "invalido" | "listo" | "hecho";
 
@@ -82,12 +82,13 @@ export function RestablecerForm({ token }: { token: string }) {
   if (estado === "invalido")
     return (
       <div className="mt-8">
-        <p role="alert" className="flex items-start gap-3 rounded-xl bg-brand-50 px-4 py-4 text-sm text-ink-700">
+        <p role="alert" className="flex items-start gap-3 rounded-[6px] bg-white px-4 py-4 text-sm text-ink-700 ring-1 ring-ink-950/10 ring-inset">
           <Link2Off className="mt-0.5 h-5 w-5 shrink-0 text-ink-500" />
           <span>{motivo ?? "Este enlace venció o ya se usó. Los enlaces duran 30 minutos y sirven una sola vez."}</span>
         </p>
         <Link href="/recuperar" className={`mt-6 ${AUTH_BUTTON}`}>
           Pedir un enlace nuevo
+          <ArrowSquare />
         </Link>
       </div>
     );
@@ -95,12 +96,13 @@ export function RestablecerForm({ token }: { token: string }) {
   if (estado === "hecho")
     return (
       <div className="mt-8">
-        <p role="status" className="flex items-start gap-3 rounded-xl bg-brand-50 px-4 py-4 text-sm text-ink-700">
+        <p role="status" className="flex items-start gap-3 rounded-[6px] bg-white px-4 py-4 text-sm text-ink-700 ring-1 ring-ink-950/10 ring-inset">
           <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" />
           <span>Listo: tu contraseña cambió y cerramos las sesiones que tenías abiertas. Ya puedes ingresar con la nueva.</span>
         </p>
         <Link href="/ingresar" className={`mt-6 ${AUTH_BUTTON}`}>
           Ir a ingresar
+          <ArrowSquare />
         </Link>
       </div>
     );
@@ -108,7 +110,7 @@ export function RestablecerForm({ token }: { token: string }) {
   return (
     <form onSubmit={guardar} noValidate className="mt-8 flex flex-col gap-5">
       <div>
-        <label htmlFor="nueva" className="text-sm text-ink-950">
+        <label htmlFor="nueva" className={AUTH_LABEL}>
           Nueva contraseña
         </label>
         <div className="relative mt-2">
@@ -133,7 +135,7 @@ export function RestablecerForm({ token }: { token: string }) {
         </div>
       </div>
       <div>
-        <label htmlFor="confirmar" className="text-sm text-ink-950">
+        <label htmlFor="confirmar" className={AUTH_LABEL}>
           Repite la nueva contraseña
         </label>
         <input
@@ -154,8 +156,8 @@ export function RestablecerForm({ token }: { token: string }) {
         )}
       </div>
       <button type="submit" disabled={guardando} className={`mt-2 ${AUTH_BUTTON}`}>
-        {guardando && <Loader2 className="h-4 w-4 animate-spin" />}
         {guardando ? "Guardando..." : "Guardar contraseña"}
+        <ArrowSquare>{guardando ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : undefined}</ArrowSquare>
       </button>
       <Link href="/ingresar" className="inline-flex items-center gap-1.5 text-sm text-ink-500 transition-colors hover:text-ink-950">
         <ArrowLeft className="h-4 w-4" />

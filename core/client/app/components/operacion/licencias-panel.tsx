@@ -105,7 +105,7 @@ function LicenciaDialog({ licencia, bots, esAdmin, onClose }: { licencia: Licenc
     >
       <form onSubmit={guardar} className="flex max-h-[92dvh] flex-col">
         <header className="flex items-center justify-between gap-4 border-b border-line px-6 py-4">
-          <h2 className="text-base font-semibold text-ink-950">{licencia ? "Editar licencia" : "Nueva licencia"}</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">{licencia ? "Editar licencia" : "Nueva licencia"}</h2>
           <button type="button" onClick={onClose} aria-label="Cerrar" className="rounded-md p-1.5 text-ink-500 hover:bg-brand-50 hover:text-ink-950">
             <X className="h-5 w-5" />
           </button>
@@ -230,7 +230,7 @@ function RenovarLicenciaDialog({ licencia, onClose }: { licencia: Licencia; onCl
     >
       <form onSubmit={renovar} className="flex flex-col gap-4 p-6">
         <div>
-          <h2 className="text-base font-semibold text-ink-950">Renovar licencia</h2>
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Renovar licencia</h2>
           <p className="mt-1 text-sm text-ink-500">
             {licencia.nombre} · vence el {formatDay(licencia.venceEl)}.
           </p>
@@ -260,7 +260,7 @@ export function LicenciasPanel({ licencias, bots, esAdmin, editar = true }: { li
     <section className={`${CARD} overflow-hidden`}>
       <div className="flex items-center justify-between gap-3 p-5">
         <div>
-          <h2 className="text-base font-semibold text-ink-950">
+          <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">
             Licencias <span className="font-normal text-ink-500">{licencias.length}</span>
           </h2>
           <p className="mt-0.5 text-xs text-ink-500">De las plataformas de los bots, de los clientes y de DDS. Avisan 30 días antes.</p>

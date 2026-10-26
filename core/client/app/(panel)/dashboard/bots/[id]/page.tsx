@@ -142,7 +142,7 @@ export default async function BotPage({ params }: { params: Promise<{ id: string
       {bot.mediciones.length > 0 && (
         <section className={`${CARD} mt-6 flex flex-col p-6`}>
           <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <h2 className="text-base font-semibold text-ink-950">Ahorro real frente al estimado</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Ahorro real frente al estimado</h2>
             <AhorroLeyenda />
           </div>
           <p className="mt-1 text-xs text-ink-500">El primer mes se estima por los días que estuvo en producción.</p>
@@ -165,7 +165,7 @@ export default async function BotPage({ params }: { params: Promise<{ id: string
 
           <section className={`${CARD} overflow-hidden`}>
             <div className="flex items-center justify-between gap-3 p-5">
-              <h2 className="text-base font-semibold text-ink-950">Incidencias</h2>
+              <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Incidencias</h2>
               <Link href={`/dashboard/incidencias?botId=${bot.id}&estado=todas`} className="text-sm font-medium text-brand-700 hover:underline">
                 Ver todas
               </Link>
@@ -182,7 +182,7 @@ export default async function BotPage({ params }: { params: Promise<{ id: string
 
         <div className="flex min-w-0 flex-col gap-6">
           <section className={`${CARD} p-5`}>
-            <h2 className="text-base font-semibold text-ink-950">Datos</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Datos</h2>
             {bot.descripcion && <p className="mt-2 text-sm text-ink-700">{bot.descripcion}</p>}
             <dl className="mt-3 divide-y divide-line border-t border-line text-sm">
               {datos.map(([label, value]) => (
@@ -195,7 +195,7 @@ export default async function BotPage({ params }: { params: Promise<{ id: string
           </section>
 
           <section className={`${CARD} p-5`}>
-            <h2 className="text-base font-semibold text-ink-950">Lo estimado</h2>
+            <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Lo estimado</h2>
             <p className="mt-1 text-xs text-ink-500">Del diagnóstico: contra esto se mide cada mes.</p>
             <dl className="mt-3 divide-y divide-line border-t border-line text-sm">
               {estimacion.map(([label, value]) => (
@@ -209,7 +209,7 @@ export default async function BotPage({ params }: { params: Promise<{ id: string
 
           <section className={`${CARD} overflow-hidden`}>
             <div className="flex items-center justify-between gap-3 p-5">
-              <h2 className="text-base font-semibold text-ink-950">Licencias</h2>
+              <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Licencias</h2>
               {editar && (
                 <Link href="/dashboard/vencimientos?vista=licencias" className="text-sm font-medium text-brand-700 hover:underline">
                   Gestionar

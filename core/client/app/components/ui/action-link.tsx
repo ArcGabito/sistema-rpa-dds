@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-// Text link led by a small round arrow.
-// Static on purpose: no hover motion, just the underline.
+// Uppercase monospace link led by a small square arrow, like the site's
+// buttons. Static on purpose: no hover motion, just the underline.
 export function ActionLink({
   href,
   children,
@@ -21,14 +21,14 @@ export function ActionLink({
   const icon = tone === "dark" ? "bg-white text-ink-950" : "bg-ink-950 text-white";
   const content = (
     <>
-      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${icon}`}>
-        <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.5} />
+      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] ${icon}`}>
+        <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
       </span>
-      <span className="group-hover:underline">{children}</span>
+      <span className="underline-offset-4 group-hover:underline">{children}</span>
       {external && <span className="sr-only">(se abre en una pestaña nueva)</span>}
     </>
   );
-  const classes = `group inline-flex items-center gap-2 text-sm font-medium ${text} ${className}`;
+  const classes = `group inline-flex items-center gap-2 font-mono text-[11px] font-medium tracking-[0.1em] uppercase ${text} ${className}`;
 
   return external ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>

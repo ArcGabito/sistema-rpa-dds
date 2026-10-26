@@ -1,6 +1,7 @@
 import { CUADRANTE_LABELS, DIAGNOSTICO_ESTADO_LABELS } from "@/lib/diagnostico";
+import { BADGE_BASE } from "@/components/ui/panel-styles";
 
-const BADGE = "inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap";
+const BADGE = BADGE_BASE;
 
 const ESTADO_STYLES: Record<string, string> = {
   en_curso: "bg-brand-100 text-ink-700",

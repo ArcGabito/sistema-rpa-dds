@@ -36,7 +36,7 @@ export function SeccionEntrega({ data }: { data: EntregaResumen }) {
         ]}
       />
       <section className={`${CARD} mt-6 p-6`}>
-        <h3 className="text-base font-semibold text-ink-950">Hitos de las próximas dos semanas</h3>
+        <h3 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Hitos de las próximas dos semanas</h3>
         {data.hitos.length === 0 ? (
           <p className="mt-3 border-t border-line pt-4 text-sm text-ink-500">Ningún hito vence en las próximas dos semanas.</p>
         ) : (

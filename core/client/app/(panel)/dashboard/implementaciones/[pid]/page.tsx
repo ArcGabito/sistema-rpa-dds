@@ -87,7 +87,7 @@ export default async function ImplementacionPage({ params }: { params: Promise<{
 
       {!impl.botId && editar && (
         <section className="mt-8">
-          <h2 className="flex items-center gap-2 text-base font-semibold text-ink-950">
+          <h2 className="flex items-center gap-2 text-base font-semibold tracking-[-0.02em] text-ink-950">
             <Rocket className="h-4 w-4" />
             Poner en producción
           </h2>

@@ -1,8 +1,9 @@
 import { Ban, CalendarClock, CheckCircle2, Clock, PauseCircle } from "lucide-react";
 import { formatDay, instanteUtc } from "@/lib/format-date";
 import { BOT_ESTADO_LABELS, INCIDENCIA_ESTADO_LABELS, SEVERIDAD_LABELS, duracion, type Sla } from "@/lib/operacion";
+import { BADGE_BASE } from "@/components/ui/panel-styles";
 
-const BADGE = "inline-flex shrink-0 items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium whitespace-nowrap";
+const BADGE = BADGE_BASE;
 const ALERTA = "bg-red-50 text-red-700 ring-1 ring-inset ring-red-200";
 
 const BOT: Record<string, string> = {

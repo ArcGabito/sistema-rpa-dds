@@ -22,9 +22,10 @@ export function Field({
 }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="mb-1.5 flex items-baseline gap-1.5 text-sm font-medium text-ink-950">
+      {/* Uppercase monospace, like the site's labels. */}
+      <label htmlFor={id} className="mb-2 flex items-baseline gap-2 font-mono text-[10px] font-medium tracking-[0.12em] text-ink-700 uppercase sm:text-[11px]">
         {label}
-        {optional && <span className="text-xs font-normal text-ink-400">Opcional</span>}
+        {optional && <span className="tracking-[0.08em] text-ink-400">· Opcional</span>}
       </label>
       {children}
       {error ? (

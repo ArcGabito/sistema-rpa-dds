@@ -36,8 +36,8 @@ export default async function RegistroBovedaPage({
               key={value || "todas"}
               href={value ? `/dashboard/boveda/registro?accion=${value}` : "/dashboard/boveda/registro"}
               aria-current={active ? "page" : undefined}
-              className={`border-b-2 px-3 pb-2.5 text-sm whitespace-nowrap transition-colors ${
-                active ? "border-brand-700 font-semibold text-brand-700" : "border-transparent text-ink-500 hover:text-ink-950"
+              className={`border-b-2 px-3 pb-2.5 font-mono text-[11px] tracking-[0.1em] whitespace-nowrap uppercase transition-colors ${
+                active ? "border-ink-950 font-semibold text-ink-950" : "border-transparent text-ink-500 hover:text-ink-950"
               }`}
             >
               {value ? ACCION_LABELS[value] : "Todo"}

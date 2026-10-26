@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
-import { GlowBackdrop } from "@/components/layout/glow-backdrop";
 import { LogoutButton } from "@/components/sections/logout-button";
 import { DASHBOARD_NAV } from "@/lib/dashboard-nav";
 import { SITE } from "@/lib/site-config";
 import { puede, type Me } from "@/lib/permisos";
 import type { SessionUser } from "@/lib/session";
+
+const GLOW =
+  "radial-gradient(90% 70% at 50% 100%, rgb(91 149 247 / 0.45) 0%, rgb(37 99 235 / 0.16) 50%, rgb(19 19 21 / 0) 80%)";
 
 function getInitials(name: string | undefined) {
   const parts = name?.trim().split(/\s+/).filter(Boolean) ?? [];
@@ -42,8 +44,11 @@ export function DashboardSidebar({
   })).filter((group) => group.items.length > 0);
 
   return (
-    <aside className="relative flex h-full w-72 shrink-0 flex-col overflow-hidden px-3 py-5 lg:rounded-3xl">
-      <GlowBackdrop glow="low" />
+    // The public site's dark band: near-black with a hairline edge and the
+    // blue glow rising from the bottom, as in its footer.
+    <aside className="relative flex h-full w-72 shrink-0 flex-col overflow-hidden border-r border-white/[0.08] bg-night-950 px-3 py-5">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64" style={{ backgroundImage: GLOW }} aria-hidden="true" />
+      <div className="grain pointer-events-none absolute inset-0 opacity-30" aria-hidden="true" />
       <div className="relative flex min-h-0 flex-1 flex-col">
         <div className="flex items-center justify-between gap-3 px-2">
           <Link href="/" className="flex min-w-0 items-center gap-2.5" onClick={onNavigate}>
@@ -85,10 +90,10 @@ export function DashboardSidebar({
                     href={item.href}
                     onClick={onNavigate}
                     aria-current={isActive ? "page" : undefined}
-                    className={`relative flex h-9 items-center gap-3 rounded-md px-3 text-sm transition-colors ${
+                    className={`flex h-9 items-center gap-3 border-l-2 px-3 text-[13px] transition-colors ${
                       isActive
-                        ? "bg-white/10 font-medium text-white ring-1 ring-white/10 ring-inset before:absolute before:inset-y-2.5 before:left-0 before:w-[3px] before:rounded-full before:bg-glow-300"
-                        : "text-white/60 hover:bg-white/5 hover:text-white"
+                        ? "border-white bg-white/[0.04] font-medium text-white"
+                        : "border-transparent text-white/55 hover:bg-white/[0.03] hover:text-white"
                     }`}
                   >
                     <Icon className="h-4 w-4 shrink-0" strokeWidth={1.75} />

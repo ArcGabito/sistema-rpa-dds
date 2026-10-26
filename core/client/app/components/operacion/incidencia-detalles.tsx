@@ -71,7 +71,7 @@ export function IncidenciaDetalles({
 
   return (
     <form onSubmit={guardar} className={`${CARD} flex flex-col gap-4 p-5`}>
-      <h2 className="text-base font-semibold text-ink-950">Detalles</h2>
+      <h2 className="text-base font-semibold tracking-[-0.02em] text-ink-950">Detalles</h2>
       <Field id="det-titulo" label="Título">
         <input id="det-titulo" value={form.titulo} maxLength={200} onChange={set("titulo")} className={input} />
       </Field>
