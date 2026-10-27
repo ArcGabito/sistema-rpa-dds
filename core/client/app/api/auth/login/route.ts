@@ -3,6 +3,10 @@ import { loginSchema } from "@/lib/auth-schema";
 import { AUTH_COOKIE_NAME, getApiUrl } from "@/lib/auth";
 import { clientIpHeaders, tooManyRequests } from "@/lib/client-ip";
 
+// Azure holds the request while the API scales up from zero, which can take
+// up to a minute.
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
   const parsed = loginSchema.safeParse(body);
@@ -37,7 +41,13 @@ export async function POST(request: Request) {
   if (!backendResponse.ok) {
     const data = await backendResponse.json().catch(() => null);
     return NextResponse.json(
-      { message: data?.message ?? "Correo o contraseña incorrectos." },
+      {
+        message:
+          data?.message ??
+          (backendResponse.status >= 500
+            ? "El servidor no responde. Intenta de nuevo en unos segundos."
+            : "Correo o contraseña incorrectos."),
+      },
       { status: backendResponse.status },
     );
   }

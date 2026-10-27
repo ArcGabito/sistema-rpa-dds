@@ -85,9 +85,15 @@ export function useAuth() {
       }
 
       if (!response.ok) {
+        // A 502/504 straight from the platform (Vercel's own timeout) has no
+        // { message }, and isn't a wrong password.
         sileo.error({
           title: "No se pudo iniciar sesión",
-          description: data?.message ?? "Correo o contraseña incorrectos.",
+          description:
+            data?.message ??
+            (response.status >= 500
+              ? "El servidor no responde. Intenta de nuevo en unos segundos."
+              : "Correo o contraseña incorrectos."),
         });
         return;
       }
