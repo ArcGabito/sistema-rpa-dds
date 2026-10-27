@@ -20,6 +20,11 @@ function secondsFromNow(seconds: number) {
   return Date.now() + seconds * 1000;
 }
 
+// The API and its database run on Azure's free tier and sleep when idle, so
+// the first login after a while can take many seconds. If the answer is slow,
+// say so instead of leaving the button spinning as if it were stuck.
+const WAKE_UP_DELAY_MS = 2500;
+
 export function useAuth() {
   const router = useRouter();
   // While the API rate-limits the login (429), the form stays locked and
@@ -49,6 +54,16 @@ export function useAuth() {
 
   const onSubmit = form.handleSubmit(async (values) => {
     if (lockedUntil !== null) return;
+
+    let wakeUpToast: string | null = null;
+    const wakeUpTimer = setTimeout(() => {
+      wakeUpToast = sileo.show({
+        type: "loading",
+        title: "Despertando servidor",
+        description: "Estaba en reposo para ahorrar recursos. La primera vez puede tardar hasta un minuto.",
+        duration: null,
+      });
+    }, WAKE_UP_DELAY_MS);
 
     try {
       const response = await fetch("/api/auth/login", {
@@ -90,6 +105,9 @@ export function useAuth() {
         title: "No se pudo iniciar sesión",
         description: "Ocurrió un error de conexión. Intenta de nuevo.",
       });
+    } finally {
+      clearTimeout(wakeUpTimer);
+      if (wakeUpToast) sileo.dismiss(wakeUpToast);
     }
   });
 
