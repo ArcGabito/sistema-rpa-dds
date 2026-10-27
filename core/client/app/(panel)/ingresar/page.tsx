@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, Loader2, ShieldAlert } from "lucide-react";
 import { ArrowSquare, AUTH_BUTTON, AUTH_FIELD, AUTH_LABEL, AuthShell, authFieldState } from "@/components/auth/auth-shell";
 import { ClientLogo } from "@/components/ui/client-logo";
 import { useAuth } from "@/hooks/use-auth";
 import { CLIENTS } from "@/lib/clients";
+import { despertarServidor } from "@/lib/despertar";
 import { SITE } from "@/lib/site-config";
 
 // This is a public demo with fictitious data: the fields show the demo
@@ -17,6 +18,11 @@ export default function IngresarPage() {
   const { register, errors, isSubmitting, locked, secondsLeft, onSubmit } = useAuth();
   const countdown = `${Math.floor(secondsLeft / 60)}:${String(secondsLeft % 60).padStart(2, "0")}`;
   const [showPassword, setShowPassword] = useState(false);
+
+  // Start the API and its database while the visitor types.
+  useEffect(() => {
+    void despertarServidor();
+  }, []);
 
   return (
     <AuthShell title="Bienvenido de nuevo" description="Ingresa para acceder al panel de administración.">

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { sileo } from "sileo";
 import { loginSchema, type LoginFormValues } from "@/lib/auth-schema";
+import { conDespertar, quizaDormido, ServidorNoDisponible } from "@/lib/despertar";
 
 // Where to go after signing in: back to the panel page that sent us here
 // (proxy.ts adds ?from=), never anywhere outside the panel.
@@ -20,10 +21,17 @@ function secondsFromNow(seconds: number) {
   return Date.now() + seconds * 1000;
 }
 
-// The API and its database run on Azure's free tier and sleep when idle, so
-// the first login after a while can take many seconds. If the answer is slow,
-// say so instead of leaving the button spinning as if it were stuck.
-const WAKE_UP_DELAY_MS = 2500;
+// A 503 means the login never reached the API (it's starting, or the route
+// couldn't connect), so trying again can't sign in twice.
+async function login(values: LoginFormValues) {
+  const response = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(values),
+  });
+  if (response.status === 503) throw new ServidorNoDisponible(503);
+  return response;
+}
 
 export function useAuth() {
   const router = useRouter();
@@ -55,21 +63,11 @@ export function useAuth() {
   const onSubmit = form.handleSubmit(async (values) => {
     if (lockedUntil !== null) return;
 
-    let wakeUpToast: string | null = null;
-    const wakeUpTimer = setTimeout(() => {
-      wakeUpToast = sileo.show({
-        type: "loading",
-        title: "Despertando servidor",
-        description: "Estaba en reposo para ahorrar recursos. La primera vez puede tardar hasta un minuto.",
-        duration: null,
-      });
-    }, WAKE_UP_DELAY_MS);
-
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+      // The page already pings the server awake (despertarServidor), which
+      // shows its own toast while it waits.
+      const response = await conDespertar(() => login(values), (error) => error instanceof ServidorNoDisponible, {
+        avisoTemprano: quizaDormido(),
       });
 
       const data = await response.json().catch(() => null);
@@ -100,14 +98,12 @@ export function useAuth() {
       });
       router.push(destination());
       router.refresh();
-    } catch {
+    } catch (error) {
       sileo.error({
         title: "No se pudo iniciar sesión",
-        description: "Ocurrió un error de conexión. Intenta de nuevo.",
+        description:
+          error instanceof ServidorNoDisponible ? error.message : "Ocurrió un error de conexión. Intenta de nuevo.",
       });
-    } finally {
-      clearTimeout(wakeUpTimer);
-      if (wakeUpToast) sileo.dismiss(wakeUpToast);
     }
   });
 

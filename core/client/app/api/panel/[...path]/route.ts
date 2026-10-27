@@ -53,7 +53,7 @@ async function forward(request: Request, { params }: Context) {
       cache: "no-store",
     });
   } catch {
-    return NextResponse.json({ message: "No se pudo conectar con el servidor." }, { status: 502 });
+    return NextResponse.json({ message: "No se pudo conectar con el servidor." }, { status: 503 });
   }
 
   if (backendResponse.status === 204) return new NextResponse(null, { status: 204, headers: NO_STORE });

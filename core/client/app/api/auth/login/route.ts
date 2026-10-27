@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json(
       { message: "No se pudo conectar con el servidor. Intenta de nuevo." },
-      { status: 502 },
+      { status: 503 },
     );
   }
 

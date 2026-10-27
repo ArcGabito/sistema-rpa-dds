@@ -113,6 +113,10 @@ app.UseRateLimiter();
 app.UseAuthorization();
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+// For the client's wake-up ping (client/app/lib/despertar.ts): the container
+// answering /health doesn't mean the serverless database has resumed.
+app.MapGet("/health/db", async (AppDbContext db, CancellationToken ct) =>
+    Results.Ok(new { listo = await db.Database.CanConnectAsync(ct) }));
 app.MapControllers();
 
 app.Run();
