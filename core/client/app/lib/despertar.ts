@@ -135,7 +135,8 @@ export function despertarServidor() {
         await esperar(REINTENTO_MS);
       }
       ultimaRespuesta = Date.now();
-      if (aviso.abierto) sileo.success({ title: "Servidor listo", description: "Ya puedes ingresar." });
+      // No "you can sign in now": the visitor may have already.
+      if (aviso.abierto) sileo.success({ title: "Servidor listo" });
     } finally {
       clearTimeout(temprano);
       aviso.cerrar();

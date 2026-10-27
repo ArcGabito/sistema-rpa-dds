@@ -15,7 +15,8 @@ import { SITE } from "@/lib/site-config";
 const DEMO = { email: "admin@dds.pe", password: "Admin123!" };
 
 export default function IngresarPage() {
-  const { register, errors, isSubmitting, locked, secondsLeft, onSubmit } = useAuth();
+  const { register, errors, isSubmitting, entering, locked, secondsLeft, onSubmit } = useAuth();
+  const busy = isSubmitting || entering;
   const countdown = `${Math.floor(secondsLeft / 60)}:${String(secondsLeft % 60).padStart(2, "0")}`;
   const [showPassword, setShowPassword] = useState(false);
 
@@ -116,11 +117,11 @@ export default function IngresarPage() {
 
         <button
           type="submit"
-          disabled={isSubmitting || locked}
+          disabled={busy || locked}
           className={`mt-2 ${AUTH_BUTTON}`}
         >
-          {isSubmitting ? "Ingresando..." : locked ? `Espera ${countdown}` : "Ingresar"}
-          <ArrowSquare>{isSubmitting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : undefined}</ArrowSquare>
+          {entering ? "Abriendo el panel..." : isSubmitting ? "Ingresando..." : locked ? `Espera ${countdown}` : "Ingresar"}
+          <ArrowSquare>{busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : undefined}</ArrowSquare>
         </button>
       </form>
 

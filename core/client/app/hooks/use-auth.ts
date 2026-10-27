@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -39,6 +39,7 @@ export function useAuth() {
   // counts down to when it can be tried again.
   const [lockedUntil, setLockedUntil] = useState<number | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(0);
+  const [entering, startEntering] = useTransition();
 
   useEffect(() => {
     if (lockedUntil === null) return;
@@ -102,8 +103,11 @@ export function useAuth() {
         title: "Sesión iniciada",
         description: `Bienvenido, ${data.user.fullName}.`,
       });
-      router.push(destination());
-      router.refresh();
+      // In a transition, so the form stays busy until the panel has rendered
+      // instead of looking idle while the server fetches its data. No
+      // router.refresh(): there's nothing cached from before signing in, and
+      // it would render the panel a second time.
+      startEntering(() => router.push(destination()));
     } catch (error) {
       sileo.error({
         title: "No se pudo iniciar sesión",
@@ -117,6 +121,7 @@ export function useAuth() {
     register: form.register,
     errors: form.formState.errors,
     isSubmitting: form.formState.isSubmitting,
+    entering,
     locked: lockedUntil !== null,
     secondsLeft,
     onSubmit,
