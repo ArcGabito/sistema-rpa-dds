@@ -2,7 +2,7 @@
 
 ![Wallpaper](core/client/public/portada.png)
 
-Sistema para implementar y gestionar soluciones de automatización RPA & IA para empresas y organizaciones públicas. El frontend (Next.js) se despliega en Vercel; la API (ASP.NET Core) y la base de datos (Azure SQL Database) en Azure, en el grupo de recursos `rg-data-discovery-solutions`.
+Sistema para implementar y gestionar soluciones de automatización RPA & IA para empresas y organizaciones públicas. El frontend (Next.js) se despliega en Vercel; la API (ASP.NET Core) y la base de datos (Azure SQL Database) en Azure.
 
 ----
 
