@@ -117,6 +117,14 @@ export function useAuth() {
     }
   });
 
+  // One click from the sign-in page: fills in the public demo's account and
+  // signs in through the same path (wake-up notice, rate limit, errors).
+  const enterAs = (email: string, password: string) => {
+    form.setValue("email", email);
+    form.setValue("password", password);
+    void onSubmit();
+  };
+
   return {
     register: form.register,
     errors: form.formState.errors,
@@ -125,5 +133,6 @@ export function useAuth() {
     locked: lockedUntil !== null,
     secondsLeft,
     onSubmit,
+    enterAs,
   };
 }

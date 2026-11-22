@@ -13,7 +13,7 @@ import { SITE } from "@/lib/site-config";
 // The fields show the public demo's credentials (when there are) as
 // placeholders, so visitors know how to get in.
 export function IngresarForm({ demo }: { demo?: { email: string; password: string } }) {
-  const { register, errors, isSubmitting, entering, locked, secondsLeft, onSubmit } = useAuth();
+  const { register, errors, isSubmitting, entering, locked, secondsLeft, onSubmit, enterAs } = useAuth();
   const busy = isSubmitting || entering;
   const countdown = `${Math.floor(secondsLeft / 60)}:${String(secondsLeft % 60).padStart(2, "0")}`;
   const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +27,7 @@ export function IngresarForm({ demo }: { demo?: { email: string; password: strin
     <AuthShell title="Bienvenido de nuevo" description="Ingresa para acceder al panel de administración.">
       {demo && (
         <p className="mt-6 rounded-[6px] bg-white px-4 py-3 text-sm text-ink-700 ring-1 ring-ink-950/10 ring-inset">
-          <span className="font-semibold text-ink-950">Demo:</span> usa las credenciales que aparecen en los campos.
+          <span className="font-semibold text-ink-950">Demo:</span> usa el botón «Entrar a la demo» o las credenciales que aparecen en los campos.
         </p>
       )}
       <form onSubmit={onSubmit} noValidate className="mt-8 flex flex-col gap-5">
@@ -126,6 +126,16 @@ export function IngresarForm({ demo }: { demo?: { email: string; password: strin
           {entering ? "Abriendo el panel..." : isSubmitting ? "Ingresando..." : locked ? `Espera ${countdown}` : "Ingresar"}
           <ArrowSquare>{busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : undefined}</ArrowSquare>
         </button>
+        {demo && (
+          <button
+            type="button"
+            onClick={() => enterAs(demo.email, demo.password)}
+            disabled={busy || locked}
+            className="-mt-2 inline-flex h-11 w-full items-center justify-center rounded-[7px] bg-white text-[13px] font-medium tracking-[-0.01em] text-ink-950 ring-1 ring-ink-950/15 transition-colors ring-inset hover:bg-ink-950/[0.04] disabled:opacity-60"
+          >
+            Entrar a la demo
+          </button>
+        )}
       </form>
 
       <p className="mt-8 text-sm text-ink-500">
