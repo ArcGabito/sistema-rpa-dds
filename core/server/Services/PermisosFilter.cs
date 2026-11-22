@@ -20,6 +20,11 @@ public sealed class ModuloAttribute(string modulo, string? nivel = null) : Attri
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public sealed class SoloAdminAttribute : Attribute;
 
+// Not for the public demo's account (CuentaDemo): it carries personal data of
+// real people, like the requests sent from the website's contact form.
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public sealed class SinDemoAttribute : Attribute;
+
 // Runs before every API action of a signed-in user: the user must still
 // exist and be active, and have the access the action's module asks for.
 // The effective permissions stay in HttpContext for the action to use.
@@ -44,6 +49,12 @@ public class PermisosFilter(PermisosService permisos) : IAsyncAuthorizationFilte
         if (metadata.OfType<SoloAdminAttribute>().Any() && !p.EsAdmin)
         {
             context.Result = Prohibido("Solo un administrador puede hacer esto.");
+            return;
+        }
+
+        if (metadata.OfType<SinDemoAttribute>().Any() && p.EsDemo)
+        {
+            context.Result = Prohibido("No está disponible en la demo: contiene datos personales.");
             return;
         }
 

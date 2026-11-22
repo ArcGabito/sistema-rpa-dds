@@ -51,8 +51,9 @@ public static class PermisosRol
 }
 
 // A signed-in user's effective access: their role's preset with their own
-// adjustments on top.
-public sealed record PermisosEfectivos(int UsuarioId, string Rol, bool Activo, IReadOnlyDictionary<string, string> Modulos, DateTime? SesionesDesdeUtc = null)
+// adjustments on top. EsDemo marks the public demo's account (CuentaDemo),
+// which doesn't see what carries other people's personal data ([SinDemo]).
+public sealed record PermisosEfectivos(int UsuarioId, string Rol, bool Activo, IReadOnlyDictionary<string, string> Modulos, DateTime? SesionesDesdeUtc = null, bool EsDemo = false)
 {
     public bool EsAdmin => Rol == AdminRole.Admin;
 
@@ -74,7 +75,7 @@ public sealed record PermisosEfectivos(int UsuarioId, string Rol, bool Activo, I
 // or permissions — or a deactivation — applies at once instead of when the
 // session expires. Cached for 30 seconds per user; changes made here clear
 // it (another API instance would pick them up when its copy expires).
-public class PermisosService(AppDbContext db, IMemoryCache cache)
+public class PermisosService(AppDbContext db, IMemoryCache cache, IConfiguration config)
 {
     private static readonly TimeSpan Duracion = TimeSpan.FromSeconds(30);
 
@@ -83,7 +84,7 @@ public class PermisosService(AppDbContext db, IMemoryCache cache)
         if (cache.TryGetValue(Clave(usuarioId), out PermisosEfectivos? guardado)) return guardado;
 
         var usuario = await db.AdminUsers.AsNoTracking().Include(u => u.Permisos).FirstOrDefaultAsync(u => u.Id == usuarioId, ct);
-        var permisos = usuario is null ? null : PermisosEfectivos.De(usuario);
+        var permisos = usuario is null ? null : PermisosEfectivos.De(usuario) with { EsDemo = CuentaDemo.Es(config, usuario.Email) };
         cache.Set(Clave(usuarioId), permisos, Duracion);
         return permisos;
     }

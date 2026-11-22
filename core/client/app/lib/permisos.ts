@@ -41,6 +41,8 @@ export type Me = {
   role: string;
   roleLabel: string;
   esAdmin: boolean;
+  // The public demo's account: it doesn't see the website's requests (personal data).
+  esDemo: boolean;
   permisos: Record<Modulo, Nivel>;
 };
 

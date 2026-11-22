@@ -158,9 +158,13 @@ export default async function OportunidadPage({ params }: { params: Promise<{ id
                 <div className="flex justify-between gap-4 py-2.5">
                   <dt className="text-ink-500">Origen</dt>
                   <dd>
-                    <Link href={`/dashboard/solicitudes/${oportunidad.solicitudId}`} className="text-brand-700 hover:underline">
-                      Solicitud web
-                    </Link>
+                    {me?.esDemo ? (
+                      "Solicitud web"
+                    ) : (
+                      <Link href={`/dashboard/solicitudes/${oportunidad.solicitudId}`} className="text-brand-700 hover:underline">
+                        Solicitud web
+                      </Link>
+                    )}
                   </dd>
                 </div>
               )}

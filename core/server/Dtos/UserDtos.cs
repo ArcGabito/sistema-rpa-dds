@@ -81,5 +81,7 @@ public class MeResponse
     public required string Role { get; set; }
     public required string RoleLabel { get; set; }
     public required bool EsAdmin { get; set; }
+    // The public demo's account: the panel hides what it can't see.
+    public required bool EsDemo { get; set; }
     public required Dictionary<string, string> Permisos { get; set; }
 }

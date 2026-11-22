@@ -51,6 +51,10 @@ services:
       Admin__Email: ${ADMIN_EMAIL}
       Admin__Password: ${ADMIN_PASSWORD}
       Admin__FullName: ${ADMIN_FULL_NAME:-Administrador}
+      # Public demo's account (limited role); empty DEMO_EMAIL = none.
+      Demo__Email: ${DEMO_EMAIL-demo@dds.pe}
+      Demo__Password: ${DEMO_PASSWORD-Demo2026!}
+      Demo__Role: ${DEMO_ROLE:-Comercial}
       Cors__AllowedOrigins__0: ${CLIENT_ORIGIN:-http://localhost:3000}
       # Password-reset e-mails: the links point at the panel, over SMTP.
       # Without SMTP_HOST they go to the local Mailpit below.
@@ -89,6 +93,10 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile.client
+      args:
+        # Shown on /ingresar, which is prerendered during the build.
+        DEMO_LOGIN_EMAIL: ${DEMO_EMAIL-demo@dds.pe}
+        DEMO_LOGIN_PASSWORD: ${DEMO_PASSWORD-Demo2026!}
     depends_on:
       server:
         condition: service_healthy
