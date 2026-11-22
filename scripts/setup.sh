@@ -4,7 +4,7 @@ set -euo pipefail
 # Remote setup script: clones the repo onto a fresh machine, installs local
 # dependencies, and creates .env from .env.example with the credentials you
 # choose for the seeded admin user. Meant to be run once per server, e.g.:
-#   curl -fsSL https://raw.githubusercontent.com/ArcGabito/sistema-rpa-dds/master/scripts/setup.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/ArcGabito/sistema-rpa-dds/main/scripts/setup.sh | bash
 # or, from an existing clone:
 #   scripts/setup.sh
 #

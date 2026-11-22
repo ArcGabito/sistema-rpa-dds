@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   client:
@@ -68,13 +68,13 @@ jobs:
     name: Docker images
     runs-on: ubuntu-latest
     needs: [client, server]
-    # On master the API image is published to GitHub Container Registry
+    # On main the API image is published to GitHub Container Registry
     # (free for a public repo), where Azure Container Apps pulls it from.
     permissions:
       contents: read
       packages: write
     env:
-      PUBLICAR: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      PUBLICAR: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -97,7 +97,7 @@ jobs:
           cache-from: type=gha,scope=client
           cache-to: type=gha,mode=max,scope=client
 
-      - name: Build server image (and publish it on master)
+      - name: Build server image (and publish it on main)
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -116,9 +116,9 @@ jobs:
     name: Deploy API (Azure Container Apps)
     runs-on: ubuntu-latest
     needs: [docker]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # Signs in to Azure with OpenID Connect (no stored password): the app
-    # registration behind AZURE_CLIENT_ID trusts this repository's master
+    # registration behind AZURE_CLIENT_ID trusts this repository's main
     # branch. Without the three AZURE_* values the job is skipped.
     permissions:
       id-token: write
