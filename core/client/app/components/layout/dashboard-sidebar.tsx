@@ -38,8 +38,10 @@ export function DashboardSidebar({
   const pathname = usePathname();
   const visibleNav = DASHBOARD_NAV.map((group) => ({
     ...group,
-    items: group.items.filter((item) =>
-      item.adminOnly ? me?.esAdmin === true : !item.modulo || !me || puede(me, item.modulo, "ver"),
+    items: group.items.filter(
+      (item) =>
+        !(item.sinDemo && me?.esDemo) &&
+        (item.adminOnly ? me?.esAdmin === true : !item.modulo || !me || puede(me, item.modulo, "ver")),
     ),
   })).filter((group) => group.items.length > 0);
 

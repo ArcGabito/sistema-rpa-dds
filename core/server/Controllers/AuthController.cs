@@ -30,7 +30,10 @@ public class AuthController(
     public async Task<ActionResult<LoginResponse>> Login(LoginRequest request)
     {
         var email = request.Email.Trim().ToLowerInvariant();
-        if (throttle.Bloqueo(email) is { } espera)
+        // The demo's password is public: locking it would only let one visitor
+        // shut the others out. The per-IP limit still applies.
+        var esDemo = CuentaDemo.Es(config, email);
+        if (!esDemo && throttle.Bloqueo(email) is { } espera)
         {
             logger.LogWarning("Inicio de sesión bloqueado para {Email} por intentos fallidos", email);
             await RateLimiting.WriteTooManyAsync(HttpContext, espera);
@@ -40,7 +43,7 @@ public class AuthController(
         var user = await db.AdminUsers.SingleOrDefaultAsync(u => u.Email == email);
         if (user is null || passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
         {
-            throttle.Fallo(email);
+            if (!esDemo) throttle.Fallo(email);
             logger.LogWarning("Intento de inicio de sesión fallido para {Email}", email);
             return Unauthorized(new { message = "Correo o contraseña incorrectos." });
         }
@@ -84,6 +87,7 @@ public class AuthController(
             Role = user.Role,
             RoleLabel = AdminRole.Label(user.Role),
             EsAdmin = p.EsAdmin,
+            EsDemo = p.EsDemo,
             Permisos = Modulo.All.ToDictionary(m => m, p.Nivel),
         });
     }
@@ -96,6 +100,9 @@ public class AuthController(
     public async Task<IActionResult> CambiarClave(CambiarClaveRequest request, CancellationToken ct)
     {
         var user = await db.AdminUsers.FirstAsync(u => u.Id == HttpContext.Permisos().UsuarioId, ct);
+        // Its credentials are on the sign-in page for every visitor.
+        if (CuentaDemo.Es(config, user.Email))
+            return BadRequest(new { message = "La cuenta de demostración no puede cambiar su contraseña." });
         if (passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Actual) == PasswordVerificationResult.Failed)
             return BadRequest(new { message = "La contraseña actual no es correcta." });
         if (request.Actual == request.Nueva)

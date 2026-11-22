@@ -18,10 +18,12 @@ public class DashboardController(AppDbContext db) : ControllerBase
     [Modulo(Modulo.Comercial, NivelAcceso.Ver)]
     public async Task<ActionResult<DashboardSummaryResponse>> GetSummary(CancellationToken ct)
     {
-        var clientsTotal = await db.Clients.CountAsync(ct);
-        var clientsNew = await db.Clients.CountAsync(c => c.Status == ClientStatus.Nuevo, ct);
+        // The website's requests carry real people's data: none for the demo's account.
+        var solicitudes = HttpContext.Permisos().EsDemo ? db.Clients.Where(_ => false) : db.Clients;
+        var clientsTotal = await solicitudes.CountAsync(ct);
+        var clientsNew = await solicitudes.CountAsync(c => c.Status == ClientStatus.Nuevo, ct);
 
-        var recentClients = await db.Clients
+        var recentClients = await solicitudes
             .OrderByDescending(c => c.CreatedAtUtc)
             .Take(5)
             .Select(c => new RecentClientSummary

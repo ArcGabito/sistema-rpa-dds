@@ -31,6 +31,12 @@ env_value() {
   sed -n "s/^$1=//p" "$ENV_FILE" | tail -n1 | sed -e "s/^'\(.*\)'$/\1/" -e 's/^"\(.*\)"$/\1/'
 }
 
+# env_or KEY DEFAULT — KEY's value from .env, or DEFAULT if .env doesn't set it
+# (same defaults as docker/docker-compose.yml; an empty value stays empty).
+env_or() {
+  if grep -q "^$1=" "$ENV_FILE"; then env_value "$1"; else printf '%s' "$2"; fi
+}
+
 require_sa_password() {
   [ -n "$(env_value MSSQL_SA_PASSWORD)" ] \
     || die "Falta MSSQL_SA_PASSWORD en .env (la contraseña de la base SQL Server local). Ejecuta scripts/setup.sh."
@@ -62,6 +68,8 @@ if [ "${1:-}" = "dev" ]; then
   log "Levantando el cliente con next dev..."
   API_URL="http://localhost:${server_port:-8080}" \
     JWT_SECRET="$(env_value JWT_SECRET)" \
+    DEMO_LOGIN_EMAIL="$(env_or DEMO_EMAIL demo@dds.pe)" \
+    DEMO_LOGIN_PASSWORD="$(env_or DEMO_PASSWORD 'Demo2026!')" \
     npm run dev -- --port "${client_port:-3000}"
   exit 0
 fi

@@ -38,7 +38,7 @@ export default async function DashboardPage() {
   const secciones: Record<Seccion, React.ReactNode> = {
     comercial: (
       <SeccionResumen key="comercial" titulo="Comercial" href="/dashboard/oportunidades" enlace="Ver el embudo">
-        {comercial ? <SeccionComercial data={comercial} today={today} /> : error}
+        {comercial ? <SeccionComercial data={comercial} today={today} solicitudes={!me?.esDemo} /> : error}
       </SeccionResumen>
     ),
     entrega: (

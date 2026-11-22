@@ -10,9 +10,12 @@ using Server.Services;
 
 namespace Server.Controllers;
 
+// The website's contact-form requests ("solicitudes web"). Real people's
+// data, so the public demo's account doesn't see them; sending one stays open.
 [ApiController]
 [Route("api/clients")]
 [Modulo(Modulo.Comercial)]
+[SinDemo]
 public class ClientsController(AppDbContext db, ILogger<ClientsController> logger) : ControllerBase
 {
     [HttpPost]

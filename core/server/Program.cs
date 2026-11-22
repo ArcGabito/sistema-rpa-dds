@@ -82,8 +82,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Apply pending migrations and seed the admin user (and, in development, the
-// demo prospect base) on startup.
+// Apply pending migrations and seed the admin user, the public demo's account
+// (and, in development, the demo prospect base) on startup.
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -98,6 +98,8 @@ using (var scope = app.Services.CreateScope())
     await PropuestaSeeder.SeedAsync(db, app.Configuration, logger);
     await ProyectoSeeder.SeedAsync(db, app.Configuration, logger);
     await OperacionSeeder.SeedAsync(db, app.Configuration, logger);
+    // Last, so the demo seeders above keep crediting their data to the admin.
+    await DemoSeeder.SeedAsync(db, app.Configuration, logger);
 }
 
 // Configure the HTTP request pipeline.

@@ -37,7 +37,16 @@ const count = new Intl.NumberFormat("es-PE");
 
 // The commercial pipeline on the summary: headline figures, monthly sales,
 // the funnel, upcoming follow-ups and recent web requests.
-export function SeccionComercial({ data, today }: { data: DashboardSummary; today: string }) {
+// `solicitudes` false hides the website's requests (the public demo's account).
+export function SeccionComercial({
+  data,
+  today,
+  solicitudes = true,
+}: {
+  data: DashboardSummary;
+  today: string;
+  solicitudes?: boolean;
+}) {
   const ganadas = data.mensual.reduce((sum, m) => sum + m.ganadas, 0);
   const cerradas = ganadas + data.mensual.reduce((sum, m) => sum + m.perdidas, 0);
   const ganadoSeisMeses = data.mensual.reduce((sum, m) => sum + m.valorGanado, 0);
@@ -146,40 +155,42 @@ export function SeccionComercial({ data, today }: { data: DashboardSummary; toda
         </section>
       </div>
 
-      <section className={`${CARD} mt-6 p-6`}>
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="flex flex-wrap items-center gap-2 text-base font-semibold tracking-[-0.02em] text-ink-950">
-            Solicitudes web recientes
-            {data.clientsNew > 0 && (
-              <span className="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-medium text-white">
-                {data.clientsNew} sin atender
-              </span>
-            )}
-          </h2>
-          <ActionLink href="/dashboard/solicitudes">Ver todas</ActionLink>
-        </div>
+      {solicitudes && (
+        <section className={`${CARD} mt-6 p-6`}>
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="flex flex-wrap items-center gap-2 text-base font-semibold tracking-[-0.02em] text-ink-950">
+              Solicitudes web recientes
+              {data.clientsNew > 0 && (
+                <span className="rounded-full bg-brand-700 px-2 py-0.5 text-xs font-medium text-white">
+                  {data.clientsNew} sin atender
+                </span>
+              )}
+            </h2>
+            <ActionLink href="/dashboard/solicitudes">Ver todas</ActionLink>
+          </div>
 
-        {data.recentClients.length === 0 ? (
-          <p className="mt-3 border-t border-line pt-4 text-sm text-ink-500">Aún no llegan solicitudes.</p>
-        ) : (
-          <ul className="mt-3 divide-y divide-line border-t border-line text-sm">
-            {data.recentClients.map((client) => (
-              <li key={client.id}>
-                <Link
-                  href={`/dashboard/solicitudes/${client.id}`}
-                  className="group flex items-center justify-between gap-4 py-3.5"
-                >
-                  <span className="truncate font-medium text-ink-950 group-hover:underline">{client.fullName}</span>
-                  <span className="flex shrink-0 items-center gap-4">
-                    <ClientStatusBadge status={client.status} />
-                    <span className="w-20 text-right text-xs text-ink-400">{formatDate(client.createdAtUtc)}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+          {data.recentClients.length === 0 ? (
+            <p className="mt-3 border-t border-line pt-4 text-sm text-ink-500">Aún no llegan solicitudes.</p>
+          ) : (
+            <ul className="mt-3 divide-y divide-line border-t border-line text-sm">
+              {data.recentClients.map((client) => (
+                <li key={client.id}>
+                  <Link
+                    href={`/dashboard/solicitudes/${client.id}`}
+                    className="group flex items-center justify-between gap-4 py-3.5"
+                  >
+                    <span className="truncate font-medium text-ink-950 group-hover:underline">{client.fullName}</span>
+                    <span className="flex shrink-0 items-center gap-4">
+                      <ClientStatusBadge status={client.status} />
+                      <span className="w-20 text-right text-xs text-ink-400">{formatDate(client.createdAtUtc)}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
     </>
   );
 }

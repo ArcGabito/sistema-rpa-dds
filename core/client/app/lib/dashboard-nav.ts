@@ -9,6 +9,8 @@ export type DashboardNavItem = {
   // Shown to users who can at least see this module.
   modulo?: Modulo;
   adminOnly?: boolean;
+  // Hidden from the public demo's account (personal data; the API refuses it too).
+  sinDemo?: boolean;
 };
 
 // The sidebar, one group per module. A group without a title sits at the top.
@@ -26,7 +28,7 @@ export const DASHBOARD_NAV: DashboardNavGroup[] = [
       { label: "Diagnósticos", href: "/dashboard/diagnosticos", icon: ClipboardList, modulo: "diagnosticos" },
       { label: "Propuestas", href: "/dashboard/propuestas", icon: FileText, modulo: "propuestas" },
       { label: "Empresas", href: "/dashboard/empresas", icon: Building2, modulo: "comercial" },
-      { label: "Solicitudes web", href: "/dashboard/solicitudes", icon: Inbox, modulo: "comercial" },
+      { label: "Solicitudes web", href: "/dashboard/solicitudes", icon: Inbox, modulo: "comercial", sinDemo: true },
     ],
   },
   {
